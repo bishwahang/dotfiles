@@ -2,8 +2,9 @@ set nocompatible
 filetype off
 
 " Vundle setup
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+"Start
+call vundle#begin()
 Bundle 'gmarik/vundle'
 
 " General enhancements
@@ -58,5 +59,7 @@ Bundle 'vim-ruby/vim-ruby'
 " Markdown
 Bundle 'tpope/vim-markdown.git'
 
+call vundle#end()
+"End
 filetype plugin indent on
 

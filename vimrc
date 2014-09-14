@@ -32,7 +32,7 @@ if has("syntax")
 endif
 " Change colorscheme from default to delek
 "colorscheme delek
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 if has('gui_running')
     set background=light
 else
@@ -76,9 +76,6 @@ if filereadable("/etc/vim/vimrc.local")
 endif
 
 
-" Pathogen
-execute pathogen#infect()
-call pathogen#helptags() " generate helptags for everything in 'runtimepath'
 "Filetype tabs
 autocmd Filetype html setlocal expandtab ts=2 str=2 sw=2
 autocmd Filetype ruby setlocal expandtab ts=2 sts=2 sw=2
