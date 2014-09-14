@@ -23,31 +23,39 @@ set hls
 
 " Wrap text instead of being on one line
 set lbr
-
-colorscheme solarized
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-if has("syntax")
-  syntax on
-endif
 " Change colorscheme from default to delek
 "colorscheme delek
+" Solarized {{{2
+colorscheme solarized
 " let g:solarized_termcolors=256
+let g:solarized_menu=0
+if exists('*togglebg#map')
+  call togglebg#map("<F5>")
+endif
 if has('gui_running')
     set background=light
 else
     set background=dark
 endif
-
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 "set background=dark
 
+" Ctlr-P {{{2
+let g:ctrlp_jump_to_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'find %s -type f'
+" Vim5 and later versions support syntax highlighting. Uncommenting the next
+" line enables syntax highlighting by default.
+if has("syntax")
+  syntax on
+endif
+
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
-"if has("autocmd")
-"  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
+if has("autocmd")
+ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
@@ -68,7 +76,7 @@ set ignorecase		" Do case insensitive matching
 "set incsearch		" Incremental search
 "set autowrite		" Automatically save before commands like :next and :make
 "set hidden		" Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
+set mouse=a		" Enable mouse usage (all modes)
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -90,3 +98,5 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 set backupdir=~/.tmp//,/tmp//
 set directory=~/.tmp//,/tmp//
+let g:netrw_list_hide= '.*\.swp$'
+set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
