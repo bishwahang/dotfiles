@@ -1,0 +1,27 @@
+[user]
+      name = Bishwa Hang Rai
+      email = bishwahang.kirat@gmail.com
+
+[color]
+      ui = auto
+      diff = auto
+      status = auto
+      branch = auto
+
+[alias]
+      st = status
+      di = diff
+      co = checkout
+      ci = commit
+      cia = commit -a
+      br = branch
+      sta = stash
+      pop = stash pop
+      hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+      type = cat-file -t
+      dump = cat-file -p
+[push]
+      default = current
+[merge]
+       renamelimit = 5000
+
