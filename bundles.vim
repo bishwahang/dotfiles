@@ -35,6 +35,11 @@ Bundle 'vim-scripts/vimwiki.git'
 "extra
 Bundle 'henrik/vim-indexed-search'
 Bundle 'craigemery/vim-autotag'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+" Optional:
+Bundle "honza/vim-snippets"
 
 " Custom textobjects
 Bundle 'kana/vim-textobj-user.git'
