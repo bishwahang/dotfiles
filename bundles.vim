@@ -48,6 +48,7 @@ Bundle 'kana/vim-textobj-indent.git'
 Bundle 'kana/vim-textobj-syntax.git'
 Bundle 'kana/vim-textobj-line.git'
 Bundle 'nelstrom/vim-textobj-rubyblock.git'
+" Bundle 'ervandew/supertab'
 
 " Colorschemes
 Bundle 'altercation/vim-colors-solarized.git'

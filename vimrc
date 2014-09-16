@@ -100,3 +100,10 @@ set backupdir=~/.tmp//,/tmp//
 set directory=~/.tmp//,/tmp//
 let g:netrw_list_hide= '.*\.swp$'
 set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
+
+"for tabularize
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+
