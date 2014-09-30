@@ -23,6 +23,8 @@ set hls
 
 " Wrap text instead of being on one line
 set lbr
+" no bell or blink on error
+set noeb vb t_vb=
 " Change colorscheme from default to delek
 "colorscheme delek
 " Solarized {{{2

@@ -1,5 +1,5 @@
 " No audible bell
-set vb
+set vb t_vb=
 
 " No toolbar
 set guioptions-=T
