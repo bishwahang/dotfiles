@@ -36,8 +36,18 @@ if exists('*togglebg#map')
 endif
 if has('gui_running')
     set background=light
+    " GUI is running or is about to start.
+    " Maximize gvim window (for an alternative on Windows, see simalt below).
+    set lines=999 columns=999
 else
     set background=dark
+    " This is console Vim.
+    if exists("+lines")
+      set lines=50
+    endif
+    if exists("+columns")
+      set columns=100
+    endif
 endif
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
