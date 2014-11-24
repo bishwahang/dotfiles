@@ -97,9 +97,10 @@ endif
 
 
 "Filetype tabs
-autocmd Filetype html setlocal expandtab ts=2 str=2 sw=2
+autocmd Filetype html setlocal expandtab ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal expandtab ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal expandtab ts=4 sts=4 sw=4
+autocmd FileType python setlocal expandtab ts=4 sts=4 sw=4
 "Ruby autocomplete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1 
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
