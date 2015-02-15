@@ -101,6 +101,7 @@ autocmd Filetype cpp setlocal expandtab ts=4 sts=4 sw=4
 autocmd Filetype html setlocal expandtab ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal expandtab ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal expandtab ts=4 sts=4 sw=4
+autocmd FileType python setlocal expandtab ts=4 sts=4 sw=4
 "Ruby autocomplete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
@@ -142,3 +143,5 @@ vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 
+nmap ,cs :let @+=expand("%")<CR>
+nmap ,cl :let @+=expand("%:p")<CR>
