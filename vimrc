@@ -17,7 +17,7 @@ source ~/dotfiles/bundles.vim
 " options, so any other options should be set AFTER setting 'compatible'.
 "set compatible
 " Turn on line numbering. Turn it off with "set nonu" 
-set nu 
+set nu
 " Higlhight search
 set hls
 
@@ -25,11 +25,18 @@ set hls
 set lbr
 " no bell or blink on error
 set noeb vb t_vb=
-" Change colorscheme from default to delek
-"colorscheme delek
-" Solarized {{{2
+
+" colorscheme
+set background=dark
 colorscheme solarized
 " let g:solarized_termcolors=256
+set t_Co=256
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
 let g:solarized_menu=0
 if exists('*togglebg#map')
   call togglebg#map("<F5>")
