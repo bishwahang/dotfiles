@@ -4,7 +4,7 @@ bind-key C-a last-window
 
 # Start numbering at 1
 set -g base-index 1
-
+set-window-option -g pane-base-index 1
 # Allows for faster key repetition
 set -s escape-time 0
 
@@ -34,3 +34,4 @@ bind-key a send-prefix
 set-window-option -g window-status-current-bg red
 # use vim keys
 setw -g mode-keys vi
+set-window-option -g utf8 on
