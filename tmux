@@ -35,3 +35,6 @@ set-window-option -g window-status-current-bg red
 # use vim keys
 setw -g mode-keys vi
 set-window-option -g utf8 on
+
+# Set the default terminal mode to 256color mode
+set -g default-terminal "screen-256color"

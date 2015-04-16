@@ -27,10 +27,11 @@ set lbr
 set noeb vb t_vb=
 
 " colorscheme
-set background=dark
 colorscheme solarized
 " let g:solarized_termcolors=256
-set t_Co=256
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
 if &term =~ '256color'
   " disable Background Color Erase (BCE) so that color schemes
   " render properly when inside 256-color tmux and GNU screen.
@@ -49,12 +50,12 @@ if has('gui_running')
 else
     set background=dark
     " This is console Vim.
-    if exists("+lines")
-      set lines=50
-    endif
-    if exists("+columns")
-      set columns=100
-    endif
+    " if exists("+lines")
+    "   set lines=50
+    " endif
+    " if exists("+columns")
+    "   set columns=100
+    " endif
 endif
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
