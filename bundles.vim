@@ -24,7 +24,7 @@ Bundle 'tpope/vim-surround.git'
 Bundle 'tpope/vim-tbone.git'
 Bundle 'tpope/vim-unimpaired.git'
 Bundle 'tpope/vim-projectile.git'
-
+Bundle 'thoughtbot/vim-rspec'
 Bundle 'mattn/gist-vim'
 Bundle 'pangloss/vim-javascript.git'
 Bundle 'kchmck/vim-coffee-script'

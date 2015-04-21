@@ -110,6 +110,7 @@ autocmd Filetype html setlocal expandtab ts=2 sts=2 sw=2
 autocmd Filetype ruby setlocal expandtab ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal expandtab ts=4 sts=4 sw=4
 autocmd FileType python setlocal expandtab ts=4 sts=4 sw=4
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 "Ruby autocomplete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
@@ -153,3 +154,12 @@ vmap <Leader>a: :Tabularize /:\zs<CR>
 
 nmap ,cs :let @+=expand("%")<CR>
 nmap ,cl :let @+=expand("%:p")<CR>
+
+nnoremap <leader><space> :noh<cr>
+
+" vim-rspec mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+let g:rspec_command = "Dispatch bundle exec rspec {spec}"
