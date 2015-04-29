@@ -189,3 +189,6 @@ fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+# After each command, save and reload history
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
