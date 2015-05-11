@@ -167,3 +167,6 @@ let g:rspec_command = "Dispatch bundle exec rspec {spec}"
 " netrw sytling
 let g:netrw_liststyle=3
 
+" show filename in status line
+set statusline+=%F
+
