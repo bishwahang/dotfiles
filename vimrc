@@ -146,7 +146,13 @@ set directory=~/.tmp//,/tmp//
 let g:netrw_list_hide= '.*\.swp$'
 set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 
-"for tabularize
+" for tabularize
+" Mappings for ruby hash rocket and symbol hashes
+nnoremap <silent> <Leader>ahr :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
+vnoremap <silent> <Leader>ahr :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
+nnoremap <silent> <Leader>ahs  :Tabularize  /^[^=]*\zs=><CR>
+vnoremap <silent> <Leader>ahs  :Tabularize  /^[^=]*\zs=><CR>
+" normal equals and json
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
