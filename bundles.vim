@@ -18,6 +18,7 @@ Bundle 'tpope/vim-ragtag.git'
 Bundle 'tpope/vim-repeat.git'
 Bundle 'tpope/vim-scriptease.git'
 Bundle 'tpope/vim-sensible.git'
+Bundle 'scrooloose/nerdtree.git'
 " commented as it was messing expand tab
 " Bundle 'tpope/vim-sleuth.git'
 Bundle 'tpope/vim-surround.git'

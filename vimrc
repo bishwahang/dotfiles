@@ -115,8 +115,8 @@ autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-" map <F8> to generate ctags
-"map <F8> :!/usr/bin/ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+" Index ctags from any project, including those outside Rails
+map <Leader>ct :!ctags -R .<CR>
 "for CtrlP
 " set runtimepath^=~/.vim/bundle/ctrlp.vim3
 " Ignore some folders and files for CtrlP indexing
@@ -137,6 +137,11 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap \ :Ag<SPACE>
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
 
@@ -158,10 +163,14 @@ vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 
-nmap ,cs :let @+=expand("%")<CR>
-nmap ,cl :let @+=expand("%:p")<CR>
+nmap <Leader>cs :let @+=expand("%")<CR>
+nmap <Leader>cl :let @+=expand("%:p")<CR>
 
-nnoremap <leader><space> :noh<cr>
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+nnoremap <Leader><space> :noh<cr>
 
 " vim-rspec mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -175,4 +184,6 @@ let g:netrw_liststyle=3
 
 " show filename in status line
 set statusline+=%F
+
+map <C-n> :NERDTreeToggle<CR>
 
