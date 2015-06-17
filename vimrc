@@ -153,10 +153,10 @@ set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 
 " for tabularize
 " Mappings for ruby hash rocket and symbol hashes
-nnoremap <silent> <Leader>ahr :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
-vnoremap <silent> <Leader>ahr :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
-nnoremap <silent> <Leader>ahs  :Tabularize  /^[^=]*\zs=><CR>
-vnoremap <silent> <Leader>ahs  :Tabularize  /^[^=]*\zs=><CR>
+nnoremap <silent> <Leader>ahs :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
+vnoremap <silent> <Leader>ahs :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
+nnoremap <silent> <Leader>ahr  :Tabularize  /^[^=]*\zs=><CR>
+vnoremap <silent> <Leader>ahr  :Tabularize  /^[^=]*\zs=><CR>
 " normal equals and json
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
