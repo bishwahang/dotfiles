@@ -61,6 +61,11 @@ endif
 " turn on this option as well
 "set background=dark
 
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+
 " Ctlr-P {{{2
 let g:ctrlp_jump_to_buffer = 0
 let g:ctrlp_working_path_mode = 0
