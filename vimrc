@@ -112,6 +112,10 @@ set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 
 set tabstop=2 softtabstop=2 shiftwidth=2
 set smarttab expandtab
+" Enable tab complete for commands.
+" first tab shows all matches. next tab starts cycling through the matches
+set wildmenu
+set wildmode=list:longest,full
 
 set textwidth=80
 set nowrap
@@ -128,13 +132,6 @@ set title
 " configure title to look like: Vim /path/to/file
 set titlestring=VIM:\ %-25.55F\ %a%r%m titlelen=70
 
-" }}}
-"{{{ Wild Side & Completion
-" Enable your wild side, take command completion completion up a notch.
-" Allow for an interesting view when opening the command line menu.
-set wildmenu wildmode=longest:full
-set wildoptions=tagfile
-if has('wildignore') && v:version >= 704 | set wildignorecase | endif
 
 " Ignore a lot of stuff.
 set wildignore+=*.swp,*.so,*.zip,*.pyc,*.bak,*.class,*.orig
@@ -159,12 +156,6 @@ endif
 if has("autocmd")
  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
-
 
 "Filetype tabs
 augroup myfiletypes
@@ -329,3 +320,9 @@ let g:netrw_liststyle=3
 
 map <C-n> :NERDTreeToggle<CR>
 
+if filereadable('~/.vim/local.vim')
+  so ~/.vim/local.vim
+endif
+if filereadable('.local.vim')
+  so .local.vim
+endif
