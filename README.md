@@ -10,3 +10,4 @@
   -  ln -s ~/dotfiles/global-gitignore ~/.gitignore
 3. Make the tmp directory:
   -  mkdir ~/tmp
+  -  mkdir ~/undo

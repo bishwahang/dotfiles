@@ -16,16 +16,49 @@ source ~/dotfiles/bundles.vim
 " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
 " options, so any other options should be set AFTER setting 'compatible'.
 "set compatible
-" Turn on line numbering. Turn it off with "set nonu" 
-set nu
-" Higlhight search
-set hls
 
 " Wrap text instead of being on one line
 set lbr
 " no bell or blink on error
-set noeb vb t_vb=
-
+set noerrorbells visualbell t_vb=
+" Uncomment the following to have Vim load indentation rules and plugins
+" according to the detected filetype.
+if has("autocmd")
+  filetype plugin indent on
+endif
+set nocompatible      " We're running Vim, not Vi!
+syntax on             " Enable syntax highlighting
+filetype on           " Enable filetype detection
+"filetype indent on    " Enable filetype-specific indenting
+filetype plugin on    " Enable filetype-specific plugins
+" The following are commented out as they cause vim to behave a lot
+" differently from regular Vi. They are highly recommended though.
+"set showcmd            " Show (partial) command in status line.
+"set showmatch          " Show matching brackets.
+set ignorecase          " Do case insensitive matching
+" Turn on line numbering. Turn it off with "set nonu"
+set number
+set numberwidth=5
+" Higlhight search
+set hlsearch
+"set smartcase          " Do smart case matching
+set incsearch          " Incremental search
+"set autowrite          " Automatically save before commands like :next and :make
+"set hidden             " Hide buffers when they are abandoned
+set mouse=a             " Enable mouse usage (all modes)
+set noswapfile
+" Display extra whitespace
+set list listchars=tab:»·,trail:·
+" Save our undo changes.
+set undodir=~/undo
+" backup dir
+set backupdir=~/.tmp//,/tmp//
+set directory=~/.tmp//,/tmp//
+let g:netrw_list_hide= '.*\.swp$'
+set spelllang=en_us
+" Set the Vim command history size to a larger number.
+set history=9999
+set undolevels=9999
 " colorscheme
 colorscheme solarized
 " let g:solarized_termcolors=256
@@ -61,10 +94,54 @@ endif
 " turn on this option as well
 "set background=dark
 
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
+" Change <Leader>
+let mapleader = ","
+let g:browser = 'gnome-open '
+
+" Nice statusbar
+set laststatus=2
+set statusline=\ "
+set statusline+=%f\ " file name
+set statusline+=[
+set statusline+=%{strlen(&ft)?&ft:'none'}, " filetype
+set statusline+=%{&fileformat}] " file format
+set statusline+=%h%1*%m%r%w%0* " flag
+set statusline+=%= " right align
+set statusline+=%-14.(%l,%c%V%)\ %<%P " offset
+set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
+
+set tabstop=2 softtabstop=2 shiftwidth=2
+set smarttab expandtab
+
+set textwidth=80
+set nowrap
+
+" Using 'smartindent' is obsolete; let ftindent plugins do their magic and
+" just format C-like files.
+set cindent
+
+" Make backspace work in insert mode
+set backspace=indent,eol,start
+
+" enable setting title
+set title
+" configure title to look like: Vim /path/to/file
+set titlestring=VIM:\ %-25.55F\ %a%r%m titlelen=70
+
+" }}}
+"{{{ Wild Side & Completion
+" Enable your wild side, take command completion completion up a notch.
+" Allow for an interesting view when opening the command line menu.
+set wildmenu wildmode=longest:full
+set wildoptions=tagfile
+if has('wildignore') && v:version >= 704 | set wildignorecase | endif
+
+" Ignore a lot of stuff.
+set wildignore+=*.swp,*.so,*.zip,*.pyc,*.bak,*.class,*.orig
+set wildignore+=.git,.hg,.bzr,.svn
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.svg
+set wildignore+=build/*,tmp/*,vendor/cache/*,bin/*
+set wildignore+=.sass-cache/*
 
 " Ctlr-P {{{2
 let g:ctrlp_jump_to_buffer = 0
@@ -76,32 +153,12 @@ if has("syntax")
   syntax on
 endif
 
+
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 if has("autocmd")
  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-if has("autocmd")
-  filetype plugin indent on
-endif
-set nocompatible      " We're running Vim, not Vi!
-syntax on             " Enable syntax highlighting
-filetype on           " Enable filetype detection
-"filetype indent on    " Enable filetype-specific indenting
-filetype plugin on    " Enable filetype-specific plugins
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-"set showcmd            " Show (partial) command in status line.
-"set showmatch          " Show matching brackets.
-set ignorecase          " Do case insensitive matching
-"set smartcase          " Do smart case matching
-"set incsearch          " Incremental search
-"set autowrite          " Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
-set mouse=a             " Enable mouse usage (all modes)
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -110,18 +167,47 @@ endif
 
 
 "Filetype tabs
-autocmd Filetype cpp setlocal expandtab ts=4 sts=4 sw=4
-autocmd Filetype html setlocal expandtab ts=2 sts=2 sw=2
-autocmd Filetype ruby setlocal expandtab ts=2 sts=2 sw=2
-autocmd Filetype javascript setlocal expandtab ts=4 sts=4 sw=4
-autocmd FileType python setlocal expandtab ts=4 sts=4 sw=4
-autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+augroup myfiletypes
+  " Clear old autocmds in group
+  autocmd!
+  " autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,eruby,yaml set autoindent shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+  autocmd FileType python set autoindent shiftwidth=4 softtabstop=4 expandtab
+  autocmd FileType javascript,html,htmldjango,css set autoindent shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType vim set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType puppet set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd Filetype cpp setlocal expandtab ts=4 sts=4 sw=4
+  au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+  au BufRead,BufNewFile *etc/nginx/* set ft=nginx 
+  " treat rackup files like ruby
+  au BufRead,BufNewFile *.ru set ft=ruby
+  au BufRead,BufNewFile Gemfile set ft=ruby
+  autocmd BufEnter *.haml setlocal cursorcolumn
+  au BufRead,BufNewFile Gemfile set ft=ruby
+  au BufRead,BufNewFile Capfile set ft=ruby
+  au BufRead,BufNewFile Thorfile set ft=ruby
+  au BufRead,BufNewFile *.god set ft=ruby
+  au BufRead,BufNewFile .caprc set ft=ruby
+  au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
+augroup END
+" Turn on language specific omnifuncs
+autocmd FileType ruby set omnifunc=rubycomplete#Complete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
 "Ruby autocomplete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-" Index ctags from any project, including those outside Rails
-map <Leader>ct :!ctags -R .<CR>
+
+" spelling
+autocmd BufRead,BufNewFile *.md setlocal spell
+set complete+=kspell
 "for CtrlP
 " set runtimepath^=~/.vim/bundle/ctrlp.vim3
 " Ignore some folders and files for CtrlP indexing
@@ -142,20 +228,70 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" Section: functions
+
+function! s:RunShellCommand(cmdline)
+  botright new
+
+  setlocal buftype=nofile
+  setlocal bufhidden=delete
+  setlocal nobuflisted
+  setlocal noswapfile
+  setlocal nowrap
+  setlocal filetype=shell
+  setlocal syntax=shell
+
+  call setline(1,a:cmdline)
+  call setline(2,substitute(a:cmdline,'.','=','g'))
+  execute 'silent $read !'.escape(a:cmdline,'%#')
+  setlocal nomodifiable
+  1
+endfunction
+
+" Open the Rails ApiDock page for the word under cursor, using the 'open'
+" command
+function! OpenRailsDoc(keyword)
+  let url = 'http://apidock.com/rails/'.a:keyword
+  exec '!'.g:browser.' '.url
+endfunction
+
+" Open the Ruby ApiDock page for the word under cursor, using the 'open'
+" command
+function! OpenRubyDoc(keyword)
+  let url = 'http://apidock.com/ruby/'.a:keyword
+  exec '!'.g:browser.' '.url
+endfunction
+" Shell
+command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
+"""
+" MAPPINGS
+"""
+" Tab navigation
+nmap <leader>tn :tabnext<CR>
+nmap <leader>tp :tabprevious<CR>
+nmap <leader>te :tabedit
+
+" Remap F1 from Help to ESC.  No more accidents.
+nmap <F1> <Esc>
+map! <F1> <Esc>
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag<SPACE>
-" Display extra whitespace
-set list listchars=tab:»·,trail:·
+" <leader>F to begin searching with ack
+map <leader>F :Ag<space>
+" create tags
+map <Leader>ct :!ctags -R .<CR>
 
-" backup dir
-set backupdir=~/.tmp//,/tmp//
-set directory=~/.tmp//,/tmp//
-let g:netrw_list_hide= '.*\.swp$'
-set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
+" search next/previous -- center in page
+nmap n nzz
+nmap N Nzz
+nmap * *Nzz
+nmap # #nzz
 
+" Yank from the cursor to the end of the line, to be consistent with C and D.
+nnoremap Y y$
+" ctrl-p ignores and whatnot
 " for tabularize
 " Mappings for ruby hash rocket and symbol hashes
 nnoremap <silent> <Leader>ahs :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
@@ -176,6 +312,9 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 nnoremap <Leader><space> :noh<cr>
+" Easily lookup documentation on apidock
+noremap <leader>rb :call OpenRubyDoc(expand('<cword>'))<CR>
+noremap <leader>rr :call OpenRailsDoc(expand('<cword>'))<CR>
 
 " vim-rspec mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -187,8 +326,6 @@ let g:rspec_command = "Dispatch rspec {spec}"
 " netrw sytling
 let g:netrw_liststyle=3
 
-" show filename in status line
-set statusline+=%F
 
 map <C-n> :NERDTreeToggle<CR>
 
