@@ -9,7 +9,7 @@
   -  ln -s ~/dotfiles/ctags ~/.ctags
   -  ln -s ~/dotfiles/gitconfig ~/.gitconfig
   -  ln -s ~/dotfiles/global-gitignore ~/.gitignore
-  -  ln -s ~/dotfiles/tmux ~/.tmux
+  -  ln -s ~/dotfiles/tmux ~/.tmux.conf
 3. Make the tmp directory:
   -  mkdir ~/tmp
   -  mkdir ~/undo
