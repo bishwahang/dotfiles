@@ -5,7 +5,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 "Start
 call vundle#begin()
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 
 " General enhancements
 Bundle 'tpope/vim-abolish.git'
@@ -44,6 +44,7 @@ Bundle 'garbas/vim-snipmate'
 Bundle 'ggreer/the_silver_searcher'
 Bundle "honza/vim-snippets"
 Bundle 'davidhalter/jedi-vim'
+Bundle 'Shougo/neocomplete.vim'
 
 " Custom textobjects
 Bundle 'kana/vim-textobj-user.git'
