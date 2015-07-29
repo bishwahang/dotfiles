@@ -117,9 +117,6 @@ set smarttab expandtab
 set wildmenu
 set wildmode=list:longest,full
 
-set textwidth=80
-set nowrap
-
 " Using 'smartindent' is obsolete; let ftindent plugins do their magic and
 " just format C-like files.
 set cindent

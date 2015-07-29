@@ -43,6 +43,7 @@ Bundle 'garbas/vim-snipmate'
 " Optional:
 Bundle 'ggreer/the_silver_searcher'
 Bundle "honza/vim-snippets"
+Bundle 'davidhalter/jedi-vim'
 
 " Custom textobjects
 Bundle 'kana/vim-textobj-user.git'
