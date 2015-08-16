@@ -50,7 +50,8 @@ set noswapfile
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
 " Save our undo changes.
-set undodir=~/undo
+set undodir=~/.undo
+set undofile " maintains undo history between sessions
 " backup dir
 set backupdir=~/.tmp//,/tmp//
 set directory=~/.tmp//,/tmp//
