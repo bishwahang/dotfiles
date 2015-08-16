@@ -1,15 +1,9 @@
 ##Installation
 
-1. `git clone git@github.com:bishwahang/dotfiles.git`
-2. Create symlinks:
-  -  ln -s ~/dotfiles/bashrc ~/.bashrc
-  -  ln -s ~/dotfiles/vimrc ~/.vimrc
-  -  ln -s ~/dotfiles/gvimrc ~/.gvimrc
-  -  ln -s ~/dotfiles/vim ~/.vim
-  -  ln -s ~/dotfiles/ctags ~/.ctags
-  -  ln -s ~/dotfiles/gitconfig ~/.gitconfig
-  -  ln -s ~/dotfiles/global-gitignore ~/.gitignore
-  -  ln -s ~/dotfiles/tmux ~/.tmux.conf
-3. Make the tmp directory:
-  -  mkdir ~/tmp
-  -  mkdir ~/undo
+Dotfiles for vim, some configs, rbenv, and pyenv.
+
+
+```
+git clone git://github.com/bishwahang/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles && ./install.sh
+```
