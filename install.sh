@@ -24,6 +24,7 @@ mkdir -p $HOME/.undo
 
 hash vim > /dev/null && {
   echo 'Installing Vim Plugin'
+  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   vim +PluginInstall +PluginUpdate +qall
 }
 echo 'Finished!'
