@@ -12,11 +12,11 @@ git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-vi
 
 echo "Link config files"
 configs=(bashrc vimrc gvimrc vim gitconfig gitignore tmux.conf)
-for config in configs; do
-  ln -nfs $HOME/.dotfiles/$target $HOME/.$target
+for config in "${configs[@]}"
+do
+  echo "linking $config"
+  ln -nfs $HOME/.dotfiles/$config $HOME/.$config
 done
-echo "setting global gitignore"
-git config --global core.excludesfile ~/.gitignore
 
 echo "making temp and undo directory"
 mkdir -p $HOME/.tmp

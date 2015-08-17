@@ -10,7 +10,7 @@
 runtime! debian.vim
 
 "the bundles vim loading
-source ~/dotfiles/bundles.vim
+source ~/.dotfiles/bundles.vim
 
 " Uncomment the next line to make Vim more Vi-compatible
 " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
