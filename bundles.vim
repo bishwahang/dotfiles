@@ -5,7 +5,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 "Start
 call vundle#begin()
-Bundle 'gmarik/Vundle.vim'
+Bundle 'VundleVim/Vundle.vim'
 
 " General enhancements
 Bundle 'tpope/vim-abolish.git'
