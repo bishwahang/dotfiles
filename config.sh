@@ -4,12 +4,6 @@ hash git > /dev/null || {
   return 1
 }
 
-echo "installing rbenv"
-git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-echo "installing pyenv and pyenv-virtualenv"
-git clone https://github.com/yyuu/pyenv.git ~/.pyenv
-git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
-
 echo "Link config files"
 configs=(bashrc vimrc gvimrc vim gitconfig gitignore tmux.conf)
 for config in "${configs[@]}"
@@ -27,5 +21,4 @@ hash vim > /dev/null && {
   git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   vim +PluginInstall +qall
 }
-echo 'Finished!'
-
+echo 'Finished config!'
