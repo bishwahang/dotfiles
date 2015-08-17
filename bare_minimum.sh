@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-# basic update
-sudo apt-get -y --force-yes update
-sudo apt-get -y --force-yes upgrade
-
-sudo apt-get -y install \
-  build-essential \
-  git vim-gnome tmux
-
 # set solarized
 cd
 wget --no-check-certificate https://raw.github.com/seebi/dircolors-solarized/master/dircolors.ansi-dark
