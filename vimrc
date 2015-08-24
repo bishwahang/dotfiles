@@ -297,6 +297,7 @@ nnoremap \ :Ag<SPACE>
 
 " create tags
 map <Leader>ct :!ctags -R .<CR>
+set tags=./tags,tags
 
 " search next/previous -- center in page
 nmap n nzz
