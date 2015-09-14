@@ -121,6 +121,8 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     c_reset='\[\e[0m\]'
     c_user='\[\e[0;32m\]'
     c_path='\[\e[1;34m\]'
+    c_user='\[\e[0;32m\]'
+    c_git_reset='\e[0m'
     c_git_clean='\e[0;37m'
     c_git_staged='\e[0;32m'
     c_git_unstaged='\e[0;31m'
@@ -156,7 +158,7 @@ git_prompt ()
             git_color="${c_git_staged}"
         fi
       fi
-    echo -e "${git_color}[$GIT_BRANCH]"
+    echo -e "[${git_color}$GIT_BRANCH${c_git_reset}]"
 }
 export PS1="${c_user}${debian_chroot:+($debian_chroot)}\u${c_reset}@${c_user}\h${c_reset}:${c_path}\w${c_reset}\$(git_prompt)${c_reset}\$ "
 ### Added by the Heroku Toolbelt
