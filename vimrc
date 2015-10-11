@@ -33,18 +33,18 @@ filetype on           " Enable filetype detection
 filetype plugin on    " Enable filetype-specific plugins
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
-"set showcmd            " Show (partial) command in status line.
-"set showmatch          " Show matching brackets.
-set ignorecase          " Do case insensitive matching
+set showcmd            " Show (partial) command in status line.
+set cursorline " highlight current line
+set showmatch          " Show matching brackets.
 " Turn on line numbering. Turn it off with "set nonu"
 set number
 set numberwidth=5
-" Higlhight search
-set hlsearch
-"set smartcase          " Do smart case matching
-set incsearch          " Incremental search
+set ignorecase          " Do case insensitive matching
+set hlsearch            " Higlhight search
+set smartcase           " Do smart case matching
+set incsearch           " Incremental search
 "set autowrite          " Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
+set hidden             " Hide buffers when they are abandoned
 set mouse=a             " Enable mouse usage (all modes)
 set noswapfile
 " Display extra whitespace
@@ -346,7 +346,8 @@ let g:netrw_liststyle=3
 
 
 map <C-n> :NERDTreeToggle<CR>
-
+" sudo save
+cmap w!! w !sudo tee > /dev/null %
 if filereadable('~/.vim/local.vim')
   so ~/.vim/local.vim
 endif
