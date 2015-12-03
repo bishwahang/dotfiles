@@ -35,6 +35,7 @@ Bundle 'kien/ctrlp.vim.git'
 Bundle 'elzr/vim-json'
 Bundle 'godlygeek/tabular.git'
 Bundle 'vim-scripts/vimwiki.git'
+Bundle 'scrooloose/syntastic'
 " Bundle 'klen/python-mode'
 " extra
 Bundle 'henrik/vim-indexed-search'
