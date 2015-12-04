@@ -354,6 +354,19 @@ let g:rspec_command = "Dispatch rspec {spec}"
 " netrw sytling
 let g:netrw_liststyle=3
 
+" Snippets
+" Some variables need default value
+if !exists("g:snips_author")
+    let g:snips_author = "Bishwa Hang Rai"
+endif
+
+if !exists("g:snips_email")
+    let g:snips_email = "bishwahang.kirat@gmail.com"
+endif
+
+if !exists("g:snips_github")
+    let g:snips_github = "https://github.com/bishwahang"
+endif
 
 map <C-n> :NERDTreeToggle<CR>
 " sudo save
