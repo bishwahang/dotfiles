@@ -70,8 +70,12 @@ Bundle 'tpope/vim-rails.git'
 Bundle 'tpope/vim-rake.git'
 Bundle 'vim-ruby/vim-ruby'
 
+" Latex
+Bundle 'lervag/vimtex'
+
 " Markdown
 Bundle 'tpope/vim-markdown.git'
+
 
 call vundle#end()
 "End

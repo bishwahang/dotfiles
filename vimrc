@@ -234,6 +234,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 " spelling
 autocmd BufRead,BufNewFile *.md setlocal spell
+autocmd BufRead,BufNewFile *.tex setlocal spell
 set complete+=kspell
 "for CtrlP
 " set runtimepath^=~/.vim/bundle/ctrlp.vim3
@@ -350,6 +351,9 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 let g:rspec_command = "Dispatch rspec {spec}"
+" latex mapping
+map <Leader>vtc :VimtexCompile<CR>
+map <Leader>vtv :VimtexView<CR>
 
 " netrw sytling
 let g:netrw_liststyle=3
