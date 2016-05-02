@@ -89,6 +89,7 @@ fi
 export PATH=$HOME/.npm/bin:$PATH
 
 export PROMPT_DIRTRIM=2
+export CHKTEXRC=$HOME/.chktexrc
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -158,8 +159,8 @@ git_prompt ()
         else
             git_color="${c_git_staged}"
         fi
-      fi
-    echo -e "[${git_color}$GIT_BRANCH${c_git_reset}]"
+    fi
+    echo "[$git_color$GIT_BRANCH$c_reset]"
 }
 export PS1="${c_user}${debian_chroot:+($debian_chroot)}\u${c_reset}@${c_user}\h${c_reset}:${c_path}\w${c_reset}\$(git_prompt)${c_reset}\$ "
 ### Added by the Heroku Toolbelt
@@ -176,4 +177,4 @@ _pip_completion()
 }
 complete -o default -F _pip_completion pip
 # pip bash completion end
-
+alias ag='ag --path-to-agignore=~/.agignore'

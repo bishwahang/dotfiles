@@ -43,6 +43,7 @@ Bundle 'craigemery/vim-autotag'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
+Bundle 'fatih/vim-go'
 " Optional:
 Bundle 'ggreer/the_silver_searcher'
 Bundle "honza/vim-snippets"

@@ -62,7 +62,7 @@ set history=9999
 set undolevels=9999
 " colorscheme
 colorscheme solarized
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 set term=xterm-256color
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
@@ -138,6 +138,7 @@ set wildignore+=.git,.hg,.bzr,.svn
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.svg
 set wildignore+=build/*,tmp/*,vendor/cache/*,bin/*
 set wildignore+=.sass-cache/*
+set wildignore+=node_modules/*,bower_components/*
 
 " Ctlr-P {{{2
 let g:ctrlp_jump_to_buffer = 0
@@ -303,7 +304,7 @@ nmap <leader>te :tabedit
 " Remap F1 from Help to ESC.  No more accidents.
 nmap <F1> <Esc>
 map! <F1> <Esc>
-" bind K to grep word under cursor
+" bind KK to grep word under cursor
 nnoremap KK :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 " bind \ (backward slash) to grep shortcut
 command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
@@ -355,6 +356,9 @@ let g:rspec_command = "Dispatch rspec {spec}"
 
 " netrw sytling
 let g:netrw_liststyle=3
+
+" vimtex output
+let g:vimtex_latexmk_build_dir="build"
 
 " Snippets
 " Some variables need default value
