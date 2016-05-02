@@ -160,7 +160,7 @@ git_prompt ()
             git_color="${c_git_staged}"
         fi
     fi
-    echo "[$git_color$GIT_BRANCH$c_reset]"
+    echo -e "[${git_color}$GIT_BRANCH${c_git_reset}]"
 }
 export PS1="${c_user}${debian_chroot:+($debian_chroot)}\u${c_reset}@${c_user}\h${c_reset}:${c_path}\w${c_reset}\$(git_prompt)${c_reset}\$ "
 ### Added by the Heroku Toolbelt
