@@ -109,23 +109,24 @@ fi
 
 # Configure colors, if available.
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    # test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     # enable color support of ls and also add handy aliases
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
+    # alias ls='ls --color=auto'
+    # alias dir='dir --color=auto'
+    # alias vdir='vdir --color=auto'
+    alias ls='ls -Gp'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
-    c_reset='\[\e[0m\]'
-    c_user='\[\e[0;32m\]'
-    c_path='\[\e[1;34m\]'
-    c_user='\[\e[0;32m\]'
-    c_git_reset='\e[0m'
-    c_git_clean='\e[0;37m'
-    c_git_staged='\e[0;32m'
-    c_git_unstaged='\e[0;31m'
+    c_reset='\[\033[0m\]'
+    c_user='\[\033[0;32m\]'
+    c_path='\[\033[1;34m\]'
+    c_user='\[\033[0;32m\]'
+    c_git_reset='\033[0m'
+    c_git_clean='\033[0;37m'
+    c_git_staged='\033[0;32m'
+    c_git_unstaged='\033[0;31m'
 else
     c_reset=
     c_user=
