@@ -62,7 +62,8 @@ set history=9999
 set undolevels=9999
 " colorscheme
 colorscheme solarized
-" let g:solarized_termcolors=256
+let g:solarized_termcolors=256
+set term=xterm-256color
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
@@ -378,3 +379,5 @@ endif
 if filereadable('.local.vim')
   so .local.vim
 endif
+" set t_te= t_ti=
+" au VimLeave * :!clear
