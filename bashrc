@@ -142,16 +142,11 @@ else
 fi
 
 # Function to assemble the Git parsingart of our prompt.
-git_prompt ()
+git_color()
 {
     GIT_DIR=`git rev-parse --git-dir 2>/dev/null`
     if [ -z "$GIT_DIR" ]; then
         return 0
-    fi
-    GIT_HEAD=`cat $GIT_DIR/HEAD`
-    GIT_BRANCH=${GIT_HEAD##*/}
-    if [ ${#GIT_BRANCH} -eq 40 ]; then
-        GIT_BRANCH="(no branch)"
     fi
     STATUS=`git status --porcelain`
     if [ -z "$STATUS" ]; then
@@ -164,10 +159,24 @@ git_prompt ()
             git_color="${c_git_staged}"
         fi
     fi
-    # echo -e "[${git_color}$GIT_BRANCH${c_git_reset}]"
-    echo -e "[${git_color}${GIT_BRANCH}${c_git_reset}]"
+    echo -e "${git_color}"
 }
-PS1="${c_user}${debian_chroot:+($debian_chroot)}\u${c_reset}@${c_user}\h${c_reset}:${c_path}\W${c_reset}\[\$(git_prompt)\] ${c_reset}\$ "
+# Function to assemble the Git parsingart of our prompt.
+git_branch()
+{
+    GIT_DIR=`git rev-parse --git-dir 2>/dev/null`
+    if [ -z "$GIT_DIR" ]; then
+        return 0
+    fi
+    GIT_HEAD=`cat $GIT_DIR/HEAD`
+    GIT_BRANCH=${GIT_HEAD##*/}
+    if [ ${#GIT_BRANCH} -eq 40 ]; then
+        GIT_BRANCH="(no branch)"
+    fi
+    echo -e " [${GIT_BRANCH}]"
+}
+
+PS1="${c_user}${debian_chroot:+($debian_chroot)}\u${c_reset}@${c_user}\h${c_reset}:${c_path}\w${c_reset}\[\$(git_color)\]\$(git_branch) ${c_reset}\$ "
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 # After each command, save and reload history
