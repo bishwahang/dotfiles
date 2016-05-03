@@ -128,6 +128,10 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     c_git_clean='\033[0;37m'
     c_git_staged='\033[0;32m'
     c_git_unstaged='\033[0;31m'
+    # c_git_reset='\[\033[0m\]'
+    # c_git_clean='\[\033[0;37m\]'
+    # c_git_staged='\[\033[0;32m\]'
+    # c_git_unstaged='\[\033[0;31m\]'
 else
     c_reset=
     c_user=
@@ -160,9 +164,10 @@ git_prompt ()
             git_color="${c_git_staged}"
         fi
     fi
-    echo -e "[${git_color}$GIT_BRANCH${c_git_reset}]"
+    # echo -e "[${git_color}$GIT_BRANCH${c_git_reset}]"
+    echo -e "[${git_color}${GIT_BRANCH}${c_git_reset}]"
 }
-export PS1="${c_user}${debian_chroot:+($debian_chroot)}\u${c_reset}@${c_user}\h${c_reset}:${c_path}\w${c_reset}\$(git_prompt)${c_reset}\$ "
+PS1="${c_user}${debian_chroot:+($debian_chroot)}\u${c_reset}@${c_user}\h${c_reset}:${c_path}\W${c_reset}\[\$(git_prompt)\] ${c_reset}\$ "
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 # After each command, save and reload history
