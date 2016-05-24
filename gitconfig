@@ -26,4 +26,4 @@
        renamelimit = 5000
 
 [core]
-  excludesfile = /home/hang/.gitignore
+	excludesfile = ~/.gitignore
