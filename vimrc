@@ -38,6 +38,7 @@ set cursorline " highlight current line
 set showmatch          " Show matching brackets.
 " Turn on line numbering. Turn it off with "set nonu"
 set number
+set relativenumber
 set numberwidth=5
 set ignorecase          " Do case insensitive matching
 set hlsearch            " Higlhight search
@@ -383,5 +384,7 @@ endif
 if filereadable('.local.vim')
   so .local.vim
 endif
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
 " set t_te= t_ti=
 " au VimLeave * :!clear
