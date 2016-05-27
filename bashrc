@@ -112,10 +112,10 @@ fi
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     # test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     # enable color support of ls and also add handy aliases
-    # alias ls='ls --color=auto'
-    # alias dir='dir --color=auto'
-    # alias vdir='vdir --color=auto'
-    alias ls='ls -Gp'
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    # alias ls='ls -Gp'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
