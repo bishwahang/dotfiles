@@ -316,10 +316,8 @@ map <Leader>ct :!ctags -R .<CR>
 set tags=./tags,tags
 
 " search next/previous -- center in page
-nmap n nzz
-nmap N Nzz
-nmap * *Nzz
-nmap # #nzz
+let g:indexed_search_unfold=1
+let g:indexed_search_center=1
 
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
