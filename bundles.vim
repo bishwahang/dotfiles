@@ -50,6 +50,7 @@ Bundle 'fatih/vim-go'
 Bundle 'ggreer/the_silver_searcher'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'Shougo/neocomplete.vim'
+Bundle 'stephpy/vim-yaml'
 
 " Custom textobjects
 Bundle 'kana/vim-textobj-user.git'

@@ -39,6 +39,8 @@ set showmatch          " Show matching brackets.
 " Turn on line numbering. Turn it off with "set nonu"
 set number
 set relativenumber
+set splitbelow
+set splitright
 set numberwidth=5
 set ignorecase          " Do case insensitive matching
 set hlsearch            " Higlhight search
@@ -343,8 +345,8 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 nnoremap <Leader><space> :noh<cr>
 " Easily lookup documentation on apidock
-noremap <leader>rb :call OpenRubyDoc(expand('<cword>'))<CR>
-noremap <leader>rr :call OpenRailsDoc(expand('<cword>'))<CR>
+noremap <leader>rb :call OpenRubyDoc(expand('<cword>'))<CR><CR>
+noremap <leader>rr :call OpenRailsDoc(expand('<cword>'))<CR><CR>
 
 " vim-rspec mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -384,5 +386,10 @@ if filereadable('.local.vim')
 endif
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
+
+" Go
+" format with goimports instead of gofmt
+let g:go_fmt_command = "goimports"
+
 " set t_te= t_ti=
 " au VimLeave * :!clear
