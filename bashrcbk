@@ -89,7 +89,6 @@ fi
 export PATH=$HOME/.npm/bin:$PATH
 
 export PROMPT_DIRTRIM=2
-export CHKTEXRC=$HOME/.chktexrc
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
@@ -115,23 +114,22 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     alias ls='ls --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
-    # alias ls='ls -Gp'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
-    c_reset='\[\033[0m\]'
-    c_user='\[\033[0;32m\]'
-    c_path='\[\033[1;34m\]'
-    c_user='\[\033[0;32m\]'
-    c_git_reset='\033[0m'
-    c_git_clean='\033[0;37m'
-    c_git_staged='\033[0;32m'
-    c_git_unstaged='\033[0;31m'
-    # c_git_reset='\[\033[0m\]'
-    # c_git_clean='\[\033[0;37m\]'
-    # c_git_staged='\[\033[0;32m\]'
-    # c_git_unstaged='\[\033[0;31m\]'
+    c_git_reset='\e[0m'
+    c_git_clean='\e[0;37m'
+    c_git_staged='\e[0;32m'
+    c_git_unstaged='\e[0;31m'
+
+    c_reset='\[\e[0m\]'
+    c_user='\[\e[0;32m\]'
+    c_path='\[\e[1;34m\]'
+    c_user='\[\e[0;32m\]'
+    c_git_clean='\[\e[0;37m\]'
+    c_git_staged='\[\e[0;32m\]'
+    c_git_unstaged='\[\e[0;31m\]'
 else
     c_reset=
     c_user=
@@ -142,11 +140,41 @@ else
 fi
 
 # Function to assemble the Git parsingart of our prompt.
-git_color()
+git_prompt ()
 {
     GIT_DIR=`git rev-parse --git-dir 2>/dev/null`
     if [ -z "$GIT_DIR" ]; then
         return 0
+    fi
+    GIT_HEAD=`cat $GIT_DIR/HEAD`
+    GIT_BRANCH=${GIT_HEAD##*/}
+    if [ ${#GIT_BRANCH} -eq 40 ]; then
+        GIT_BRANCH="(no branch)"
+    fi
+    STATUS=`git status --porcelain`
+    if [ -z "$STATUS" ]; then
+        git_color="${c_git_clean}"
+    else
+        echo -e "$STATUS" | grep -q '^ [A-Z\?]'
+        if [ $? -eq 0 ]; then
+            git_color="${c_git_unstaged}"
+        else
+            git_color="${c_git_staged}"
+        fi
+      fi
+    echo -e "[${git_color}$GIT_BRANCH${c_git_reset}]"
+}
+# Function to assemble the Git parsingart of our prompt.
+git_prompt ()
+{
+    GIT_DIR=`git rev-parse --git-dir 2>/dev/null`
+    if [ -z "$GIT_DIR" ]; then
+        return 0
+    fi
+    GIT_HEAD=`cat $GIT_DIR/HEAD`
+    GIT_BRANCH=${GIT_HEAD##*/}
+    if [ ${#GIT_BRANCH} -eq 40 ]; then
+        GIT_BRANCH="(no branch)"
     fi
     STATUS=`git status --porcelain`
     if [ -z "$STATUS" ]; then
@@ -159,24 +187,10 @@ git_color()
             git_color="${c_git_staged}"
         fi
     fi
-    echo -e "${git_color}"
+    echo "[$git_color$GIT_BRANCH$c_reset]"
 }
-# Function to assemble the Git parsingart of our prompt.
-git_branch()
-{
-    GIT_DIR=`git rev-parse --git-dir 2>/dev/null`
-    if [ -z "$GIT_DIR" ]; then
-        return 0
-    fi
-    GIT_HEAD=`cat $GIT_DIR/HEAD`
-    GIT_BRANCH=${GIT_HEAD##*/}
-    if [ ${#GIT_BRANCH} -eq 40 ]; then
-        GIT_BRANCH="(no branch)"
-    fi
-    echo -e " [${GIT_BRANCH}]"
-}
+export PROMPT_COMMAND="$PROMPT_COMMAND PS1=\"${c_user}\u${c_reset}@${c_user}\h${c_reset}:${c_path}\w${c_reset}\$(git_prompt)\$ \" ;"
 
-PS1="${c_user}${debian_chroot:+($debian_chroot)}\u${c_reset}@${c_user}\h${c_reset}:${c_path}\w${c_reset}\[\$(git_color)\]\$(git_branch) ${c_reset}\$ "
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 # After each command, save and reload history
@@ -191,4 +205,4 @@ _pip_completion()
 }
 complete -o default -F _pip_completion pip
 # pip bash completion end
-alias ag='ag --path-to-agignore=~/.agignore'
+

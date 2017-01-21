@@ -1,6 +1,7 @@
 [user]
       name = Bishwa Hang Rai
       email = bishwahang.kirat@gmail.com
+	signingkey = 4DAEE9C4A5A35281CF28A700CC7BD6E59CA5B8A4
 
 [color]
       ui = auto
@@ -28,3 +29,5 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = /usr/bin/vim
+[commit]
+	gpgsign = true
