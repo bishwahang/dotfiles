@@ -9,9 +9,6 @@ alias la='ls -A --color'
 alias l='ls -CF --color'
 
 if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
-  # test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  # enable color support of ls and also add handy aliases
-  # alias ls='ls -G'
   alias dir='dir -G'
   alias vdir='vdir -G'
   alias ls='ls -Gp'

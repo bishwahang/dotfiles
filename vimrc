@@ -103,7 +103,7 @@ endif
 
 " Change <Leader>
 let mapleader = ","
-let g:browser = 'gnome-open '
+let g:browser = 'open '
 
 " Nice statusbar
 set laststatus=2
