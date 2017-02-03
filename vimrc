@@ -115,7 +115,7 @@ set statusline+=%= " right align
 set statusline+=%-14.(%l,%c%V%)\ %<%P " offset
 set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 
-" set tabstop=2 softtabstop=2 shiftwidth=2
+set tabstop=2 softtabstop=2 shiftwidth=2
 set smarttab expandtab
 " Enable tab complete for commands.
 " first tab shows all matches. next tab starts cycling through the matches

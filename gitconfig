@@ -1,32 +1,33 @@
 [user]
-      name = Bishwa Hang Rai
-      email = bishwahang.kirat@gmail.com
+  name = Bishwa Hang Rai
+  email = bishwahang.kirat@gmail.com
+  ; signingkey = 4DAEE9C4A5A35281CF28A700CC7BD6E59CA5B8A4
 
 [color]
-      ui = auto
-      diff = auto
-      status = auto
-      branch = auto
+  ui = auto
+  diff = auto
+  status = auto
+  branch = auto
 
 [alias]
-      st = status
-      di = diff
-      co = checkout
-      ci = commit
-      cia = commit -a
-      br = branch
-      sta = stash
-      pop = stash pop
-      hist = log --pretty=format:\"%Cred%h%Creset %C(yellow)(%cr) %ad%Creset | %s%d %C(blue)[%an]%Creset\" --graph --date=short
-      type = cat-file -t
-      dump = cat-file -p
+  st = status
+  di = diff
+  co = checkout
+  ci = commit
+  cia = commit -a
+  br = branch
+  sta = stash
+  pop = stash pop
+  hist = log --pretty=format:\"%Cred%h%Creset %C(yellow)(%cr) %ad%Creset | %s%d %C(blue)[%an]%Creset\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
 [push]
-      default = current
+  default = current
 [merge]
-       renamelimit = 5000
+  renamelimit = 5000
 
 [core]
-	excludesfile = ~/.gitignore
-	editor = /usr/bin/vim
+  excludesfile = ~/.gitignore
+  editor = /usr/bin/vim
 ; [commit]
-; 	gpgsign = true
+;   gpgsign = true
