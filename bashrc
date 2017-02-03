@@ -96,12 +96,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
 # 256 color
 if [ "$TERM" == "xterm" ]; then
     # No it isn't, it's gnome-terminal
@@ -110,16 +104,6 @@ fi
 
 # Configure colors, if available.
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    # enable color support of ls and also add handy aliases
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-    # alias ls='ls -Gp'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
     c_reset='\[\033[0m\]'
     c_user='\[\033[0;32m\]'
     c_path='\[\033[1;34m\]'
@@ -181,6 +165,8 @@ PS1="${c_user}${debian_chroot:+($debian_chroot)}\u${c_reset}@${c_user}\h${c_rese
 export PATH="/usr/local/heroku/bin:$PATH"
 # After each command, save and reload history
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 # pip bash completion start
 _pip_completion()
