@@ -115,7 +115,7 @@ set statusline+=%= " right align
 set statusline+=%-14.(%l,%c%V%)\ %<%P " offset
 set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 
-" set tabstop=2 softtabstop=2 shiftwidth=2
+set tabstop=2 softtabstop=2 shiftwidth=2
 set smarttab expandtab
 " Enable tab complete for commands.
 " first tab shows all matches. next tab starts cycling through the matches
@@ -240,6 +240,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 " spelling
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.tex setlocal spell
+autocmd BufRead,BufNewFile *.markdown setlocal spell
 set complete+=kspell
 "for CtrlP
 " set runtimepath^=~/.vim/bundle/ctrlp.vim3
@@ -314,7 +315,7 @@ command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
 
 " create tags
-map <Leader>ct :!ctags -R .<CR>
+map <Leader>ct :!ctags -R --exclude=.bundle --exclude=.git .<CR>
 set tags=./tags,tags
 
 " search next/previous -- center in page
@@ -323,6 +324,9 @@ let g:indexed_search_center=1
 
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
+" nnoremap <expr> gp `[v`]
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]''`]`'
+nnoremap <expr> gb '`[' . getregtype()[0] . '`]''`]`'
 " ctrl-p ignores and whatnot
 " for tabularize
 " Mappings for ruby hash rocket and symbol hashes
@@ -353,7 +357,7 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>la :call RunLastSpec()<CR>
 map <Leader>al :call RunAllSpecs()<CR>
-let g:rspec_command = "Dispatch rspec {spec}"
+let g:rspec_command = "Dispatch bundle exec rspec {spec}"
 
 " netrw sytling
 let g:netrw_liststyle=3
@@ -393,3 +397,5 @@ let g:go_fmt_command = "goimports"
 
 " set t_te= t_ti=
 " au VimLeave * :!clear
+" autocmd filetype crontab setlocal nobackup nowritebackup
+let $BASH_ENV= "~/.bash_aliases"

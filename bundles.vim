@@ -39,7 +39,7 @@ Bundle 'scrooloose/syntastic'
 " Bundle 'klen/python-mode'
 " extra
 Bundle 'henrik/vim-indexed-search'
-Bundle 'craigemery/vim-autotag'
+" Bundle 'craigemery/vim-autotag'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'garbas/vim-snipmate'
