@@ -1,6 +1,6 @@
 [user]
       name = Bishwa Hang Rai
-      email = bishwahang.kirat@gmail.com
+      email = bishwa@freeletics.com
 
 [color]
       ui = auto
@@ -28,5 +28,6 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = /usr/bin/vim
+	hooksPath = /Users/bishwa/.git/hooks/
 ; [commit]
 ; 	gpgsign = true

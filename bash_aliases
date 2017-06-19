@@ -19,6 +19,7 @@ if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
 fi
 
 alias ag='ag --path-to-ignore=~/.agignore'
-alias cop='bundle exec rake spec && bundle exec rubocop'
-alias diff="/usr/local/bin/grc /usr/bin/diff"
+alias cop='bundle exec rubocop'
+alias spec='bundle exec rake spec && bundle exec rubocop'
+# alias diff="/usr/local/bin/grc /usr/bin/diff"
 alias genpass='cat /dev/urandom | env LC_CTYPE=C tr -dc a-zA-Z0-9_\!\@\#\$\%\^\&\*\(\)\-+= | head -c 17; echo'
