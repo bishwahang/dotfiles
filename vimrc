@@ -353,11 +353,13 @@ noremap <leader>rb :call OpenRubyDoc(expand('<cword>'))<CR><CR>
 noremap <leader>rr :call OpenRailsDoc(expand('<cword>'))<CR><CR>
 
 " vim-rspec mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>la :call RunLastSpec()<CR>
-map <Leader>al :call RunAllSpecs()<CR>
-let g:rspec_command = "Dispatch bundle exec rspec {spec}"
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+" make test commands execute using dispatch.vim
+let test#strategy = "dispatch"
 
 " netrw sytling
 let g:netrw_liststyle=3
