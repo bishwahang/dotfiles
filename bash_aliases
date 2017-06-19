@@ -21,7 +21,6 @@ if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
   alias egrep='egrep --color=auto'
 fi
 
-alias ag='ag --path-to-agignore=~/.agignore'
 alias ag='ag --path-to-ignore=~/.agignore'
 alias cop='bundle exec rubocop'
 alias spec='bundle exec rake spec && bundle exec rubocop'

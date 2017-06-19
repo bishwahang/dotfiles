@@ -58,7 +58,6 @@ set undofile " maintains undo history between sessions
 " backup dir
 set backupdir=~/.tmp//,/tmp//
 set directory=~/.tmp//,/tmp//
-let g:netrw_list_hide= '.*\.swp$'
 set spelllang=en_us
 " Set the Vim command history size to a larger number.
 set history=9999
@@ -181,8 +180,8 @@ augroup myfiletypes
   au BufRead,BufNewFile .caprc set ft=ruby
   au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
+
 " neo complete
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -193,14 +192,11 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-" <TAB>: completion.
-" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplete#close_popup()
 inoremap <expr><C-e>  neocomplete#cancel_popup()
-""" end neo complete
+
 " Turn on language specific omnifuncs
 " python
 autocmd FileType python set omnifunc=jedi#completions
@@ -210,6 +206,7 @@ if !exists('g:neocomplete#force_omni_input_patterns')
         let g:neocomplete#force_omni_input_patterns = {}
 endif
 let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+""" end neo complete
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -363,6 +360,7 @@ let test#strategy = "dispatch"
 
 " netrw sytling
 let g:netrw_liststyle=3
+let g:netrw_list_hide= '.*\.swp$'
 
 " vimtex output
 let g:vimtex_latexmk_build_dir="build"
