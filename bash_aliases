@@ -4,11 +4,11 @@ shopt -s expand_aliases
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -alF --color'
+alias la='ls -A --color'
+alias l='ls -CF --color'
 
-if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
   # enable color support of ls and also add handy aliases
   alias ls='ls --color=auto'
@@ -24,7 +24,8 @@ fi
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias ag='ag --path-to-agignore=~/.agignore'
-alias cop='bundle exec rake spec && bundle exec rubocop'
-alias diff="/usr/local/bin/grc /usr/bin/diff"
+alias ag='ag --path-to-ignore=~/.agignore'
+alias cop='bundle exec rubocop'
+alias spec='bundle exec rake spec && bundle exec rubocop'
+# alias diff="/usr/local/bin/grc /usr/bin/diff"
 alias genpass='cat /dev/urandom | env LC_CTYPE=C tr -dc a-zA-Z0-9_\!\@\#\$\%\^\&\*\(\)\-+= | head -c 17; echo'
