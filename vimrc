@@ -76,24 +76,27 @@ if &term =~ '256color'
   set t_ut=
 endif
 let g:solarized_menu=0
+
 if exists('*togglebg#map')
   call togglebg#map("<F5>")
 endif
+
 if has('gui_running')
-    set background=light
-    " GUI is running or is about to start.
-    " Maximize gvim window (for an alternative on Windows, see simalt below).
-    set lines=999 columns=999
+  set background=light
+  " GUI is running or is about to start.
+  " Maximize gvim window (for an alternative on Windows, see simalt below).
+  set lines=999 columns=999
 else
-    set background=dark
-    " This is console Vim.
-    " if exists("+lines")
-    "   set lines=50
-    " endif
-    " if exists("+columns")
-    "   set columns=100
-    " endif
+  set background=dark
+  " This is console Vim.
+  " if exists("+lines")
+  "   set lines=50
+  " endif
+  " if exists("+columns")
+  "   set columns=100
+  " endif
 endif
+
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 "set background=dark
@@ -153,7 +156,7 @@ if has("autocmd")
  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-"Filetype tabs
+" Filetype tabs
 augroup myfiletypes
   " Clear old autocmds in group
   autocmd!
@@ -297,10 +300,24 @@ command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
 """
 " MAPPINGS
 """
-" Tab navigation
-nmap <leader>tn :tabnext<CR>
-nmap <leader>tp :tabprevious<CR>
-nmap <leader>te :tabedit
+" ----------------------------------------------------------------------------
+" Buffers
+" ----------------------------------------------------------------------------
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
+
+" ----------------------------------------------------------------------------
+" Tabs
+" ----------------------------------------------------------------------------
+nnoremap ]t :tabn<cr>
+nnoremap [t :tabp<cr>
+nnoremap <leader>te :tabedit
+
+" ----------------------------------------------------------------------------
+" <tab> / <s-tab> | Circular windows navigation
+" ----------------------------------------------------------------------------
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
 
 " Remap F1 from Help to ESC.  No more accidents.
 nmap <F1> <Esc>
@@ -324,7 +341,7 @@ nnoremap Y y$
 " nnoremap <expr> gp `[v`]
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]''`]`'
 nnoremap <expr> gb '`[' . getregtype()[0] . '`]''`]`'
-" ctrl-p ignores and whatnot
+
 " for tabularize
 " Mappings for ruby hash rocket and symbol hashes
 nnoremap <silent> <Leader>ahs :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
@@ -337,6 +354,7 @@ vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
 
+" copy current file path
 nmap <Leader>cs :let @+=expand("%")<CR>
 nmap <Leader>cl :let @+=expand("%:p")<CR>
 
@@ -382,14 +400,13 @@ endif
 map <C-n> :NERDTreeToggle<CR>
 " sudo save
 cmap w!! w !sudo tee > /dev/null %
-if filereadable('~/.vim/local.vim')
-  so ~/.vim/local.vim
-endif
-if filereadable('.local.vim')
-  so .local.vim
-endif
+
 nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
+
+augroup vimrc
+  au InsertLeave * silent! set nopaste
+augroup END
 
 " Go
 " format with goimports instead of gofmt
@@ -399,3 +416,7 @@ let g:go_fmt_command = "goimports"
 " au VimLeave * :!clear
 " autocmd filetype crontab setlocal nobackup nowritebackup
 let $BASH_ENV= "~/.bash_aliases"
+
+if filereadable('.local.vim')
+  so .local.vim
+endif
