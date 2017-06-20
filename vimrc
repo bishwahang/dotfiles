@@ -309,8 +309,8 @@ nnoremap [b :bprev<cr>
 " ----------------------------------------------------------------------------
 " Tabs
 " ----------------------------------------------------------------------------
-nnoremap ]t :tabn<cr>
-nnoremap [t :tabp<cr>
+nnoremap <leader>tn :tabn<cr>
+nnoremap <leader>tp :tabp<cr>
 nnoremap <leader>te :tabedit
 
 " ----------------------------------------------------------------------------
@@ -338,6 +338,8 @@ let g:indexed_search_center=1
 
 " Yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
+" qq to record, Q to replay
+nnoremap Q @q
 " nnoremap <expr> gp `[v`]
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]''`]`'
 nnoremap <expr> gb '`[' . getregtype()[0] . '`]''`]`'
