@@ -20,8 +20,7 @@ Bundle 'tpope/vim-repeat.git'
 Bundle 'tpope/vim-scriptease.git'
 Bundle 'tpope/vim-sensible.git'
 Bundle 'scrooloose/nerdtree.git'
-" commented as it was messing expand tab
-" Bundle 'tpope/vim-sleuth.git'
+Bundle 'tpope/vim-sleuth.git'
 Bundle 'tpope/vim-surround.git'
 Bundle 'Raimondi/delimitMate'
 Bundle 'tpope/vim-tbone.git'
@@ -38,6 +37,7 @@ Bundle 'vim-scripts/vimwiki.git'
 Bundle 'scrooloose/syntastic'
 " Bundle 'klen/python-mode'
 Bundle 'janko-m/vim-test'
+Bundle 'Yggdroot/indentLine'
 " extra
 Bundle 'henrik/vim-indexed-search'
 " Bundle 'craigemery/vim-autotag'
@@ -56,11 +56,6 @@ Bundle 'stephpy/vim-yaml'
 " Custom textobjects
 Bundle 'kana/vim-textobj-user.git'
 Bundle 'kana/vim-textobj-entire.git'
-Bundle 'kana/vim-textobj-indent.git'
-Bundle 'kana/vim-textobj-syntax.git'
-Bundle 'kana/vim-textobj-line.git'
-Bundle 'nelstrom/vim-textobj-rubyblock.git'
-" Bundle 'ervandew/supertab'
 
 " Colorschemes
 Bundle 'altercation/vim-colors-solarized.git'
@@ -73,6 +68,7 @@ Bundle 'tpope/vim-endwise.git'
 Bundle 'tpope/vim-rails.git'
 Bundle 'tpope/vim-rake.git'
 Bundle 'vim-ruby/vim-ruby'
+Bundle 'nelstrom/vim-textobj-rubyblock.git'
 
 " Latex
 Bundle 'lervag/vimtex'
@@ -80,8 +76,6 @@ Bundle 'lervag/vimtex'
 " Markdown
 Bundle 'tpope/vim-markdown.git'
 
-
 call vundle#end()
-"End
+" End
 filetype plugin indent on
-
