@@ -24,7 +24,7 @@ fi
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-alias ag='ag --path-to-ignore=~/.agignore'
+alias ag='ag --path-to-agignore=~/.agignore'
 alias cop='bundle exec rubocop'
 alias spec='bundle exec rake spec && bundle exec rubocop'
 # alias diff="/usr/local/bin/grc /usr/bin/diff"
