@@ -211,15 +211,15 @@ endif
 let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 """ end neo complete
 
-" " Syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
+" ALE
+" show Vim windows for the loclist or quickfix items when a file contains warnings or errors
+let g:ale_open_list = 1
+" disable lint while typing
+let g:ale_lint_on_text_changed = 'never'
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 0
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Enable omni completion.
 autocmd FileType ruby set omnifunc=rubycomplete#Complete
