@@ -383,7 +383,9 @@ let g:netrw_liststyle=3
 let g:netrw_list_hide= '.*\.swp$'
 
 " vimtex output
-let g:vimtex_latexmk_build_dir="build"
+let g:vimtex_compiler_latexmk = {
+\ 'build_dir' : 'build',
+\}
 
 " Snippets
 " Some variables need default value
