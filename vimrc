@@ -218,6 +218,8 @@ let g:ale_open_list = 1
 let g:ale_lint_on_text_changed = 'never'
 " if you don't want linters to run on opening a file
 let g:ale_lint_on_enter = 0
+" disable when saving file
+let g:ale_lint_on_save = 0
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
@@ -242,7 +244,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.markdown setlocal spell
 set complete+=kspell
-"for CtrlP
+" for CtrlP
 " set runtimepath^=~/.vim/bundle/ctrlp.vim3
 " Ignore some folders and files for CtrlP indexing
 let g:ctrlp_custom_ignore = {
@@ -261,6 +263,11 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
+" for FZF
+nnoremap <Leader>ff :Files<CR>
+nnoremap <Leader>fg :GitFiles<CR>
+nnoremap <Leader>fb :Buffers<CR>
 
 " Section: functions
 
