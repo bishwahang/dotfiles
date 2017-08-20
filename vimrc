@@ -120,7 +120,6 @@ else
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
 
-  
   if $COLORTERM == 'gnome-terminal'
     set term=gnome-256color
   else
@@ -128,7 +127,6 @@ else
       set term=xterm-256color
     endif
   endif
-  
 endif
 
 
@@ -338,10 +336,12 @@ nnoremap <leader>ss :SaveSession<Space>
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 
-"" Tabs
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<CR>
+"" circular navigation
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
+
+" tabs
+nnoremap <leader>te :tabedit
 
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
@@ -370,9 +370,8 @@ if executable('rg')
   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
 
-cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <leader>e :FZF -m<CR>
+nnoremap <silent> <C-p> :FZF -m<CR>
 
 " snippets
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -388,6 +387,20 @@ let g:syntastic_style_error_symbol = '✗'
 let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" ale
+" " show Vim windows for the loclist or quickfix items when a file contains warnings or errors
+" let g:ale_open_list = 1
+" " disable lint while typing
+" let g:ale_lint_on_text_changed = 'never'
+" " if you don't want linters to run on opening a file
+" let g:ale_lint_on_enter = 0
+" " disable when saving file
+" let g:ale_lint_on_save = 1
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Tagbar
 nmap <silent> <F4> :TagbarToggle<CR>

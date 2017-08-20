@@ -64,10 +64,10 @@ if v:version >= 703
   Plug 'Shougo/vimshell.vim'
 endif
 
-if v:version >= 704
-  "" Snippets
-  Plug 'SirVer/ultisnips'
-endif
+" if v:version >= 704
+"   "" Snippets
+"   Plug 'SirVer/ultisnips'
+" endif
 
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
@@ -117,6 +117,7 @@ Plug 'ecomba/vim-ruby-refactoring'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'vim-ruby/vim-ruby'
 
 " tpope
 Plug 'tpope/vim-abolish'
