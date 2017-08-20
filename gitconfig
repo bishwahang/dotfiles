@@ -1,7 +1,7 @@
 [user]
       name = Bishwa Hang Rai
       email = bishwa@freeletics.com
-
+	signingkey = CC7BD6E59CA5B8A4
 [color]
       ui = auto
       diff = auto
@@ -23,11 +23,13 @@
 [push]
       default = current
 [merge]
-       renamelimit = 5000
+      renamelimit = 5000
 
 [core]
-	excludesfile = ~/.gitignore
-	editor = /usr/bin/vim
-	hooksPath = /Users/bishwa/.git/hooks/
-; [commit]
-; 	gpgsign = true
+      excludesfile = ~/.gitignore
+      editor = /usr/bin/vim
+      hooksPath = /Users/bishwa/.git/hooks/
+[commit]
+      gpgsign = true
+[gpg]
+      program = gpg2
