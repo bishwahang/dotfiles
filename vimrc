@@ -628,23 +628,37 @@ let g:tagbar_type_ruby = {
     \ ]
 \ }
 
-" " For ruby refactory
-" if has('nvim')
-"   runtime! macros/matchit.vim
-" else
-"   packadd! matchit
-" endif
+" for tabularize
+" Mappings for ruby hash rocket and symbol hashes
+nnoremap <silent> <Leader>ahs :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
+vnoremap <silent> <Leader>ahs :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
+nnoremap <silent> <Leader>ahr  :Tabularize  /^[^=]*\zs=><CR>
+vnoremap <silent> <Leader>ahr  :Tabularize  /^[^=]*\zs=><CR>
 
-" " Ruby refactory
-" nnoremap <leader>rap  :RAddParameter<cr>
-" nnoremap <leader>rcpc :RConvertPostConditional<cr>
-" nnoremap <leader>rel  :RExtractLet<cr>
-" vnoremap <leader>rec  :RExtractConstant<cr>
-" vnoremap <leader>relv :RExtractLocalVariable<cr>
-" nnoremap <leader>rit  :RInlineTemp<cr>
-" vnoremap <leader>rrlv :RRenameLocalVariable<cr>
-" vnoremap <leader>rriv :RRenameInstanceVariable<cr>
-" vnoremap <leader>rem  :RExtractMethod<cr>
+" normal equals and json
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+
+" For ruby refactory
+if has('nvim')
+  runtime! macros/matchit.vim
+else
+  packadd! matchit
+endif
+
+
+" Ruby refactory
+nnoremap <leader>rap  :RAddParameter<cr>
+nnoremap <leader>rcpc :RConvertPostConditional<cr>
+nnoremap <leader>rel  :RExtractLet<cr>
+vnoremap <leader>rec  :RExtractConstant<cr>
+vnoremap <leader>relv :RExtractLocalVariable<cr>
+nnoremap <leader>rit  :RInlineTemp<cr>
+vnoremap <leader>rlv  :RRenameLocalVariable<cr>
+vnoremap <leader>riv  :RRenameInstanceVariable<cr>
+vnoremap <leader>rem  :RExtractMethod<cr>
 
 " Easily lookup documentation on apidock
 noremap <leader>rb :call OpenRubyDoc(expand('<cword>'))<CR><CR>
