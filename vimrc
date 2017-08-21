@@ -3,9 +3,7 @@
 source ~/.dotfiles/bundles.vim
 
 " Required:
-if has("autocmd")
-  filetype plugin indent on
-endif
+filetype plugin indent on
 
 "*****************************************************************************
 "" Basic Setup
@@ -635,10 +633,6 @@ nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
-
-" For ruby refactory
-packadd! matchit
-
 
 " Ruby refactory
 nnoremap <leader>rap  :RAddParameter<cr>
