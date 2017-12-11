@@ -100,6 +100,12 @@ Plug 'tpope/vim-endwise'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'vim-ruby/vim-ruby'
 
+" F#
+" Plug 'fsharp/vim-fsharp', {
+"       \ 'for': 'fsharp',
+"       \ 'do':  'make fsautocomplete',
+"       \}
+
 " tpope
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-characterize'

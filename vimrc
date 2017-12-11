@@ -737,3 +737,7 @@ let $BASH_ENV= "~/.bash_aliases"
 "*****************************************************************************
 "" Convenience variables
 "*****************************************************************************
+" FSharp Testing
+" let g:fsharpbinding_debug = 1
+" let g:fsharp_interactive_bin = '/Library/Frameworks/Mono.framework/Versions/Current/Commands/fsharpi'
+" let g:fsharp_xbuild_path = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/msbuild"
