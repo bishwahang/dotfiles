@@ -602,12 +602,16 @@ let g:jedi#smart_auto_mappings = 0
 let g:syntastic_python_checkers=['python', 'flake8']
 
 " vim-airline
-let g:airline#extensions#virtualenv#enabled = 1
+" let g:airline#extensions#virtualenv#enabled = 1
 
 " Syntax highlight
 " Default highlight is better than polyglot
 let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
+
+" using vim-tex
+let g:polyglot_disabled = ['latex']
+
 
 
 " ruby
