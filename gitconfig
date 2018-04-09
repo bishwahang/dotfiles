@@ -27,9 +27,11 @@
 
 [core]
       excludesfile = ~/.gitignore
-      editor = /usr/bin/vim
+      editor = /usr/local/bin/vim
       hooksPath = /Users/bishwa/.git/hooks/
 [commit]
       gpgsign = true
 [gpg]
       program = gpg2
+[diff "sopsdiffer"]
+	textconv = sops -d

@@ -23,3 +23,5 @@ alias cop='bundle exec rubocop'
 alias spec='bundle exec rake spec && bundle exec rubocop'
 # alias diff="/usr/local/bin/grc /usr/bin/diff"
 alias genpass='cat /dev/urandom | env LC_CTYPE=C tr -dc a-zA-Z0-9_\!\@\#\$\%\^\&\*\(\)\-+= | head -c 17; echo'
+# FL-CLI-Tools
+function fl() { docker run --rm -it -v ~/:/root/ docker.freeletics.com/fl-cli-tools:latest ${*:1}; }

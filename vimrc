@@ -146,7 +146,7 @@ set title
 set titleold="Terminal"
 set titlestring=%F
 
-set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
+" set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
@@ -214,7 +214,7 @@ set wildignore+=.sass-cache/*
 set wildignore+=node_modules/*,bower_components/*
 
 " sudo save
-cmap w!! w !sudo tee > /dev/null %
+" cmap w!! w !sudo tee > /dev/null %
 
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
@@ -344,7 +344,7 @@ nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
 
 " tabs
-nnoremap <leader>te :tabedit
+" nnoremap <leader>te :tabedit
 
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
@@ -600,9 +600,6 @@ let g:jedi#smart_auto_mappings = 0
 
 " syntastic
 let g:syntastic_python_checkers=['python', 'flake8']
-
-" vim-airline
-" let g:airline#extensions#virtualenv#enabled = 1
 
 " Syntax highlight
 " Default highlight is better than polyglot
