@@ -12,11 +12,14 @@ cd gnome-terminal-colors-solarized
 cd
 # rbenv and pyenv
 echo "installing rbenv"
-git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
-git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+cd ~/.rbenv && src/configure && make -C src
+mkdir -p ~/.rbenv/plugins
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+
 echo "installing pyenv and pyenv-virtualenv"
-git clone https://github.com/yyuu/pyenv.git ~/.pyenv
-git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
 
 # install other packages
 echo "installing packages"
