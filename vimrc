@@ -727,6 +727,7 @@ let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*f
 let g:netrw_banner       = 0
 let g:netrw_liststyle    = 3
 let g:netrw_winsize      = 25
+let g:netrw_preview      = 1
 
 "" Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
@@ -742,3 +743,6 @@ let $BASH_ENV= "~/.bash_aliases"
 " let g:fsharpbinding_debug = 1
 " let g:fsharp_interactive_bin = '/Library/Frameworks/Mono.framework/Versions/Current/Commands/fsharpi'
 " let g:fsharp_xbuild_path = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/msbuild"
+
+" prettify json file
+nmap <silent> <leader>pj :%!python -m json.tool<CR>
