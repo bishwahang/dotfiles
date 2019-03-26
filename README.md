@@ -2,11 +2,13 @@
 
 Install minimum required app, and set up configs.
 
+# homebrew
 
 ```
-sudo apt-get -y --force-yes update && sudo apt-get -y install \
-  build-essential git
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
 
+```
 git clone https://github.com/bishwahang/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles && ./bare_minimum.sh && ./config.sh
 ```

@@ -4,9 +4,9 @@ shopt -s expand_aliases
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # some more ls aliases
-alias ll='ls -alF --color'
-alias la='ls -A --color'
-alias l='ls -CF --color'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
   alias dir='dir -G'

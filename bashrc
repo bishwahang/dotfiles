@@ -188,5 +188,4 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 if [ -f ~/.config/exercism/exercism_completion.bash ]; then
   . ~/.config/exercism/exercism_completion.bash
 fi
-eval `dircolors ~/.dircolors/`
 DISABLE_SPRING=1

@@ -17,8 +17,11 @@ mkdir -p $HOME/.tmp
 mkdir -p $HOME/.undo
 
 hash vim > /dev/null && {
-  echo 'Installing Vim Plugin'
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  echo 'Installing Vim-Plugin'
   vim +PluginInstall +qall
 }
+
+wget -O ~/.tmp/solarized_dark.itemcolors https://github.com/altercation/solarized/blob/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors
+echo "import solarized_dark to iterm profile"
+
 echo 'Finished config!'
