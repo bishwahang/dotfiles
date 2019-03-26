@@ -22,7 +22,7 @@ Plug 'Shougo/neocomplete.vim'
 " Plug 'Shougo/neosnippet-snippets'
 Plug 'mbbill/undotree'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'justinmk/vim-sneak'
+" Plug 'justinmk/vim-sneak'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -123,6 +123,7 @@ Plug 'tpope/vim-projectile'
 
 "  Other
 Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
 Plug 'pangloss/vim-javascript'
 Plug 'kchmck/vim-coffee-script'
 Plug 'elzr/vim-json'

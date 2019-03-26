@@ -34,4 +34,6 @@
 [gpg]
       program = gpg2
 [diff "sopsdiffer"]
-	textconv = sops -d
+      textconv = sops -d
+[github]
+	user = bishwahang

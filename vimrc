@@ -278,10 +278,10 @@ command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
 "" Autocmd Rules
 "*****************************************************************************
 "" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
-augroup vimrc-sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync maxlines=200
-augroup END
+" augroup vimrc-sync-fromstart
+"   autocmd!
+"   autocmd BufEnter * :syntax sync maxlines=200
+" augroup END
 
 "" Remember cursor position
 augroup vimrc-remember-cursor-position
