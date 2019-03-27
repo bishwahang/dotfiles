@@ -5,7 +5,7 @@ hash git > /dev/null || {
 }
 
 echo "Link config files"
-configs=(bashrc vimrc gvimrc vim gitconfig gitignore tmux.conf)
+configs=(bash_profile vimrc gvimrc vim gitconfig gitignore tmux.conf agignore)
 for config in "${configs[@]}"
 do
   echo "linking $config"

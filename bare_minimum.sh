@@ -2,6 +2,7 @@
 
 cd
 echo "installing packages"
+brew install bash-completion
 brew install wget
 brew install vim
 brew install tmux

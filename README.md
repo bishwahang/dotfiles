@@ -6,6 +6,7 @@ Install minimum required app, and set up configs.
 
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install git
 ```
 
 ```
