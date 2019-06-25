@@ -189,3 +189,4 @@ if [ -f ~/.config/exercism/exercism_completion.bash ]; then
   . ~/.config/exercism/exercism_completion.bash
 fi
 DISABLE_SPRING=1
+export LC_ALL=en_US.UTF-8

@@ -15,11 +15,15 @@ done
 echo "making temp and undo directory"
 mkdir -p $HOME/.tmp
 mkdir -p $HOME/.undo
+mkdir -p $HOME/.tmux/plugins
 
 hash vim > /dev/null && {
   echo 'Installing Vim-Plugin'
   vim +PluginInstall +qall
 }
+
+echo "cloning tmux plugin manager"
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 wget -O ~/.tmp/solarized_dark.itemcolors https://github.com/altercation/solarized/blob/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors
 echo "import solarized_dark to iterm profile"
