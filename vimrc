@@ -1,3 +1,5 @@
+let g:polyglot_disabled = []
+
 source ~/.dotfiles/bundles.vim
 
 "*****************************************************************************
@@ -33,7 +35,7 @@ set showcmd " Show (partial) command in status line.
 set cursorline " highlight current line
 set showmatch " Show matching brackets.
 
-set relativenumber
+" set relativenumber
 set splitbelow
 set splitright
 set numberwidth=5
@@ -289,6 +291,12 @@ augroup vimrc-remember-cursor-position
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
+"" fugitive
+augroup fugitive
+  "" fugitive clear buffer after visiting git object
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
+
 "" txt
 augroup vimrc-wrapping
   autocmd!
@@ -376,11 +384,24 @@ endif
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <C-p> :FZF -m<CR>
 
-" snippets
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-" let g:UltiSnipsEditSplit="vertical"
+" Snippets
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-tab>"
+let g:UltiSnipsEditSplit="vertical"
+
+" Some variables need default value
+if !exists("g:snips_author")
+    let g:snips_author = "Bishwa Hang Rai"
+endif
+
+if !exists("g:snips_email")
+    let g:snips_email = "bishwahang.kirat@gmail.com"
+endif
+
+if !exists("g:snips_github")
+    let g:snips_github = "https://github.com/bishwahang"
+endif
 
 " syntastic
 let g:syntastic_always_populate_loc_list=1
@@ -558,7 +579,7 @@ augroup go
   au FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
   au FileType go nmap <C-g> :GoDecls<cr>
   au FileType go imap <C-g> <esc>:<C-u>GoDecls<cr>
-  au FileType go nmap <leader>rb :<C-u>call <SID>build_go_files()<CR>
+  au FileType go nmap <leader>gb :<C-u>call <SID>build_go_files()<CR>
 
 augroup END
 
@@ -612,14 +633,33 @@ let g:polyglot_disabled = ['latex']
 
 
 " ruby
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_classes_in_global = 1
-let g:rubycomplete_rails = 1
-
 augroup vimrc-ruby
   autocmd!
   autocmd BufNewFile,BufRead *.rb,*.rbw,*.gemspec setlocal filetype=ruby
   autocmd FileType ruby set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+  " Easily lookup documentation on apidock
+  autocmd FileType ruby noremap <leader>rb :call OpenRubyDoc(expand('<cword>'))<CR><CR>
+  autocmd FileType ruby noremap <leader>rr :call OpenRailsDoc(expand('<cword>'))<CR><CR>
+
+  " Mappings for ruby hash rocket and symbol hashes
+  autocmd FileType ruby nnoremap <silent> <Leader>ahs :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
+  autocmd FileType ruby vnoremap <silent> <Leader>ahs :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
+  autocmd FileType ruby nnoremap <silent> <Leader>ahr  :Tabularize  /^[^=]*\zs=><CR>
+  autocmd FileType ruby vnoremap <silent> <Leader>ahr  :Tabularize  /^[^=]*\zs=><CR>
+
+  " " Ruby refactory (not used frequently)
+  " autocmd FileType ruby nnoremap <leader>rap  :RAddParameter<cr>
+  " autocmd FileType ruby nnoremap <leader>rcpc :RConvertPostConditional<cr>
+  " autocmd FileType ruby nnoremap <leader>rel  :RExtractLet<cr>
+  " autocmd FileType ruby vnoremap <leader>rec  :RExtractConstant<cr>
+  " autocmd FileType ruby vnoremap <leader>relv :RExtractLocalVariable<cr>
+  " autocmd FileType ruby nnoremap <leader>rit  :RInlineTemp<cr>
+  " autocmd FileType ruby vnoremap <leader>rlv  :RRenameLocalVariable<cr>
+  " autocmd FileType ruby vnoremap <leader>riv  :RRenameInstanceVariable<cr>
+  " autocmd FileType ruby vnoremap <leader>rem  :RExtractMethod<cr>
 augroup END
 
 let g:tagbar_type_ruby = {
@@ -634,32 +674,11 @@ let g:tagbar_type_ruby = {
 \ }
 
 " for tabularize
-" Mappings for ruby hash rocket and symbol hashes
-nnoremap <silent> <Leader>ahs :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
-vnoremap <silent> <Leader>ahs :Tabularize /\s\?\w\+:[^:]/l0l0<CR>
-nnoremap <silent> <Leader>ahr  :Tabularize  /^[^=]*\zs=><CR>
-vnoremap <silent> <Leader>ahr  :Tabularize  /^[^=]*\zs=><CR>
-
 " normal equals and json
 nmap <Leader>a= :Tabularize /=<CR>
 vmap <Leader>a= :Tabularize /=<CR>
 nmap <Leader>a: :Tabularize /:\zs<CR>
 vmap <Leader>a: :Tabularize /:\zs<CR>
-
-" Ruby refactory
-nnoremap <leader>rap  :RAddParameter<cr>
-nnoremap <leader>rcpc :RConvertPostConditional<cr>
-nnoremap <leader>rel  :RExtractLet<cr>
-vnoremap <leader>rec  :RExtractConstant<cr>
-vnoremap <leader>relv :RExtractLocalVariable<cr>
-nnoremap <leader>rit  :RInlineTemp<cr>
-vnoremap <leader>rlv  :RRenameLocalVariable<cr>
-vnoremap <leader>riv  :RRenameInstanceVariable<cr>
-vnoremap <leader>rem  :RExtractMethod<cr>
-
-" Easily lookup documentation on apidock
-noremap <leader>rb :call OpenRubyDoc(expand('<cword>'))<CR><CR>
-noremap <leader>rr :call OpenRailsDoc(expand('<cword>'))<CR><CR>
 
 " vim-test mappings
 nmap <silent> <leader>t :TestFile<CR>
@@ -670,64 +689,54 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 
 let test#strategy = "dispatch"
+" let test#ruby#rspec#executable = 'bundle exec rspec'
 
 " vimtex output
 let g:vimtex_latexmk_build_dir="build"
 
-" Snippets
-" Some variables need default value
-if !exists("g:snips_author")
-    let g:snips_author = "Bishwa Hang Rai"
-endif
-
-if !exists("g:snips_email")
-    let g:snips_email = "bishwahang.kirat@gmail.com"
-endif
-
-if !exists("g:snips_github")
-    let g:snips_github = "https://github.com/bishwahang"
-endif
+let g:deoplete#enable_at_startup = 1
 
 " neo complete
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
+" let g:acp_enableAtStartup = 0
+" " Use neocomplete.
+" let g:neocomplete#enable_at_startup = 1
+" " Use smartcase.
+" let g:neocomplete#enable_smart_case = 1
+" " Set minimum syntax keyword length.
+" let g:ueocomplete#sources#syntax#min_keyword_length = 3
+" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" " Enable snipMate compatibility feature.
+" let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
 " let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/UltiSnips'
 
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
+" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y>  neocomplete#close_popup()
+" inoremap <expr><C-e>  neocomplete#cancel_popup()
 
 " Turn on language specific omnifuncs
 " python
 autocmd FileType python set omnifunc=jedi#completions
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
-if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+" if !exists('g:neocomplete#force_omni_input_patterns')
+"         let g:neocomplete#force_omni_input_patterns = {}
+" endif
+" let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 """ end neo complete
 
 "*****************************************************************************
 "*****************************************************************************
 
 " netrw sytling
-let g:netrw_banner       = 0
-let g:netrw_liststyle    = 3
-let g:netrw_winsize      = 25
-let g:netrw_preview      = 1
+let g:netrw_banner    = 0
+let g:netrw_liststyle = 3
+let g:netrw_winsize   = 25
+let g:netrw_preview   = 1
+let g:netrw_altv      = 1
 
 "" Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
@@ -743,6 +752,21 @@ let $BASH_ENV= "~/.bash_aliases"
 " let g:fsharpbinding_debug = 1
 " let g:fsharp_interactive_bin = '/Library/Frameworks/Mono.framework/Versions/Current/Commands/fsharpi'
 " let g:fsharp_xbuild_path = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/msbuild"
+"
+" save folds
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
 
 " prettify json file
 nmap <silent> <leader>pj :%!python -m json.tool<CR>
+
+
+" faith/vim-go tutorial
+set autowrite
+map <leader>cn :cnext<CR>
+map <leader>cp :cprevious<CR>
+nnoremap <leader>cc :cclose<CR>
+highlight Comment cterm=italic

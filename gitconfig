@@ -1,7 +1,7 @@
 [user]
       name = Bishwa Hang Rai
-      email = bishwa@freeletics.com
-      signingkey = F39ACA1A31B3A0E1
+      email = bishwahang.kirat@gmail.com
+      signingkey = B890DEE9689A1FE7
 [color]
       ui = auto
       diff = auto
@@ -37,3 +37,5 @@
       textconv = sops -d
 [github]
 	user = bishwahang
+[pull]
+	rebase = false

@@ -17,11 +17,11 @@ Plug 'scrooloose/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/neocomplete.vim'
+" Plug 'Shougo/neocomplete.vim'
 " Plug 'Shougo/neosnippet'
 " Plug 'Shougo/neosnippet-snippets'
 Plug 'mbbill/undotree'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 " Plug 'justinmk/vim-sneak'
 
 if isdirectory('/usr/local/opt/fzf')
@@ -44,13 +44,18 @@ if v:version >= 703
   Plug 'Shougo/vimshell.vim'
 endif
 
-" if v:version >= 704
-"   "" Snippets
-"   Plug 'SirVer/ultisnips'
-" endif
+if v:version >= 704
+  "" Snippets
+  Plug 'SirVer/ultisnips'
+endif
 
-Plug 'garbas/vim-snipmate'
+" Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
+
+" autocomplete
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
 "" Color
 Plug 'tomasr/molokai'
@@ -69,6 +74,8 @@ Plug 'ludwig/split-manpage.vim'
 "" Go Lang Bundle
 Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
+" split join
+Plug 'AndrewRadev/splitjoin.vim'
 
 " html
 "" HTML Bundle
@@ -93,7 +100,7 @@ Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-projectionist'
-Plug 'ecomba/vim-ruby-refactoring'
+" Plug 'ecomba/vim-ruby-refactoring' # not used frequently
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-endwise'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -120,6 +127,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-projectile'
+Plug 'tpope/vim-obsession'
 
 "  Other
 Plug 'mattn/gist-vim'
