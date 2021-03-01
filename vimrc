@@ -348,8 +348,8 @@ nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
 
 "" circular navigation
-nnoremap <tab>   <c-w>w
-nnoremap <S-tab> <c-w>W
+" nnoremap <tab>   <c-w>w
+" nnoremap <S-tab> <c-w>W
 
 " tabs
 " nnoremap <leader>te :tabedit
@@ -576,7 +576,7 @@ augroup go
   au FileType go nmap <leader>t  <Plug>(go-test)
   au FileType go nmap <Leader>gt <Plug>(go-coverage-toggle)
   au FileType go nmap <Leader>i <Plug>(go-info)
-  au FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
+  au FileType go nmap <silent> <Leader>L <Plug>(go-metalinter)
   au FileType go nmap <C-g> :GoDecls<cr>
   au FileType go imap <C-g> <esc>:<C-u>GoDecls<cr>
   au FileType go nmap <leader>gb :<C-u>call <SID>build_go_files()<CR>
@@ -759,6 +759,7 @@ augroup remember_folds
   autocmd BufWinLeave * mkview
   autocmd BufWinEnter * silent! loadview
 augroup END
+set viewoptions-=curdir
 
 " prettify json file
 nmap <silent> <leader>pj :%!python -m json.tool<CR>
