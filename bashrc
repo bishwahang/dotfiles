@@ -192,5 +192,5 @@ DISABLE_SPRING=1
 export LC_ALL=en_US.UTF-8
 
 # to use homebrew's python version
-export PATH=/usr/local/opt/python/libexec/bin:$PATH
-# export TERM=xterm-256color-italic
+export PATH=/opt/homebrew/opt/python@3.9/bin:$PATH
+export TERM=xterm-256color-italic

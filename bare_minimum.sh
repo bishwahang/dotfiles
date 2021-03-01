@@ -11,4 +11,6 @@ brew install the_silver_searcher
 brew install ctags
 brew install rbenv
 rbenv init
+brew install fzf
+$(brew --prefix)/opt/fzf/install
 echo "Finished bare minimum"

@@ -1,41 +1,41 @@
 [user]
-      name = Bishwa Hang Rai
-      email = bishwahang.kirat@gmail.com
-      signingkey = B890DEE9689A1FE7
+    name = Bishwa Hang Rai
+    email = bishwahang.kirat@gmail.com
+    signingkey = B890DEE9689A1FE7
 [color]
-      ui = auto
-      diff = auto
-      status = auto
-      branch = auto
+    ui = auto
+    diff = auto
+    status = auto
+    branch = auto
 
 [alias]
-      st = status
-      di = diff
-      co = checkout
-      ci = commit
-      cia = commit -a
-      br = branch
-      sta = stash
-      pop = stash pop
-      hist = log --pretty=format:\"%Cred%h%Creset %C(yellow)(%cr) %ad%Creset | %s%d %C(blue)[%an]%Creset\" --graph --date=short
-      type = cat-file -t
-      dump = cat-file -p
+    st = status
+    di = diff
+    co = checkout
+    ci = commit
+    cia = commit -a
+    br = branch
+    sta = stash
+    pop = stash pop
+    hist = log --pretty=format:\"%Cred%h%Creset %C(yellow)(%cr) %ad%Creset | %s%d %C(blue)[%an]%Creset\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
 [push]
-      default = current
+    default = current
 [merge]
-      renamelimit = 5000
+    renamelimit = 5000
 
 [core]
-      excludesfile = ~/.gitignore
-      editor = /usr/local/bin/vim
-      hooksPath = /Users/bishwa/.git/hooks/
+    excludesfile = ~/.gitignore
+    editor = /usr/local/bin/vim
+    hooksPath = /Users/bishwa/.git/hooks/
 [commit]
-      gpgsign = true
+    gpgsign = true
 [gpg]
-      program = gpg2
+    program = gpg2
 [diff "sopsdiffer"]
-      textconv = sops -d
+    textconv = sops -d
 [github]
-	user = bishwahang
+    user = bishwahang
 [pull]
-	rebase = false
+    rebase = false

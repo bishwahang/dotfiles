@@ -216,7 +216,7 @@ set wildignore+=.sass-cache/*
 set wildignore+=node_modules/*,bower_components/*
 
 " sudo save
-" cmap w!! w !sudo tee > /dev/null %
+cmap w!! w !sudo tee > /dev/null %
 
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
