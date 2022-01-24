@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
-# install other packages
+
+# cd
+# wget --no-check-certificate https://raw.github.com/seebi/dircolors-solarized/master/dircolors.ansi-dark
+# mv dircolors.ansi-dark .dircolors
+# eval `dircolors ~/.dircolors`
+# git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git
+# cd gnome-terminal-colors-solarized
+# ./set_dark.sh
+# cd
+
+# install packages
 echo "installing packages"
 brew install bash-completion
 brew install vim
@@ -12,5 +22,8 @@ brew install ruby-build
 rbenv init
 brew install fzf
 $(brew --prefix)/opt/fzf/install
+
+# extra packages
 brew install bat
+
 echo "Finished bare minimum"

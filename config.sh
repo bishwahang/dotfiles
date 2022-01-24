@@ -25,8 +25,8 @@ hash vim > /dev/null && {
 echo "cloning tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
-wget -O ~/.tmp/solarized_dark.itemcolors https://github.com/altercation/solarized/blob/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors
-echo "import solarized_dark to iterm profile"
+# wget -O ~/.tmp/solarized_dark.itemcolors https://github.com/altercation/solarized/blob/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors
+# echo "import solarized_dark to iterm profile"
 # to enable italic: https://weibeld.net/terminals-and-shells/italics.html
 echo "Visit how to enable italics in iTerm: https://weibeld.net/terminals-and-shells/italics.html"
 

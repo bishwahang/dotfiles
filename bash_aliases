@@ -18,6 +18,8 @@ if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
   alias egrep='egrep --color=auto'
 fi
 
+alias ssh="TERM=xterm-256color ssh"
+
 alias ag='ag --path-to-ignore=~/.agignore'
 alias cat="bat --theme='Solarized (light)'"
 alias cop='bundle exec rubocop -a'
