@@ -17,7 +17,6 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
-export CORE_ADMIN_DATABASE_URL=postgres://postgres@localhost:5432/core-admin-development
 export AWS_SQS_QUEUES_PREFIX=bishwa
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home"
 export PATH=$JAVA_HOME/bin:$PATH

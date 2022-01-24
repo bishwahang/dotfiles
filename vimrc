@@ -35,7 +35,7 @@ set showcmd " Show (partial) command in status line.
 set cursorline " highlight current line
 set showmatch " Show matching brackets.
 
-" set relativenumber
+set relativenumber
 set splitbelow
 set splitright
 set numberwidth=5
@@ -336,8 +336,8 @@ noremap <Leader>ga :Gwrite<CR>
 noremap <Leader>gc :Gcommit<CR>
 noremap <Leader>gsh :Gpush<CR>
 noremap <Leader>gll :Gpull<CR>
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
+noremap <Leader>gs :Git<CR>
+noremap <Leader>gb :Git blame<CR>
 noremap <Leader>gd :Gvdiff<CR>
 noremap <Leader>gr :Gremove<CR>
 
@@ -404,28 +404,38 @@ if !exists("g:snips_github")
 endif
 
 " syntastic
-let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_aggregate_errors = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
+" let syntastic_mode_map = { 'passive_filetypes': ['yaml'] }
+
+" let g:syntastic_python_checkers=['python', 'flake8']
+
+" let g:syntastic_go_checkers = ['golint', 'govet']
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
 " let g:syntastic_error_symbol='✗'
 " let g:syntastic_warning_symbol='⚠'
 " let g:syntastic_style_error_symbol = '✗'
 " let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=1
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let syntastic_mode_map = { 'passive_filetypes': ['yaml'] }
+
+
+
 
 " ale
-" " show Vim windows for the loclist or quickfix items when a file contains warnings or errors
+" show Vim windows for the loclist or quickfix items when a file contains warnings or errors
 " let g:ale_open_list = 1
-" " disable lint while typing
-" let g:ale_lint_on_text_changed = 'never'
-" " if you don't want linters to run on opening a file
-" let g:ale_lint_on_enter = 0
-" " disable when saving file
-" let g:ale_lint_on_save = 1
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" disable lint while typing
+let g:ale_lint_on_text_changed = 'never'
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_insert_leave = 0
+" enable when saving file
+let g:ale_lint_on_save = 1
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " Tagbar
 nmap <silent> <F4> :TagbarToggle<CR>
@@ -535,9 +545,6 @@ endfunction
 
 let g:go_fmt_command = "goimports"
 let g:go_fmt_fail_silently = 1
-let g:syntastic_go_checkers = ['golint', 'govet']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
@@ -618,9 +625,6 @@ let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "0"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#smart_auto_mappings = 0
-
-" syntastic
-let g:syntastic_python_checkers=['python', 'flake8']
 
 " Syntax highlight
 " Default highlight is better than polyglot
@@ -737,6 +741,7 @@ let g:netrw_liststyle = 3
 let g:netrw_winsize   = 25
 let g:netrw_preview   = 1
 let g:netrw_altv      = 1
+let g:netrw_keepdir = 0
 
 "" Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
@@ -753,13 +758,13 @@ let $BASH_ENV= "~/.bash_aliases"
 " let g:fsharp_interactive_bin = '/Library/Frameworks/Mono.framework/Versions/Current/Commands/fsharpi'
 " let g:fsharp_xbuild_path = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/msbuild"
 "
-" save folds
-augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
-augroup END
-set viewoptions-=curdir
+" " save folds
+" augroup remember_folds
+"   autocmd!
+"   autocmd BufWinLeave * mkview
+"   autocmd BufWinEnter * silent! loadview
+" augroup END
+" set viewoptions-=curdir
 
 " prettify json file
 nmap <silent> <leader>pj :%!python -m json.tool<CR>

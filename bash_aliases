@@ -19,8 +19,11 @@ if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
 fi
 
 alias ag='ag --path-to-ignore=~/.agignore'
-alias cop='bundle exec rubocop -a --auto-correct --disable-pending-cops'
+alias cat="bat --theme='Solarized (light)'"
+alias cop='bundle exec rubocop -a'
 alias spec='bundle exec rake spec && cop'
+# ctags
+alias ctags='/opt/homebrew/bin/ctags'
 # alias diff="/usr/local/bin/grc /usr/bin/diff"
 alias genpass='cat /dev/urandom | env LC_ALL=C tr -dc a-zA-Z0-9_\!\@\#\$\%\^\&\*\(\)\-+= | head -c 17; echo'
 # FL-CLI-Tools
