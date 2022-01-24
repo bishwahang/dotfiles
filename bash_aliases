@@ -19,6 +19,7 @@ if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
 fi
 
 alias ssh="TERM=xterm-256color ssh"
+alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 alias ag='ag --path-to-ignore=~/.agignore'
 alias cat="bat --theme='Solarized (light)'"

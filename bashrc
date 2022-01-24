@@ -178,10 +178,10 @@ PERL_LOCAL_LIB_ROOT="/Users/bishwa/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB
 PERL_MB_OPT="--install_base \"/Users/bishwa/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/bishwa/perl5"; export PERL_MM_OPT;
 
-# added by travis gem
-[ -f /Users/bishwa/.travis/travis.sh ] && source /Users/bishwa/.travis/travis.sh
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/.functions.sh ] && source ~/.functions.sh
+[ -f ~/.key_bindings.sh ] && source ~/.key_bindings.sh
+
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

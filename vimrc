@@ -374,11 +374,19 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
+" bind \ (backward slash) to grep shortcut
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
+nnoremap \ :Ag<SPACE>
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+
+" bind KK to grep word under cursor
+" nnoremap KK :Ag --preview "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 " ripgrep
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+  command! -bang -nargs=* RG call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
 endif
 
 nnoremap <silent> <leader>b :Buffers<CR>
@@ -504,12 +512,6 @@ nnoremap Q @q
 nmap <F1> <Esc>
 map! <F1> <Esc>
 
-" bind KK to grep word under cursor
-nnoremap KK :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" bind \ (backward slash) to grep shortcut
-command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-nnoremap \ :Ag<SPACE>
 
 " create tags
 map <Leader>ct :!ctags -R --exclude=.bundle --exclude=.git .<CR>
