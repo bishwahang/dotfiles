@@ -194,7 +194,8 @@ export LC_ALL=en_US.UTF-8
 export PATH=/opt/homebrew/opt/python@3.9/bin:$PATH
 export TERM=xterm-256color-italic
 
-
+# usees solarized theme for bat. Also fzf#vim uses this for preview theme
+export BAT_THEME="Solarized (dark)"
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

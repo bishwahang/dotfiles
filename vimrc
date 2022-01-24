@@ -372,7 +372,8 @@ let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/
 if executable('ag')
   let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
   set grepprg=ag\ --nogroup\ --nocolor
-  command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
+  command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '', fzf#vim#with_preview(), <bang>0)
+  " command! -bang -nargs=* Ag call fzf#vim#grep('ag --color-path 35 --color-match "1;35" --color-line-number 32 --path-to-ignore=~/.agignore -- '.shellescape(<q-args>), 1,fzf#vim#with_preview(), <bang>0)
   " bind \ (backward slash) to grep shortcut
   nnoremap \ :Ag<SPACE>
   nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
