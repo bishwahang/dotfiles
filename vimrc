@@ -363,29 +363,78 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 "" Opens a tab edit command with the path of the currently edited file filled
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
-"" fzf.vim
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+
+"" fzf.vim
+" See `man fzf-tmux` for available options
+" TODO: research more about this
+" if exists('$TMUX')
+"   let g:fzf_layout = { 'tmux': '-p90%,60%' }
+" else
+"   let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+" endif
+
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
 " The Silver Searcher
 if executable('ag')
   let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
   set grepprg=ag\ --nogroup\ --nocolor
-  command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '', fzf#vim#with_preview(), <bang>0)
-  " command! -bang -nargs=* Ag call fzf#vim#grep('ag --color-path 35 --color-match "1;35" --color-line-number 32 --path-to-ignore=~/.agignore -- '.shellescape(<q-args>), 1,fzf#vim#with_preview(), <bang>0)
+  let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
+  " See here: https://github.com/junegunn/fzf.vim/issues/27#issuecomment-608294881
+  " command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '', fzf#vim#with_preview(), <bang>0)
+  " "Raw" version of ag; arguments directly passed to ag
+  "
+  " e.g.
+  "   " Search 'foo bar' in ~/projects
+  "   :Ag "foo bar" ~/projects
+  "
+  "   " Start in fullscreen mode
+  "   :Ag! "foo bar"
+  "   Raw version without preview
+  " command! -bang -nargs=+ -complete=file Ag call fzf#vim#ag_raw(<q-args>, <bang>0)
+
+  " Raw version with preview
+  command! -bang -nargs=+ -complete=file Ag call fzf#vim#ag_raw(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+
+  " AgIn: Start ag in the specified directory
+  "
+  " e.g.
+  "   :AgIn .. foo
+  function! s:ag_in(bang, ...)
+      if !isdirectory(a:1)
+          throw 'not a valid directory: ' .. a:1
+      endif
+      " Press `ctrl-/' to enable preview window.
+      call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'right:50%:hidden', 'ctrl-/'), a:bang)
+
+      " If you don't want preview option, use this
+      " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+  endfunction
+
+  command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
+
   " bind \ (backward slash) to grep shortcut
   nnoremap \ :Ag<SPACE>
+
+  " find word under cursor
   nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 endif
 
-" ripgrep
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* RG call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
+" " ripgrep
+" if executable('rg')
+"   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+"   set grepprg=rg\ --vimgrep
+"   command! -bang -nargs=* RG call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+" endif
 
+" command! -bang -nargs=? -complete=dir Files
+"     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <C-p> :FZF -m<CR>
 
