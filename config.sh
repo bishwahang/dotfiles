@@ -25,8 +25,18 @@ hash vim > /dev/null && {
 echo "cloning tmux plugin manager"
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
+# iTerm2 comes with solarized color palette
 # wget -O ~/.tmp/solarized_dark.itemcolors https://github.com/altercation/solarized/blob/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors
 # echo "import solarized_dark to iterm profile"
+# importing and setting solarized dark and light
+# cd /tmp
+# git clone git@github.com:mbadolato/iTerm2-Color-Schemes.git iterm2colors
+# cd iterm2colors
+# tools/import-scheme.sh 'Builtin Solarized Dark.itermcolors'
+# tools/import-scheme.sh 'Builtin Solarized Light.itermcolors'
+# cd
+# rm -rf /tmp/iterm2colors
+
 # to enable italic: https://weibeld.net/terminals-and-shells/italics.html
 echo "Visit how to enable italics in iTerm: https://weibeld.net/terminals-and-shells/italics.html"
 
