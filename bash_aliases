@@ -21,7 +21,7 @@ fi
 alias ssh="TERM=xterm-256color ssh"
 alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
-alias ag='ag --path-to-ignore=~/.agignore'
+alias ag="ag --color-path 35 --color-match '1;35' --color-line-number 32 --path-to-ignore=~/.agignore"
 alias cat="bat --theme='Solarized (light)'"
 alias cop='bundle exec rubocop -a'
 alias spec='bundle exec rake spec && cop'

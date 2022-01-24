@@ -372,15 +372,11 @@ let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/
 if executable('ag')
   let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
   set grepprg=ag\ --nogroup\ --nocolor
+  command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
+  " bind \ (backward slash) to grep shortcut
+  nnoremap \ :Ag<SPACE>
+  nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 endif
-
-" bind \ (backward slash) to grep shortcut
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
-nnoremap \ :Ag<SPACE>
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-
-" bind KK to grep word under cursor
-" nnoremap KK :Ag --preview "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " ripgrep
 if executable('rg')
