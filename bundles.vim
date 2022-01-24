@@ -1,82 +1,168 @@
-set nocompatible
-filetype off
+call plug#begin('~/.vim/bundle')
 
-" Vundle setup
-set rtp+=~/.vim/bundle/Vundle.vim/
-"Start
-call vundle#begin()
-Bundle 'VundleVim/Vundle.vim'
+"*****************************************************************************
+"" Plug install packages
+"*****************************************************************************
 
-" General enhancements
-Bundle 'tpope/vim-abolish.git'
-Bundle 'tpope/vim-characterize.git'
-Bundle 'tpope/vim-commentary.git'
-Bundle 'tpope/vim-dispatch.git'
-Bundle 'tpope/vim-eunuch.git'
-Bundle 'tpope/vim-fugitive.git'
-Bundle 'tpope/vim-rhubarb'
-Bundle 'tpope/vim-ragtag.git'
-Bundle 'tpope/vim-repeat.git'
-Bundle 'tpope/vim-scriptease.git'
-Bundle 'tpope/vim-sensible.git'
-" Bundle 'scrooloose/nerdtree.git'
-Bundle 'tpope/vim-sleuth.git'
-Bundle 'tpope/vim-surround.git'
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-tbone.git'
-Bundle 'tpope/vim-unimpaired.git'
-Bundle 'tpope/vim-projectile.git'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'mattn/gist-vim'
-Bundle 'pangloss/vim-javascript.git'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim.git'
-Bundle 'elzr/vim-json'
-Bundle 'godlygeek/tabular.git'
-Bundle 'vim-scripts/vimwiki.git'
-" Bundle 'scrooloose/syntastic'
-Bundle 'w0rp/ale'
-" Bundle 'klen/python-mode'
-Bundle 'janko-m/vim-test'
-Bundle 'Yggdroot/indentLine'
-" extra
-Bundle 'henrik/vim-indexed-search'
-" Bundle 'craigemery/vim-autotag'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
-" Bundle 'SirVer/ultisnips'
-Bundle 'fatih/vim-go'
-" Optional:
-Bundle 'ggreer/the_silver_searcher'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'Shougo/neocomplete.vim'
-Bundle 'stephpy/vim-yaml'
+Plug 'VundleVim/Vundle.vim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/grep.vim'
+Plug 'vim-scripts/CSApprox'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'Raimondi/delimitMate'
+Plug 'majutsushi/tagbar'
+" Plug 'vim-syntastic/syntastic'
+Plug 'Yggdroot/indentLine'
+Plug 'avelino/vim-bootstrap-updater'
+Plug 'sheerun/vim-polyglot'
+" Plug 'Shougo/neocomplete.vim'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
+Plug 'mbbill/undotree'
+" Plug 'ludovicchabant/vim-gutentags'
+" Plug 'justinmk/vim-sneak'
+
+if isdirectory('/usr/local/opt/fzf')
+  Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+else
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+  Plug 'junegunn/fzf.vim'
+endif
+let g:make = 'gmake'
+if exists('make')
+        let g:make = 'make'
+endif
+Plug 'Shougo/vimproc.vim', {'do': g:make}
+
+"" Vim-Session
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
+
+if v:version >= 703
+  Plug 'Shougo/vimshell.vim'
+endif
+
+if v:version >= 704
+  "" Snippets
+  Plug 'SirVer/ultisnips'
+endif
+
+" Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+
+" autocomplete
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+
+"" Color
+Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
+
+"*****************************************************************************
+"" Custom bundles
+"*****************************************************************************
+
+" c
+Plug 'vim-scripts/c.vim', {'for': ['c', 'cpp']}
+Plug 'ludwig/split-manpage.vim'
+
+
+" go
+"" Go Lang Bundle
+Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
+
+" split join
+Plug 'AndrewRadev/splitjoin.vim'
+
+" html
+"" HTML Bundle
+Plug 'hail2u/vim-css3-syntax'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'tpope/vim-haml'
+Plug 'mattn/emmet-vim'
+
+
+" javascript
+"" Javascript Bundle
+Plug 'jelera/vim-javascript-syntax'
+
+
+" python
+"" Python Bundle
+Plug 'davidhalter/jedi-vim'
+Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+
+
+" ruby
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-projectionist'
+" Plug 'ecomba/vim-ruby-refactoring' # not used frequently
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-endwise'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'vim-ruby/vim-ruby'
+
+" F#
+" Plug 'fsharp/vim-fsharp', {
+"       \ 'for': 'fsharp',
+"       \ 'do':  'make fsautocomplete',
+"       \}
+
+" tpope
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-scriptease'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-tbone'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-projectile'
+Plug 'tpope/vim-obsession'
+
+"  Other
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'kchmck/vim-coffee-script'
+Plug 'elzr/vim-json'
+Plug 'godlygeek/tabular'
+Plug 'vim-scripts/vimwiki'
+Plug 'janko-m/vim-test'
+Plug 'dense-analysis/ale'
+Plug 'henrik/vim-indexed-search'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+
+" yaml
+Plug 'stephpy/vim-yaml'
 
 " Custom textobjects
-Bundle 'kana/vim-textobj-user.git'
-Bundle 'kana/vim-textobj-entire.git'
-
-" Colorschemes
-Bundle 'altercation/vim-colors-solarized.git'
-Bundle 'nelstrom/vim-mac-classic-theme.git'
-Bundle 'nelstrom/vim-blackboard.git'
-
-" Ruby enhancements
-Bundle 'tpope/vim-bundler.git'
-Bundle 'tpope/vim-endwise.git'
-Bundle 'tpope/vim-rails.git'
-Bundle 'tpope/vim-rake.git'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'nelstrom/vim-textobj-rubyblock.git'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-entire'
 
 " Latex
-Bundle 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'for' : ['tex', 'markdown']}
 
 " Markdown
-Bundle 'tpope/vim-markdown.git'
+Plug 'tpope/vim-markdown'
 
-call vundle#end()
-" End
-filetype plugin indent on
+
+"*****************************************************************************
+"*****************************************************************************
+
+" Include user's extra bundle
+if filereadable(expand("~/.vimrc.local.bundles"))
+  source ~/.vimrc.local.bundles
+endif
+
+call plug#end()

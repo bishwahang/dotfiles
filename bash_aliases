@@ -4,14 +4,11 @@ shopt -s expand_aliases
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # some more ls aliases
-alias ll='ls -alF --color'
-alias la='ls -A --color'
-alias l='ls -CF --color'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
-  # test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  # enable color support of ls and also add handy aliases
-  # alias ls='ls -G'
   alias dir='dir -G'
   alias vdir='vdir -G'
   alias ls='ls -Gp'
@@ -22,7 +19,16 @@ if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
 fi
 
 alias ag='ag --path-to-ignore=~/.agignore'
-alias cop='bundle exec rubocop'
-alias spec='bundle exec rake spec && bundle exec rubocop'
+alias cat="bat --theme='Solarized (light)'"
+alias cop='bundle exec rubocop -a'
+alias spec='bundle exec rake spec && cop'
+# ctags
+alias ctags='/opt/homebrew/bin/ctags'
 # alias diff="/usr/local/bin/grc /usr/bin/diff"
-alias genpass='cat /dev/urandom | env LC_CTYPE=C tr -dc a-zA-Z0-9_\!\@\#\$\%\^\&\*\(\)\-+= | head -c 17; echo'
+alias genpass='cat /dev/urandom | env LC_ALL=C tr -dc a-zA-Z0-9_\!\@\#\$\%\^\&\*\(\)\-+= | head -c 17; echo'
+# FL-CLI-Tools
+function fl() {
+  $(aws ecr get-login --no-include-email --region eu-west-1);
+  docker pull 524690225562.dkr.ecr.eu-west-1.amazonaws.com/fl-cli-tools:latest;
+  docker run --rm -it -v ~/:/root/ 524690225562.dkr.ecr.eu-west-1.amazonaws.com/fl-cli-tools:latest ${*:1};
+}

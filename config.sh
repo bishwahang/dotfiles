@@ -5,7 +5,7 @@ hash git > /dev/null || {
 }
 
 echo "Link config files"
-configs=(bashrc bash_aliases vimrc gvimrc vim gitconfig gitignore tmux.conf)
+configs=(bashrc bash_profile bash_aliases vimrc gvimrc vim gitconfig gitignore tmux.conf agignore)
 for config in "${configs[@]}"
 do
   echo "linking $config"
@@ -15,10 +15,19 @@ done
 echo "making temp and undo directory"
 mkdir -p $HOME/.tmp
 mkdir -p $HOME/.undo
+mkdir -p $HOME/.tmux/plugins
 
 hash vim > /dev/null && {
-  echo 'Installing Vim Plugin'
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  echo 'Installing Vim-Plugin'
   vim +PluginInstall +qall
 }
+
+echo "cloning tmux plugin manager"
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+
+wget -O ~/.tmp/solarized_dark.itemcolors https://github.com/altercation/solarized/blob/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors
+echo "import solarized_dark to iterm profile"
+# to enable italic: https://weibeld.net/terminals-and-shells/italics.html
+echo "Visit how to enable italics in iTerm: https://weibeld.net/terminals-and-shells/italics.html"
+
 echo 'Finished config!'
