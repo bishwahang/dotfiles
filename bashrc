@@ -91,12 +91,6 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# 256 color
-if [ "$TERM" == "xterm" ]; then
-    # No it isn't, it's gnome-terminal
-    export TERM=xterm-256color
-fi
-
 # Configure colors, if available.
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     c_reset='\[\033[0m\]'
