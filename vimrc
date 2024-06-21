@@ -156,6 +156,12 @@ set titlestring=%F
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
+" Map Alt + B to move back one word in command-line mode
+cnoremap <Esc>b <C-Left>
+
+" Map Alt + F to move forward one word in command-line mode
+cnoremap <Esc>f <C-Right>
+
 " if exists("*fugitive#statusline")
 "   set statusline+=%{fugitive#statusline()}
 " endif
@@ -380,6 +386,10 @@ let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/
 
 " The Silver Searcher
 if executable('ag')
+  set grepprg=ag\ --vimgrep
+  set grepformat^=%f:%l:%c:%m
+
+  " using with FZF
   let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
   set grepprg=ag\ --nogroup\ --nocolor
   let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
@@ -424,20 +434,45 @@ if executable('ag')
   nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 endif
 
-" " ripgrep
-" if executable('rg')
-"   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-"   set grepprg=rg\ --vimgrep
-"   command! -bang -nargs=* RG call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-" endif
+" Ripgrep
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
+    set grepformat=%f:%l:%c:%m
 
-" command! -bang -nargs=? -complete=dir Files
-"     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+    " Using with fzf
+    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+    " command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+    " let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
+
+
+  " RgIn: Start ag in the specified directory
+  "
+  " e.g.
+  "   :RgIn .. foo
+  function! s:rg_in(bang, ...)
+      if !isdirectory(a:1)
+          throw 'not a valid directory: ' .. a:1
+      endif
+      " Press `ctrl-/' to enable preview window.
+      call fzf#vim#rg(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'right:50%:hidden', 'ctrl-/'), a:bang)
+
+      " If you don't want preview option, use this
+      " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+  endfunction
+
+  command! -bang -nargs=+ -complete=dir RgIn call s:ag_in(<bang>0, <f-args>)
+
+  " bind \ (backward slash) to grep shortcut
+  nnoremap \r :RgIn<SPACE>
+
+  " find word under cursor
+  nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+endif
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)
 nnoremap <silent> <leader>b :Buffers<CR>
-nnoremap <silent> <C-p> :FZF -m<CR>
+nnoremap <silent> <C-p> :Files<CR>
 
 " Snippets
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -544,7 +579,7 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 "" Open current line on GitHub
-nnoremap <Leader>o :.Gbrowse<CR>
+nnoremap <Leader>o :.GBrowse<CR>
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -561,7 +596,7 @@ map! <F1> <Esc>
 
 
 " create tags
-map <Leader>ct :!ctags -R --exclude=.bundle --exclude=.git .<CR>
+map <Leader>ct :!ctags -R --exclude=.bundle --exclude=.git --exclude=*.js .<CR>
 set tags=./tags,tags
 
 " search next/previous -- center in page
@@ -741,7 +776,7 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
 
-let test#strategy = "dispatch"
+let test#strategy = 'dispatch'
 " let test#ruby#rspec#executable = 'bundle exec rspec'
 
 " vimtex output
@@ -807,7 +842,7 @@ let $BASH_ENV= "~/.bash_aliases"
 " let g:fsharp_interactive_bin = '/Library/Frameworks/Mono.framework/Versions/Current/Commands/fsharpi'
 " let g:fsharp_xbuild_path = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/msbuild"
 "
-" " save folds
+" save folds
 " augroup remember_folds
 "   autocmd!
 "   autocmd BufWinLeave * mkview
