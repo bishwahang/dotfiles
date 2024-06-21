@@ -7,6 +7,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'VundleVim/Vundle.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/CSApprox'
@@ -16,7 +17,7 @@ Plug 'majutsushi/tagbar'
 " Plug 'vim-syntastic/syntastic'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 " Plug 'Shougo/neocomplete.vim'
 " Plug 'Shougo/neosnippet'
 " Plug 'Shougo/neosnippet-snippets'
@@ -112,6 +113,8 @@ Plug 'vim-ruby/vim-ruby'
 "       \ 'do':  'make fsautocomplete',
 "       \}
 
+" Tmux
+Plug 'preservim/vimux'
 " tpope
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-characterize'
@@ -155,6 +158,8 @@ Plug 'lervag/vimtex', { 'for' : ['tex', 'markdown']}
 
 " Markdown
 Plug 'tpope/vim-markdown'
+
+Plug 'instant-markdown/vim-instant-markdown', {'for': 'markdown', 'do': 'yarn install'}
 
 
 "*****************************************************************************
