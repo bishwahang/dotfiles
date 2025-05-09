@@ -16,8 +16,8 @@ set bomb
 set binary
 set ttyfast
 
-" " Display extra whitespace
-" set list listchars=tab:»·,trail:·
+" Display extra whitespace
+set list listchars=tab:»·,trail:·
 
 " Enable mouse usage (all modes)
 set mouse=a

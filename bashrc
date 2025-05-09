@@ -50,37 +50,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#rbenv root
-export RBENV_ROOT="$HOME/.rbenv"
-# add rbenv to PATH
-# and initialize rbenv
-if [[ -d $RBENV_ROOT ]];then
-  PATH="$RBENV_ROOT/bin:$PATH"
-  eval "$(rbenv init -)"
-  export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-fi
-
-# pyenv root
-export PYENV_ROOT="$HOME/.pyenv"
-
-# Add pyenv root to PATH
-# and initialize pyenv
-if [[ -d $PYENV_ROOT ]];then
-    PATH="$PYENV_ROOT/bin:$PATH"
-    # initialize pyenv
-    eval "$(pyenv init -)"
-    # initialize pyenv virtualenv
-    eval "$(pyenv virtualenv-init -)"
-fi
-
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    export WORKON_HOME=$HOME/.virtualenvs
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
-
-# OPAM configuration
-. /home/hang/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
-#NPM
 export PATH=$HOME/.npm/bin:$PATH
 
 export PROMPT_DIRTRIM=2
@@ -101,10 +70,6 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     c_git_clean='\033[0;37m'
     c_git_staged='\033[0;32m'
     c_git_unstaged='\033[0;31m'
-    # c_git_reset='\[\033[0m\]'
-    # c_git_clean='\[\033[0;37m\]'
-    # c_git_staged='\[\033[0;32m\]'
-    # c_git_unstaged='\[\033[0;31m\]'
 else
     c_reset=
     c_user=
@@ -143,9 +108,6 @@ git_branch()
     fi
     GIT_HEAD=`cat $GIT_DIR/HEAD`
     GIT_BRANCH=${GIT_HEAD##*/}
-    if [ ${#GIT_BRANCH} -eq 40 ]; then
-        GIT_BRANCH="(no branch)"
-    fi
     echo -e " [${GIT_BRANCH}]"
 }
 
@@ -184,10 +146,6 @@ export DISABLE_SPRING=1
 
 export LC_ALL=en_US.UTF-8
 
-# to use homebrew's python version
-export PATH=/opt/homebrew/opt/python@3.10/bin:$PATH
-export TERM=xterm-256color-italic
-
 # usees solarized theme for bat. Also fzf#vim uses this for preview theme
 export BAT_THEME="Solarized (dark)"
 # nvm
@@ -195,4 +153,17 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# eval "$(starship init bash)"
+# pkgconfig
+export PKG_CONFIG_PATH="/opt/homebrew/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+# Customer Dot ENV variables
+if [ -f ~/.cust_dot_env ]; then
+    . ~/.cust_dot_env
+fi
+
+# # to use homebrew's python version
+export PATH=/opt/homebrew/opt/python@3.13/bin:$PATH
+export TERM=xterm-256color-italic
+
+eval "$(mise activate bash)"
+eval "$(mise mise hook-env)"

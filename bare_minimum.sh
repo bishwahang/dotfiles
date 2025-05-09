@@ -17,9 +17,6 @@ brew install tmux
 brew install reattach-to-user-namespace
 brew install the_silver_searcher
 brew install ctags
-brew install rbenv
-brew install ruby-build
-rbenv init
 brew install fzf
 $(brew --prefix)/opt/fzf/install
 

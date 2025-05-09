@@ -1,41 +1,95 @@
 [user]
-    name = Bishwa Hang Rai
-    email = bishwahang.kirat@gmail.com
-    signingkey = 9FDACB1F0CC8D3E662AE43548D3D4673AFC0020E
+  name = Bishwa Hang Rai
+  email = bhrai@gitlab.com
+  signingkey = B218D5879E7765D3
 [color]
-    ui = auto
-    diff = auto
-    status = auto
-    branch = auto
+  ui = auto
+  diff = auto
+  status = auto
+  branch = auto
+
+[column]
+  ui = auto
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = version:refname
 
 [alias]
-    st = status
-    di = diff
-    co = checkout
-    ci = commit
-    cia = commit -a
-    br = branch
-    sta = stash
-    pop = stash pop
-    hist = log --pretty=format:\"%Cred%h%Creset %C(yellow)(%cr) %ad%Creset | %s%d %C(blue)[%an]%Creset\" --graph --date=short
-    type = cat-file -t
-    dump = cat-file -p
+  st = status
+  di = diff
+  co = checkout
+  ci = commit
+  cia = commit -a
+  br = branch
+  sta = stash
+  pop = stash pop
+  unsta = stash apply stash@{0}
+  hist = log --pretty=format:\"%Cred%h%Creset %C(yellow)(%cr) %ad%Creset | %s%d %C(blue)[%an]%Creset\" --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
+    # Fetch branch from origin and reset your local branch copy (when changes were made on origin to the branch, and there's nothing local we want to keep)
+    # git fresh my-branch
+  fresh = "!f() { git checkout master && git fetch origin $1 && git branch -D $1 && git checkout $1; }; f"
+    # Check out remote branch (for code review)
+    # git codereview remote-branch
+  codereview = "!f() { git fetch origin $1 && git checkout origin/$1 && bundle && yarn && gdk restart; }; f"
+
 [push]
-    default = current
+  default = simple
+  autoSetupRemote = true
+  followTags = true
+
+[fetch]
+  ; prune = true
+  ; pruneTags = true
+  ; all = true
+
+[pull]
+  rebase = false
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+
 [merge]
-    renamelimit = 5000
+  renamelimit = 5000
 
 [core]
-    excludesfile = ~/.gitignore
-    editor = vim
-    hooksPath = /Users/bishwa/.git/hooks/
+  excludesfile = ~/.gitignore
+  editor = vim
+  hooksPath = /Users/bishwa/.git/hooks/
+
+[help]
+   autocorrect = prompt
+
 [commit]
-    gpgsign = true
+  gpgsign = true
+  verbose = true
+
 [gpg]
-    program = gpg2
+  program = gpg2
+
 [diff "sopsdiffer"]
-    textconv = sops -d
+  textconv = sops -d
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
+
 [github]
-    user = bishwahang
-[pull]
-    rebase = false
+  user = bishwahang
+
+[rerere]
+  enabled = true
+  autoupdate = true
+
+[init]
+  defaultBranch = main
+
+[maintenance]
+  repo = /Users/bishwa/workspace/glab/gitlab-development-kit
+  repo = /Users/bishwa/workspace/glab/gitlab-development-kit/gitlab
