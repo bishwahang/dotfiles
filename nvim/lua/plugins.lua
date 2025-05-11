@@ -1,14 +1,22 @@
 require("lazy").setup({
     -- Colorscheme
+    -- {
+    --     "catppuccin/nvim",
+    --     name = "catppuccin",
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd.colorscheme "catppuccin-mocha"  -- or frappe, latte, macchiato
+    --     end,
+    -- },
+    -- Solarized here
     {
-        "catppuccin/nvim",
-        name = "catppuccin",
+        "shaunsingh/solarized.nvim",
         priority = 1000,
         config = function()
-            vim.cmd.colorscheme "catppuccin-mocha"  -- or frappe, latte, macchiato
+            vim.o.background = "dark" -- or "light"
+            vim.cmd([[colorscheme solarized]])
         end,
     },
-
     -- FZF
     { "junegunn/fzf", build = "./install --bin" },
     "junegunn/fzf.vim",
