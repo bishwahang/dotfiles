@@ -156,27 +156,21 @@ set titlestring=%F
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Readline-style keybindings in Vim command-line mode
-" Map Option + B to move back one word in command-line mode
-cnoremap <Esc>b <C-Left>
-" Map Option + F to move forward one word in command-line mode
-cnoremap <Esc>f <C-Right>
-" Map Ctrl + A to beginning of command-line
-cnoremap <C-A> <Home>
-" Map Ctrl + E to move to end of command-line
-cnoremap <C-E> <End>
-
-" if exists("*fugitive#statusline")
-"   set statusline+=%{fugitive#statusline()}
-" endif
-
-" vim-airline
-" let g:airline_theme = 'powerlineish'
-" let g:airline#extensions#syntastic#enabled = 1
-" let g:airline#extensions#branch#enabled = 1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tagbar#enabled = 1
-" let g:airline_skip_empty_sections = 1
+" Readline-style key bindings for command mode
+" Move to beginning of line
+cnoremap <C-a> <Home>
+" Move to end of line
+cnoremap <C-e> <End>
+" Move backward one word (Escape + b)
+cnoremap <Esc>b <S-Left>
+" Move forward one word (Escape + f)
+cnoremap <Esc>f <S-Right>
+" Delete from cursor to end of line
+cnoremap <C-k> <C-\>estrpart(getcmdline(), 0, getcmdpos()-1)<CR>
+" Delete one word backward (Escape + Backspace)
+cnoremap <Esc><BS> <C-W>
+" Alternative for word backward deletion (Escape + h)
+cnoremap <Esc>h <C-W>" Readline-style key bindings for command mode
 
 " Nice statusbar
 set laststatus=2

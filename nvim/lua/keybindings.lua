@@ -65,6 +65,15 @@ map("n", "<C-k>", "<C-w>k", { noremap = true })
 map("n", "<C-h>", "<C-w>h", { noremap = true })
 map("n", "<C-l>", "<C-w>l", { noremap = true })
 
+-- Readline-style keybindings in Neovim command-line mode
+vim.api.nvim_set_keymap('c', '<C-a>', '<Home>', {noremap = true})
+vim.api.nvim_set_keymap('c', '<C-e>', '<End>', {noremap = true})
+vim.api.nvim_set_keymap('c', '<A-b>', '<S-Left>', {noremap = true})
+vim.api.nvim_set_keymap('c', '<A-f>', '<S-Right>', {noremap = true})
+vim.api.nvim_set_keymap('c', '<C-k>', '<C-\\>estrpart(getcmdline(), 0, getcmdpos()-1)<CR>', {noremap = true})
+vim.api.nvim_set_keymap('c', '<A-BS>', '<C-W>', {noremap = true})
+
+
 -- Keep visual selection when shifting
 map("v", "<", "<gv", { noremap = true })
 map("v", ">", ">gv", { noremap = true })
@@ -95,16 +104,3 @@ map("n", "<Leader>pj", ":%!python3 -m json.tool<CR>", opts)
 map("n", "<C-j>", "<Plug>(ale_next_wrap)", {})
 map("n", "<C-k>", "<Plug>(ale_previous_wrap)", {})
 
-
--- LuaSnip snippets
-
--- local ls = require("luasnip")
---
--- map({ "i", "s" }, "<Tab>", function()
---     return ls.expand_or_jumpable() and "<Plug>luasnip-expand-or-jump" or "<Tab>"
--- end, { expr = true, silent = true })
---
--- map({ "i", "s" }, "<S-Tab>", function()
---     return ls.jumpable(-1) and "<Plug>luasnip-jump-prev" or "<S-Tab>"
--- end, { expr = true, silent = true })
---
