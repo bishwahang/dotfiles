@@ -1,7 +1,5 @@
 [user]
   name = Bishwa Hang Rai
-  email = bhrai@gitlab.com
-  signingkey = B218D5879E7765D3
 [color]
   ui = auto
   diff = auto
