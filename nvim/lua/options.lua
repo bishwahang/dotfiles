@@ -17,6 +17,19 @@ vim.opt.title = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "»·", trail = "·" }
 
+-- Enable statusline
+vim.opt.laststatus = 2
+vim.opt.laststatus = 2
+
+vim.opt.statusline = table.concat({
+  " %f", -- full file path
+  " [%{strlen(&ft) ? &ft : 'none'},%{&fileformat}]", -- filetype + format
+  " %h%1*%m%r%w%0*", -- help, modified, readonly, preview
+  " %{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}", -- git branch
+  " %=", -- align right
+  "%-14.(%l,%c%V%) %<%P", -- line/column, truncate long paths, file percent
+})
+
 -- Search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
@@ -49,4 +62,12 @@ vim.fn.mkdir(vim.opt.directory:get()[1], "p")
 -- Modelines
 vim.opt.modeline = true
 vim.opt.modelines = 10
+
+-- colors
+vim.opt.termguicolors = true
+
+-- Enable system clipboard if available
+if vim.fn.has("unnamedplus") == 1 then
+  vim.opt.clipboard = { "unnamed", "unnamedplus" }
+end
 
