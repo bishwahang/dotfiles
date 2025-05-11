@@ -860,7 +860,12 @@ nmap <silent> <leader>pj :%!python -m json.tool<CR>
 
 " faith/vim-go tutorial
 set autowrite
+
+" quickfix navigation
 map <leader>cn :cnext<CR>
 map <leader>cp :cprevious<CR>
 nnoremap <leader>cc :cclose<CR>
+
+" highlight comment as italic
 highlight Comment cterm=italic
+
