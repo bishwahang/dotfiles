@@ -24,6 +24,27 @@ require("lazy").setup({
         },
     },
 
+    -- GBrowse
+    {
+        "shumphrey/fugitive-gitlab.vim",
+        dependencies = {
+            "tpope/vim-fugitive",
+        },
+    },
+
+    -- Surround replacement
+    {
+        "kylechui/nvim-surround",
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({})
+        end,
+    },
+
+    -- Tabularize
+    { "godlygeek/tabular" },
+
+
     -- Ruby & Rails
     "vim-ruby/vim-ruby",
     "tpope/vim-rails",
