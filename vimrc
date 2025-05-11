@@ -156,11 +156,15 @@ set titlestring=%F
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Map Alt + B to move back one word in command-line mode
+" Readline-style keybindings in Vim command-line mode
+" Map Option + B to move back one word in command-line mode
 cnoremap <Esc>b <C-Left>
-
-" Map Alt + F to move forward one word in command-line mode
+" Map Option + F to move forward one word in command-line mode
 cnoremap <Esc>f <C-Right>
+" Map Ctrl + A to beginning of command-line
+cnoremap <C-A> <Home>
+" Map Ctrl + E to move to end of command-line
+cnoremap <C-E> <End>
 
 " if exists("*fugitive#statusline")
 "   set statusline+=%{fugitive#statusline()}

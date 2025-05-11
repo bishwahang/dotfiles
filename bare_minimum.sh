@@ -11,6 +11,8 @@
 
 # install packages
 echo "installing packages"
+brew install bash
+brew install mise
 brew install bash-completion
 brew install vim
 brew install tmux
