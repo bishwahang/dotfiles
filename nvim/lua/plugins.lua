@@ -1,17 +1,15 @@
 require("lazy").setup({
+    -- Colorscheme
     {
-        "Tsuzat/NeoSolarized.nvim",
+        "ishan9299/nvim-solarized-lua",  -- faithful port of original solarized
         priority = 1000,
         config = function()
-            require('NeoSolarized').setup({
-                style = "dark", -- "dark" or "light"
-                transparent = false, -- Enable/disable transparency
-                terminal_colors = true, -- Configure terminal colors
-                enable_italics = true, -- Italics for different parts of the code
-            })
-            vim.cmd[[colorscheme NeoSolarized]]
+            vim.opt.termguicolors = true
+            vim.opt.background = "dark" -- or "light"
+            vim.cmd[[colorscheme solarized]]
         end,
     },
+
     -- FZF
     { "junegunn/fzf", build = "./install --bin" },
     "junegunn/fzf.vim",
