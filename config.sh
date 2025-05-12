@@ -42,6 +42,12 @@ if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
   git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 fi
 
+# Install tmux plugins listed in .tmux.conf
+if hash tmux > /dev/null; then
+  echo "📦 Installing tmux plugins..."
+  "$TPM_PATH/bin/install_plugins"
+fi
+
 echo "🎨 Tip: Import Solarized iTerm colors manually if needed"
 echo "💡 For italics in terminal, visit: https://weibeld.net/terminals-and-shells/italics.html"
 
