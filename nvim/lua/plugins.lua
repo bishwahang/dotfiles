@@ -1,11 +1,11 @@
 require("lazy").setup({
     -- Colorscheme
     {
-        "ishan9299/nvim-solarized-lua",  -- faithful port of original solarized
+        "ishan9299/nvim-solarized-lua",
         priority = 1000,
         config = function()
             vim.opt.termguicolors = true
-            vim.opt.background = "dark" -- or "light"
+            vim.opt.background = "dark"
             vim.cmd[[colorscheme solarized]]
         end,
     },
@@ -13,7 +13,6 @@ require("lazy").setup({
     -- FZF
     { "junegunn/fzf", build = "./install --bin" },
     "junegunn/fzf.vim",
-
 
     -- Git
     "tpope/vim-fugitive",
@@ -45,7 +44,6 @@ require("lazy").setup({
     -- Tabularize
     { "godlygeek/tabular" },
 
-
     -- Ruby & Rails
     "vim-ruby/vim-ruby",
     "tpope/vim-rails",
@@ -56,35 +54,73 @@ require("lazy").setup({
     -- Lint
     { "dense-analysis/ale" },
 
-    -- Snippet engine and prebuilt snippets
+    -- Snippets: UltiSnips instead of LuaSnip
     {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        build = "make install_jsregexp",
+        "SirVer/ultisnips",
+        event = "InsertEnter",
+    },
+    {
+        "honza/vim-snippets",
+        event = "InsertEnter",
+    },
+
+    -- Autocompletion with cmp and UltiSnips
+    {
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
         dependencies = {
-            "rafamadriz/friendly-snippets",
+            "quangnguyen30192/cmp-nvim-ultisnips",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-nvim-lua",
         },
         config = function()
-            local ls = require("luasnip")
+            local cmp = require("cmp")
+            local t = function(str)
+                return vim.api.nvim_replace_termcodes(str, true, true, true)
+            end
 
-            ls.config.set_config({
-                history = true,
-                updateevents = "TextChanged,TextChangedI",
+            cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        vim.fn["UltiSnips#Anon"](args.body)
+                    end,
+                },
+                mapping = {
+                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                    ["<Tab>"] = cmp.mapping(function(fallback)
+                        if cmp.visible() then
+                            cmp.confirm({ select = true })  -- << this expands the currently selected item
+                        elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+                            vim.fn.feedkeys(t("<C-R>=UltiSnips#ExpandSnippet()<CR>"), "")
+                        elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+                            vim.fn.feedkeys(t("<C-R>=UltiSnips#JumpForwards()<CR>"), "")
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+
+
+                    ["<S-Tab>"] = cmp.mapping(function(fallback)
+                        if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+                            vim.fn.feedkeys(t("<C-R>=UltiSnips#JumpBackwards()<CR>"), "")
+                        else
+                            fallback()
+                        end
+                    end, { "i", "s" }),
+                },
+                sources = {
+                    { name = "ultisnips" },
+                    { name = "nvim_lsp" },
+                    { name = "buffer" },
+                    { name = "path" },
+                },
             })
-
-            require("luasnip.loaders.from_vscode").lazy_load()
-
-            -- Tab/Shift-Tab keybindings for snippets
-            vim.keymap.set({ "i", "s" }, "<Tab>", function()
-                return ls.expand_or_jumpable() and "<Plug>luasnip-expand-or-jump" or "<Tab>"
-            end, { expr = true, silent = true })
-
-            vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-                return ls.jumpable(-1) and "<Plug>luasnip-jump-prev" or "<S-Tab>"
-            end, { expr = true, silent = true })
         end,
     },
-    -- Optional: Markdown
-    "preservim/vim-markdown",
 })
 
