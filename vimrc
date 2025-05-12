@@ -382,90 +382,105 @@ set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
 
 let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
-" The Silver Searcher
-if executable('ag')
-  set grepprg=ag\ --vimgrep
-  set grepformat^=%f:%l:%c:%m
-
-  " using with FZF
-  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
-  " See here: https://github.com/junegunn/fzf.vim/issues/27#issuecomment-608294881
-  " command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '', fzf#vim#with_preview(), <bang>0)
-  " "Raw" version of ag; arguments directly passed to ag
-  "
-  " e.g.
-  "   " Search 'foo bar' in ~/projects
-  "   :Ag "foo bar" ~/projects
-  "
-  "   " Start in fullscreen mode
-  "   :Ag! "foo bar"
-  "   Raw version without preview
-  " command! -bang -nargs=+ -complete=file Ag call fzf#vim#ag_raw(<q-args>, <bang>0)
-
-  " Raw version with preview
-  command! -bang -nargs=+ -complete=file Ag call fzf#vim#ag_raw(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-
-  " AgIn: Start ag in the specified directory
-  "
-  " e.g.
-  "   :AgIn .. foo
-  function! s:ag_in(bang, ...)
-      if !isdirectory(a:1)
-          throw 'not a valid directory: ' .. a:1
-      endif
-      " Press `ctrl-/' to enable preview window.
-      call fzf#vim#ag(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'right:50%:hidden', 'ctrl-/'), a:bang)
-
-      " If you don't want preview option, use this
-      " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
-  endfunction
-
-  command! -bang -nargs=+ -complete=dir AgIn call s:ag_in(<bang>0, <f-args>)
-
-  " bind \ (backward slash) to grep shortcut
-  nnoremap \ :Ag<SPACE>
-
-  " find word under cursor
-  nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-endif
-
-" Ripgrep
+" RgSearch - Improved ripgrep integration
 if executable('rg')
-    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
-    set grepformat=%f:%l:%c:%m
+  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
+  set grepformat=%f:%l:%c:%m
 
-    " Using with fzf
-    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-    " command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-    " let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
+  " Using with fzf - enable ripgrep for FZF by default
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
 
+  " RgSearch command: Enhanced ripgrep search with flexible arguments
+  command! -nargs=+ -complete=dir RgSearch call s:RgSearch(<f-args>)
 
-  " RgIn: Start ag in the specified directory
-  "
-  " e.g.
-  "   :RgIn .. foo
-  function! s:rg_in(bang, ...)
-      if !isdirectory(a:1)
-          throw 'not a valid directory: ' .. a:1
+  function! s:RgSearch(...)
+    if a:0 < 1
+      echo "Usage: RgSearch [flags] pattern [path]"
+      return
+    endif
+
+    " Collect all arguments
+    let l:args = copy(a:000)
+    let l:flags = []
+    let l:pattern = ""
+    let l:path = ""
+
+    " First, extract all flags (arguments starting with -)
+    let l:i = 0
+    while l:i < len(l:args)
+      if l:args[l:i] =~# '^-'
+        call add(l:flags, l:args[l:i])
+        call remove(l:args, l:i)
+      else
+        let l:i += 1
       endif
-      " Press `ctrl-/' to enable preview window.
-      call fzf#vim#rg(join(a:000[1:], ' '), fzf#vim#with_preview({'dir': a:1}, 'right:50%:hidden', 'ctrl-/'), a:bang)
+    endwhile
 
-      " If you don't want preview option, use this
-      " call fzf#vim#ag(join(a:000[1:], ' '), {'dir': a:1}, a:bang)
+    " After removing flags, first remaining arg is pattern, second (if exists) is path
+    if len(l:args) > 0
+      let l:pattern = l:args[0]
+
+      if len(l:args) > 1
+        let l:path = l:args[1]
+      endif
+    else
+      echo "No search pattern provided"
+      return
+    endif
+
+    " Join flags
+    let l:flag_str = join(l:flags, ' ')
+
+    " Build command with correct handling of -e flag
+    let l:cmd = 'rg --column --line-number --no-heading --color=always --smart-case '
+
+    " Check if -e flag is present and handle pattern appropriately
+    if l:flag_str =~# '-e\>'
+      " If -e flag is present, don't use -- separator
+      let l:cmd .= l:flag_str . ' ' . shellescape(l:pattern)
+    else
+      " Otherwise, use -- separator
+      let l:cmd .= l:flag_str . ' -- ' . shellescape(l:pattern)
+    endif
+
+    " Add path if provided
+    if l:path != ''
+      let l:cmd .= ' ' . shellescape(l:path)
+    endif
+
+    call fzf#vim#grep(l:cmd, 1, fzf#vim#with_preview())
   endfunction
 
-  command! -bang -nargs=+ -complete=dir RgIn call s:ag_in(<bang>0, <f-args>)
+  " RgIn: Search in specified directory
+  function! s:RgIn(bang, ...)
+    if !isdirectory(a:1)
+      throw 'not a valid directory: ' .. a:1
+    endif
 
-  " bind \ (backward slash) to grep shortcut
-  nnoremap \r :RgIn<SPACE>
+    " If only directory provided, prompt for search
+    if a:0 == 1
+      call RgSearch('', a:1)
+      return
+    endif
 
-  " find word under cursor
-  nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
+    " Otherwise, search in specified directory
+    call RgSearch(join(a:000[1:], ' '), a:1)
+  endfunction
+
+  command! -bang -nargs=+ -complete=dir RgIn call s:RgIn(<bang>0, <f-args>)
+
 endif
+
+" Key mappings
+" Basic search
+nnoremap \ :RgSearch<Space>
+
+" Search for word under cursor (default search)
+nnoremap <silent> <Leader>rg :RgSearch <C-R><C-W><CR>
+
+" Search for word under cursor with word boundaries (whole word only)
+nnoremap <silent> <Leader>rw :RgSearch -e \b<C-R><C-W>\b<CR>
 
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)

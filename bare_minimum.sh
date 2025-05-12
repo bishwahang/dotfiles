@@ -10,7 +10,7 @@ brew install vim
 brew install neovim
 brew install tmux
 brew install reattach-to-user-namespace
-brew install the_silver_searcher    # ag
+brew install ripgrep
 brew install ctags
 brew install fzf
 $(brew --prefix)/opt/fzf/install --all
