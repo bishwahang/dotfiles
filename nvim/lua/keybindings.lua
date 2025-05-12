@@ -1,11 +1,27 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
--- FZF: Ctrl-P to search files
+-- FZF:
+-- Ctrl-P to search files
 map("n", "<C-p>", ":Files<CR>", opts)
+-- Buffers
+map("n", "<Leader>b", ":Buffers<CR>", opts)
 
--- SilverSearcher
-map("n", "<Leader>ag", ":Ag<Space>", opts)
+-- RipGrep
+-- Basic search (backslash key)
+vim.keymap.set('n', '\\', ':RgSearch ', { noremap = true })
+
+-- Search for word under cursor (normal search)
+vim.keymap.set('n', '<leader>rg', function()
+  local word = vim.fn.expand('<cword>')
+  vim.cmd('RgSearch ' .. word)
+end, { noremap = true, silent = true })
+
+-- Search for word under cursor with word boundaries (whole word only)
+vim.keymap.set('n', '<leader>rw', function()
+  local word = vim.fn.expand('<cword>')
+  vim.cmd('RgSearch -e \\b' .. word .. '\\b')
+end, { noremap = true, silent = true })
 
 -- Git commands via vim-fugitive
 map("n", "<Leader>gs", ":Git<CR>", opts)

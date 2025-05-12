@@ -1,9 +1,5 @@
 -- FZF config
-vim.g.fzf_preview_window = { "right:50%:hidden", "ctrl-/" }
-vim.cmd([[
-  command! -nargs=* Ag call fzf#vim#ag(<q-args>, '--hidden --vimgrep', fzf#vim#with_preview(), <bang>0)
-]])
-
+require("plugin_config.fzf")
 -- vim-test config
 vim.g["test#strategy"] = "neovim"
 vim.g["test#ruby#rspec#executable"] = "bundle exec rspec"

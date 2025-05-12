@@ -1,20 +1,15 @@
 require("lazy").setup({
-    -- Colorscheme
-    -- {
-    --     "catppuccin/nvim",
-    --     name = "catppuccin",
-    --     priority = 1000,
-    --     config = function()
-    --         vim.cmd.colorscheme "catppuccin-mocha"  -- or frappe, latte, macchiato
-    --     end,
-    -- },
-    -- Solarized here
     {
-        "shaunsingh/solarized.nvim",
+        "Tsuzat/NeoSolarized.nvim",
         priority = 1000,
         config = function()
-            vim.o.background = "dark" -- or "light"
-            vim.cmd([[colorscheme solarized]])
+            require('NeoSolarized').setup({
+                style = "dark", -- "dark" or "light"
+                transparent = false, -- Enable/disable transparency
+                terminal_colors = true, -- Configure terminal colors
+                enable_italics = true, -- Italics for different parts of the code
+            })
+            vim.cmd[[colorscheme NeoSolarized]]
         end,
     },
     -- FZF
