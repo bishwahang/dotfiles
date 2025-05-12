@@ -138,7 +138,8 @@ PERL_MM_OPT="INSTALL_BASE=/Users/bishwa/perl5"; export PERL_MM_OPT;
 [ -f ~/.functions.sh ] && source ~/.functions.sh
 [ -f ~/.key_bindings.sh ] && source ~/.key_bindings.sh
 
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!vendor/*" --glob "!node_modules/*" --glob "!tmp/*" --glob "!log/*"'
+
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 

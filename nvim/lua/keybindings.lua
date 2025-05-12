@@ -120,3 +120,11 @@ map("n", "<Leader>pj", ":%!python3 -m json.tool<CR>", opts)
 map("n", "<C-j>", "<Plug>(ale_next_wrap)", {})
 map("n", "<C-k>", "<Plug>(ale_previous_wrap)", {})
 
+-- VimTest
+-- Run the current file’s tests
+map("n", "<leader>t", ":TestFile<CR>", opts)
+--- Run the test nearest to the cursor
+map("n", "<leader>s", ":TestNearest<CR>", opts)
+-- Run the full suite
+map("n", "<leader>l", ":TestLast<CR>", opts)
+

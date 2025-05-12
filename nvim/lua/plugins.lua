@@ -24,6 +24,13 @@ require("lazy").setup({
         },
     },
 
+    -- Projetctionist
+    {
+        "tpope/vim-projectionist",
+        event = "BufReadPre",
+    },
+
+
     -- GBrowse
     {
         "shumphrey/fugitive-gitlab.vim",
@@ -44,10 +51,24 @@ require("lazy").setup({
     -- Tabularize
     { "godlygeek/tabular" },
 
-    -- Ruby & Rails
-    "vim-ruby/vim-ruby",
-    "tpope/vim-rails",
+    -- Ruby and Rails
 
+    { "vim-ruby/vim-ruby"},
+
+    {
+        "tpope/vim-rails",
+        lazy = false,
+    },
+
+    {
+        "tpope/vim-projectionist",
+        lazy = false,
+        event = "BufReadPre",
+    },
+    -- Ruby & Rails
+
+    -- Asynchronous build & test dispatcher
+    { "tpope/vim-dispatch" },
     -- Testing
     "vim-test/vim-test",
 
@@ -62,6 +83,25 @@ require("lazy").setup({
     {
         "honza/vim-snippets",
         event = "InsertEnter",
+    },
+
+    -- LSP
+    {
+        "neovim/nvim-lspconfig",
+        event = "BufReadPre",
+        config = function()
+            local lspconfig = require("lspconfig")
+
+            -- Setup ruby_lsp with broken handlers disabled
+            lspconfig.ruby_lsp.setup({
+                cmd = { "ruby-lsp" },  -- required for project-based LSP use
+                handlers = {
+                    ["textDocument/semanticTokens/full"] = function() return {} end,
+                    ["workspace/symbol"] = function() return {} end,
+                    ["workspace/semanticTokens/refresh"] = function() return {} end,
+                },
+            })
+        end,
     },
 
     -- Autocompletion with cmp and UltiSnips
