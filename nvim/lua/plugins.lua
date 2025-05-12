@@ -72,7 +72,7 @@ require("lazy").setup({
             "quangnguyen30192/cmp-nvim-ultisnips",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
-            "hrsh7th/cmp-nvim-lsp",
+            -- "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lua",
         },
@@ -115,9 +115,14 @@ require("lazy").setup({
                 },
                 sources = {
                     { name = "ultisnips" },
-                    { name = "nvim_lsp" },
+                    -- { name = "nvim_lsp" },
                     { name = "buffer" },
                     { name = "path" },
+                },
+                matching = {
+                    disallow_fuzzy_matching = true,
+                    disallow_partial_fuzzy_matching = true,
+                    disallow_prefix_unmatching = true,
                 },
             })
         end,

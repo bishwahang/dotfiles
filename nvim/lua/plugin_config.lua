@@ -10,8 +10,17 @@ vim.g.ale_lint_on_enter = 0
 vim.g.ale_lint_on_insert_leave = 0
 vim.g.ale_lint_on_save = 1
 
+vim.g.ale_linters = {
+    ruby = {'rubocop'},
+}
+vim.g.ale_fixers = {
+    ruby = {'rubocop'},
+}
+vim.g.ale_fix_on_save = 1
+
 
 -- UltiSnip
 vim.g.UltiSnipsExpandTrigger = "<Tab>"
 vim.g.UltiSnipsJumpForwardTrigger = "<Tab>"
 vim.g.UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+
