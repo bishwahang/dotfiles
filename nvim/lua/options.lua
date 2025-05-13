@@ -70,4 +70,3 @@ vim.opt.termguicolors = true
 if vim.fn.has("unnamedplus") == 1 then
   vim.opt.clipboard = { "unnamed", "unnamedplus" }
 end
-

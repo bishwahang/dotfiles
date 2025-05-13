@@ -128,3 +128,5 @@ map("n", "<leader>s", ":TestNearest<CR>", opts)
 -- Run the full suite
 map("n", "<leader>l", ":TestLast<CR>", opts)
 
+-- Gitlab
+vim.keymap.set('n', '<C-g>', '<Plug>(GitLabToggleCodeSuggestions)')

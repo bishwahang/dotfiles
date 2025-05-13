@@ -3,11 +3,6 @@ require("lazy").setup({
     {
         "ishan9299/nvim-solarized-lua",
         priority = 1000,
-        config = function()
-            vim.opt.termguicolors = true
-            vim.opt.background = "dark"
-            vim.cmd[[colorscheme solarized]]
-        end,
     },
 
     -- FZF
@@ -36,9 +31,6 @@ require("lazy").setup({
     {
         "kylechui/nvim-surround",
         event = "VeryLazy",
-        config = function()
-            require("nvim-surround").setup({})
-        end,
     },
 
     -- Tabularize
@@ -48,7 +40,6 @@ require("lazy").setup({
     {
         "vim-ruby/vim-ruby",
         lazy = false,
-
     },
 
     {
@@ -98,55 +89,18 @@ require("lazy").setup({
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lua",
         },
-        config = function()
-            local cmp = require("cmp")
-            local t = function(str)
-                return vim.api.nvim_replace_termcodes(str, true, true, true)
-            end
-
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        vim.fn["UltiSnips#Anon"](args.body)
-                    end,
-                },
-                mapping = {
-                    ["<C-n>"] = cmp.mapping.select_next_item(),
-                    ["<C-p>"] = cmp.mapping.select_prev_item(),
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.confirm({ select = true })  -- << this expands the currently selected item
-                        elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-                            vim.fn.feedkeys(t("<C-R>=UltiSnips#ExpandSnippet()<CR>"), "")
-                        elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-                            vim.fn.feedkeys(t("<C-R>=UltiSnips#JumpForwards()<CR>"), "")
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-
-
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-                            vim.fn.feedkeys(t("<C-R>=UltiSnips#JumpBackwards()<CR>"), "")
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-                },
-                sources = {
-                    { name = "ultisnips" },
-                    -- { name = "nvim_lsp" },
-                    { name = "buffer" },
-                    { name = "path" },
-                },
-                matching = {
-                    disallow_fuzzy_matching = true,
-                    disallow_partial_fuzzy_matching = true,
-                    disallow_prefix_unmatching = true,
-                },
-            })
-        end,
     },
+
+    {
+        'https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git',
+        -- Activate when a file is created/opened
+        event = { 'BufReadPre', 'BufNewFile' },
+        -- Activate when a supported filetype is open
+        ft = { 'go', 'javascript', 'python', 'ruby' },
+        cond = function()
+            -- Only activate if token is present in environment variable.
+            -- Remove this line to use the interactive workflow.
+            return vim.env.GITLAB_TOKEN ~= nil and vim.env.GITLAB_TOKEN ~= ''
+        end,
+    }
 })

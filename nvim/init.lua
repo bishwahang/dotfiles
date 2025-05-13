@@ -5,7 +5,6 @@ vim.g.mapleader = ","
 require("options")
 require("keybindings")
 require("autocmds")
-require("plugin_config")
 
 -- Lazy.nvim plugin manager bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -19,3 +18,4 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Load plugins
 require("plugins")
+require("plugin_config")
