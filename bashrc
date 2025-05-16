@@ -160,9 +160,7 @@ if [ -f ~/.cust_dot_env ]; then
     . ~/.cust_dot_env
 fi
 
-# # to use homebrew's python version
-export PATH=/opt/homebrew/opt/python@3.13/bin:$PATH
 export TERM=xterm-256color-italic
 
-eval "$(mise activate bash)"
-eval "$(mise mise hook-env)"
+# Added by GDK bootstrap
+eval "$(/opt/homebrew/bin/mise activate bash)"

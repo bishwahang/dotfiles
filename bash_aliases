@@ -39,6 +39,4 @@ alias bumi='bundle install && bundle exec rails db:migrate'
 alias gurr='gdk update && gdk reconfigure && gdk restart'
 alias grr='gdk reconfigure && gdk restart'
 
-alias python=/usr/bin/python3
-
 alias pg_cdot="pg_ctl -D '/Users/bishwa/workspace/glab/databases/cdot/data'"
