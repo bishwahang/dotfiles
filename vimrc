@@ -541,6 +541,17 @@ set statusline+=[
 
         command! -bang -nargs=+ -complete=dir RgIn call s:RgIn(<bang>0, <f-args>)
     endif
+    " Define a function to search with word boundaries
+
+    function! RgSearchWordBoundary()
+        " Explicitly capture the word under cursor
+        let l:word = expand('<cword>')
+        " Construct the command with proper escaping
+        let l:cmd = 'RgSearch -e "\\b' . l:word . '\\b"'
+        execute l:cmd
+    endfunction
+
+    " Map the function to your keybinding
 
     " Key mappings
     " Basic search
@@ -548,7 +559,7 @@ set statusline+=[
     " Search for word under cursor (default search)
     nnoremap <silent> <Leader>rg :RgSearch <C-R><C-W><CR>
     " Search for word under cursor with word boundaries (whole word only)
-    nnoremap <silent> <Leader>rw :RgSearch -e \b<C-R><C-W>\b<CR>
+    nnoremap <silent> <Leader>rw :call RgSearchWordBoundary()<CR>
 
     command! -bang -nargs=? -complete=dir Files
                 \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--info=inline']}), <bang>0)

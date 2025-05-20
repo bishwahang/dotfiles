@@ -164,3 +164,4 @@ export TERM=xterm-256color-italic
 
 # Added by GDK bootstrap
 eval "$(/opt/homebrew/bin/mise activate bash)"
+eval "$(/opt/homebrew/bin/mise hook-env)"
