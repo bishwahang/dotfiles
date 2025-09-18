@@ -34,6 +34,7 @@
     # Check out remote branch (for code review)
     # git codereview remote-branch
   codereview = "!f() { git fetch origin $1 && git checkout origin/$1 && bundle && yarn && gdk restart; }; f"
+  cleanup = !git branch --merged | grep -v \"\\*\\|master\\|main\\|develop\" | xargs -n1 -r git branch -d
 
 [push]
   default = simple
@@ -91,3 +92,6 @@
 [maintenance]
   repo = /Users/bishwa/workspace/glab/gitlab-development-kit
   repo = /Users/bishwa/workspace/glab/gitlab-development-kit/gitlab
+
+[diff "rails_credentials"]
+  textconv = bin/rails credentials:diff
