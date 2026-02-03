@@ -17,6 +17,7 @@ $(brew --prefix)/opt/fzf/install --all
 
 echo "✨ Extras..."
 brew install bat
+brew install gum
 
 echo "✅ Finished installing bare minimum!"
 
