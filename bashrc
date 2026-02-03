@@ -168,3 +168,6 @@ eval "$(/opt/homebrew/bin/mise hook-env)"
 source /Users/bishwa/.config/op/plugins.sh
 
 export PATH="$HOME/.local/bin:$PATH"
+
+# opencode
+export PATH=/Users/bishwa/.opencode/bin:$PATH

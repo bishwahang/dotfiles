@@ -15,3 +15,4 @@ export PATH=$PATH:$GOPATH/bin
 export AWS_SQS_QUEUES_PREFIX=bishwa
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export GPG_TTY=$(tty)
