@@ -23,6 +23,11 @@ if hash vim > /dev/null; then
   vim +PluginInstall +qall
 fi
 
+# Claude Code config symlink
+echo "🔗 Linking Claude Code config"
+mkdir -p "$HOME/.claude"
+ln -nfs "$HOME/.dotfiles/claude/settings.json" "$HOME/.claude/settings.json"
+
 # Neovim config symlink
 if hash nvim > /dev/null; then
   echo "🔗 Linking Neovim config from dotfiles"

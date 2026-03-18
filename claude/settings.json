@@ -1,0 +1,20 @@
+{
+  "model": "opus[1m]",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit(~/workspace/**)",
+      "Edit(~/.dotfiles/**)",
+      "Write(~/workspace/**)",
+      "Write(~/.dotfiles/**)",
+      "Glob",
+      "Grep",
+      "Bash(git status*)",
+      "Bash(git log*)",
+      "Bash(git diff*)",
+      "Bash(git branch*)",
+      "Bash(git show*)",
+      "Bash(ls*)"
+    ]
+  }
+}
