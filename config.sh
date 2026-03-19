@@ -28,6 +28,13 @@ echo "🔗 Linking Claude Code config"
 mkdir -p "$HOME/.claude"
 ln -nfs "$HOME/.dotfiles/claude/settings.json" "$HOME/.claude/settings.json"
 
+# OpenCode config symlink
+echo "🔗 Linking OpenCode config"
+mkdir -p "$HOME/.config/opencode/agents"
+ln -nfs "$HOME/.dotfiles/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
+ln -nfs "$HOME/.dotfiles/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
+ln -nfs "$HOME/.dotfiles/opencode/agents/gitlab-dev.md" "$HOME/.config/opencode/agents/gitlab-dev.md"
+
 # Neovim config symlink
 if hash nvim > /dev/null; then
   echo "🔗 Linking Neovim config from dotfiles"
