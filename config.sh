@@ -31,9 +31,18 @@ ln -nfs "$HOME/.dotfiles/claude/settings.json" "$HOME/.claude/settings.json"
 # OpenCode config symlink
 echo "🔗 Linking OpenCode config"
 mkdir -p "$HOME/.config/opencode/agents"
+mkdir -p "$HOME/.config/opencode/skills"
 ln -nfs "$HOME/.dotfiles/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
 ln -nfs "$HOME/.dotfiles/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
+ln -nfs "$HOME/.dotfiles/opencode/decisions.md" "$HOME/.config/opencode/decisions.md"
 ln -nfs "$HOME/.dotfiles/opencode/agents/gitlab-dev.md" "$HOME/.config/opencode/agents/gitlab-dev.md"
+
+# OpenCode skills — symlink every skill directory present in dotfiles
+for skill_dir in "$HOME/.dotfiles/opencode/skills"/*/; do
+  [ -d "$skill_dir" ] || continue
+  skill_name=$(basename "$skill_dir")
+  ln -nfs "${skill_dir%/}" "$HOME/.config/opencode/skills/$skill_name"
+done
 
 # Neovim config symlink
 if hash nvim > /dev/null; then
