@@ -15,6 +15,13 @@ Managed by the `auto-learn` skill.
 
 ---
 
+## 2026-05-20 -- meta -- Portable opencode setup via dotfiles
+- Context: ensure opencode skills/agents/config survive a new machine
+- Tried: symlinking the whole `skills/` directory as one unit
+- Rejected: force-syncs live git clones (e.g. gitlab-review) and one-off copies you don't own
+- Chose: per-skill symlinks in a loop; gitignore mutable `data/`; print setup hints instead of auto-running bootstrap
+- Why: one `config.sh` run restores everything on a new machine; new skills added to dotfiles auto-install on next run; no interactive auth blocks the install
+
 ## 2026-05-20 -- meta -- Auto-learning harness storage layout
 - Context: opencode loses knowledge between sessions; want iterative improvement
 - Tried: folding decisions into AGENTS.md under per-project sub-sections

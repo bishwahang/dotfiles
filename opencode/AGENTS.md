@@ -27,6 +27,8 @@ Memory is keyed by project (matched against `cwd`). See `~/.config/opencode/skil
 
 ### Conventions
 
+- Keep opencode portable via dotfiles: symlink AGENTS.md, decisions.md, opencode.json, agents/*, and each skills/<name>/ individually from ~/.dotfiles/opencode/ into ~/.config/opencode/. Exclude live git-clone skills (detect via `[ -d <skill>/.git ]`) and gitignore mutable per-skill `data/` directories. Install script auto-detects setup entrypoints (`setup.sh` or `modes/bootstrap.md`) and prints hints rather than auto-running them.
+
 ### Patterns
 
 ### Anti-patterns
