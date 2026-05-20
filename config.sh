@@ -38,11 +38,24 @@ ln -nfs "$HOME/.dotfiles/opencode/decisions.md" "$HOME/.config/opencode/decision
 ln -nfs "$HOME/.dotfiles/opencode/agents/gitlab-dev.md" "$HOME/.config/opencode/agents/gitlab-dev.md"
 
 # OpenCode skills — symlink every skill directory present in dotfiles
+opencode_skill_setup_hints=()
 for skill_dir in "$HOME/.dotfiles/opencode/skills"/*/; do
   [ -d "$skill_dir" ] || continue
   skill_name=$(basename "$skill_dir")
   ln -nfs "${skill_dir%/}" "$HOME/.config/opencode/skills/$skill_name"
+
+  # Detect setup entrypoints and record a hint for the user
+  if [ -x "${skill_dir}setup.sh" ]; then
+    opencode_skill_setup_hints+=("  ${skill_name}: bash ~/.config/opencode/skills/${skill_name}/setup.sh")
+  elif [ -f "${skill_dir}modes/bootstrap.md" ]; then
+    opencode_skill_setup_hints+=("  ${skill_name}: run \`/${skill_name} bootstrap\` inside opencode")
+  fi
 done
+
+if [ "${#opencode_skill_setup_hints[@]}" -gt 0 ]; then
+  echo "💡 Some OpenCode skills need one-time setup:"
+  printf '%s\n' "${opencode_skill_setup_hints[@]}"
+fi
 
 # Neovim config symlink
 if hash nvim > /dev/null; then
