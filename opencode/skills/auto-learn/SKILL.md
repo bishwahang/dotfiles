@@ -19,6 +19,7 @@ Activate before ending your turn when ANY of these are true:
 - A merge request was created or merged in this turn
 - A bug was reproduced AND resolved in this turn
 - User says "remember this", "save that", "log this", "memorize"
+- **Fallback:** the session is ending with >= 10 substantive tool calls and no explicit completion signal. Do ONE quiet self-check; if nothing notable surfaces, exit silently per the no-fishing rule below.
 
 Do NOT trigger when:
 
@@ -26,6 +27,15 @@ Do NOT trigger when:
 - The task was trivial (single command, single file read, single trivial edit)
 - The task was purely informational with no novel finding
 - The user explicitly says "don't save" or "skip learning"
+
+## No-fishing rule (hard)
+
+If reflection produces zero candidates that clear the quality bar in `classify.md`, you MUST:
+
+1. Print exactly one line: `auto-learn: nothing notable to save.`
+2. Exit the skill immediately.
+
+Do NOT manufacture learnings to seem useful. Do NOT downgrade a weak candidate just to have something to show. Zero is a valid and common outcome -- most sessions should produce zero. A session that produces 1 strong candidate is a good session; 3+ candidates should be rare and is a yellow flag that you may be fishing.
 
 ## Workflow
 
@@ -39,6 +49,8 @@ Read both:
 ### 2. Reflect
 
 Apply the reflection prompt from `reflect.md` against the just-finished conversation. Produce a raw list of candidate learnings.
+
+If the raw list is empty, invoke the no-fishing rule above and exit. Do not proceed to classification just to find something.
 
 ### 3. Classify
 
