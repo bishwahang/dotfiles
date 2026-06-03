@@ -1,5 +1,4 @@
 {
-  "model": "opus[1m]",
   "permissions": {
     "allow": [
       "Read",
@@ -7,6 +6,14 @@
       "Edit(~/.dotfiles/**)",
       "Write(~/workspace/**)",
       "Write(~/.dotfiles/**)",
+      "Edit(~/.claude/memory/**)",
+      "Write(~/.claude/memory/**)",
+      "Edit(~/.claude/projects/**/memory/**)",
+      "Write(~/.claude/projects/**/memory/**)",
+      "Edit(/tmp/**)",
+      "Write(/tmp/**)",
+      "Edit(/private/tmp/**)",
+      "Write(/private/tmp/**)",
       "Glob",
       "Grep",
       "Bash(git status*)",
@@ -14,7 +21,44 @@
       "Bash(git diff*)",
       "Bash(git branch*)",
       "Bash(git show*)",
-      "Bash(ls*)"
+      "Bash(ls*)",
+      "Bash(glab auth status*)",
+      "Bash(glab mr list*)",
+      "Bash(glab mr view*)",
+      "Bash(glab mr diff*)",
+      "Bash(glab issue list*)",
+      "Bash(glab issue view*)",
+      "Bash(glab ci status*)",
+      "Bash(glab ci list*)",
+      "Bash(glab ci view*)",
+      "Bash(glab ci trace*)",
+      "Bash(glab pipeline list*)",
+      "Bash(glab repo view*)",
+      "Bash(glab release list*)",
+      "Bash(glab label list*)"
     ]
+  },
+  "model": "opus[1m]",
+  "env": {
+    "EDITOR": "vim",
+    "VISUAL": "vim"
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r 'if .stop_hook_active then empty else {decision: \"block\", reason: \"Before ending this session: review for concrete saveable learnings — corrections received, non-obvious approaches the user validated, project facts you learned, or external references. If you find any, surface them to the user with brief proposed memory entries (name, type, one-line summary) and ask which to persist. Save project-specific learnings to the current project memory directory and cross-project learnings (user preferences, workflow feedback, general patterns) to ~/.claude/memory/. If nothing notable stands out, say \\\"nothing notable to save\\\" in one line and end — do not fish.\"} end' 2>/dev/null || true",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "skipAutoPermissionPrompt": true,
+  "enabledPlugins": {
+    "ruby-lsp@claude-plugins-official": true
   }
 }
