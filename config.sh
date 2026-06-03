@@ -32,6 +32,7 @@ ln -nfs "$HOME/.dotfiles/claude/settings.json" "$HOME/.claude/settings.json"
 echo "🔗 Linking OpenCode config"
 mkdir -p "$HOME/.config/opencode/agents"
 mkdir -p "$HOME/.config/opencode/skills"
+mkdir -p "$HOME/.config/opencode/plugins"
 if [ ! -f "$HOME/.dotfiles/opencode/AGENTS.local.md" ]; then
   printf '# Local opencode memory\n\nPrivate project memory for this machine. This file is ignored by git.\n' > "$HOME/.dotfiles/opencode/AGENTS.local.md"
 fi
@@ -44,6 +45,11 @@ ln -nfs "$HOME/.dotfiles/opencode/AGENTS.local.md" "$HOME/.config/opencode/AGENT
 ln -nfs "$HOME/.dotfiles/opencode/decisions.md" "$HOME/.config/opencode/decisions.md"
 ln -nfs "$HOME/.dotfiles/opencode/decisions.local.md" "$HOME/.config/opencode/decisions.local.md"
 ln -nfs "$HOME/.dotfiles/opencode/agents/gitlab-dev.md" "$HOME/.config/opencode/agents/gitlab-dev.md"
+for plugin_file in "$HOME/.dotfiles/opencode/plugins"/*; do
+  [ -f "$plugin_file" ] || continue
+  plugin_name=$(basename "$plugin_file")
+  ln -nfs "$plugin_file" "$HOME/.config/opencode/plugins/$plugin_name"
+done
 
 # OpenCode skills — symlink every skill directory present in dotfiles
 opencode_skill_setup_hints=()

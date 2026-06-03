@@ -5,7 +5,7 @@
   "autoupdate": false,
   "instructions": [
     "AGENTS.md",
-    "AGENTS.local.md"
+    "~/.config/opencode/AGENTS.local.md"
   ],
   "permission": {
     "*": "ask",

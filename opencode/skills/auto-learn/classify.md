@@ -50,7 +50,14 @@ Format: lightweight bullets.
 Examples:
 - "Tried exponential backoff for Zuora 429s, still hit per-account ceiling, chose queue-level concurrency limit of 4"
 
-Goes to: `decisions.local.md` (prepend, newest first).
+Goes to: `decisions.local.md` by default. Goes to public `decisions.md` only if it passes every item in the public-decision gate:
+
+- About generic dotfiles/opencode setup, portability, skill packaging, or config layout
+- Reusable by someone cloning this public dotfiles repo
+- No private project names, customer/work context, MR/issue URLs, people, personal preferences, local-only paths beyond `~/.dotfiles` or `~/.config/opencode`, credentials, tokens, or environment-specific data
+- Still accurate on a new machine
+
+If any item fails, or if unsure, use `decisions.local.md`.
 
 ### New workflow skill
 A multi-step process likely to recur.
@@ -63,7 +70,7 @@ Goes to: PROPOSE `~/.config/opencode/skills/<name>/SKILL.md`; do not auto-create
 
 Before presenting a candidate:
 
-1. `grep` the target file for the key noun phrase (3-5 word substring).
+1. `grep` `AGENTS.local.md`, `decisions.local.md`, and `decisions.md` for the key noun phrase (3-5 word substring).
 2. If a match is found AND the existing entry covers the same point, mark as duplicate and skip.
 3. If the existing entry is partial, propose an EDIT diff (extend) rather than an ADD diff.
 
@@ -88,6 +95,7 @@ Skip a candidate if any of these are true:
 - It's trivial restatement of common knowledge ("use git to version control")
 - It lacks a concrete actionable rule or example
 - It's a transient state (will be false in a week)
+- It is proposed for public `decisions.md` but only helps this user's private workflow
 
 ## Decision log entry format
 

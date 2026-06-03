@@ -11,7 +11,10 @@ Append-only log of non-obvious choices. Newest first. Format:
 - Why: <key reason>
 ```
 
-Managed by the `auto-learn` skill.
+Managed by the `auto-learn` skill. This tracked file is only for public-safe,
+generic dotfiles/opencode setup decisions. Project-specific, task-specific,
+personal workflow, or uncertain decisions belong in ignored
+`decisions.local.md`.
 
 ---
 
