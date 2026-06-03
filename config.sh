@@ -20,7 +20,7 @@ mkdir -p "$HOME/.tmux/plugins"
 # Vim plugin installation
 if hash vim > /dev/null; then
   echo '📦 Installing Vim plugins...'
-  vim +PluginInstall +qall
+  vim '+PlugInstall --sync' +qall
 fi
 
 # Claude Code config symlink
@@ -55,6 +55,7 @@ done
 opencode_skill_setup_hints=()
 for skill_dir in "$HOME/.dotfiles/opencode/skills"/*/; do
   [ -d "$skill_dir" ] || continue
+  [ ! -d "${skill_dir}.git" ] || continue
   skill_name=$(basename "$skill_dir")
   ln -nfs "${skill_dir%/}" "$HOME/.config/opencode/skills/$skill_name"
 
