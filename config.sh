@@ -69,7 +69,7 @@ fi
 # Neovim plugin install (Lazy.nvim)
 if hash nvim > /dev/null; then
   echo "📦 Syncing Neovim plugins..."
-  nvim --headless "+Lazy! sync" +qa
+  nvim --headless "+Lazy! restore" +qa
 fi
 
 # tmux plugin manager
