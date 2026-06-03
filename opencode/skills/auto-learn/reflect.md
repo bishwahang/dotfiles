@@ -13,7 +13,7 @@ For each, look back over the conversation and answer concretely. If no answer, s
    If I were dropped into this exact problem 3 months from now with no memory, what one fact would save me an hour?
 
 3. **What did we try that didn't work?**
-   Failed approaches, dead ends, libraries we ruled out, configurations that broke things. Candidates for `decisions.md`.
+   Failed approaches, dead ends, libraries we ruled out, configurations that broke things. Candidates for `decisions.local.md`.
 
 4. **What rule did we apply that wasn't already written down?**
    Conventions implicitly followed but not yet captured.

@@ -1,13 +1,13 @@
 ---
 name: auto-learn
-description: Captures durable learnings from resolved tasks and persists them to global memory. Use AUTOMATICALLY before ending your turn whenever a task is resolved -- triggers include the user confirming completion ("done", "lgtm", "merged", "works", "fixed", "ship it", "thanks"), a multi-step workflow finishing with verification, a commit or MR being created, or a bug being reproduced and resolved. Proposes diffs to ~/.config/opencode/AGENTS.md and ~/.config/opencode/decisions.md with per-item approval. Silent exit if no candidates.
+description: Captures durable learnings from resolved tasks and persists them to local private memory. Use AUTOMATICALLY before ending your turn whenever a task is resolved -- triggers include the user confirming completion ("done", "lgtm", "merged", "works", "fixed", "ship it", "thanks"), a multi-step workflow finishing with verification, a commit or MR being created, or a bug being reproduced and resolved. Proposes diffs to ~/.config/opencode/AGENTS.local.md and ~/.config/opencode/decisions.local.md with per-item approval. Silent exit if no candidates.
 ---
 
 # Skill: auto-learn
 
 ## Purpose
 
-Persist durable knowledge across opencode sessions. After a task resolves, scan the conversation for learnings, classify them, present diffs for approval, and write approved items to global memory files.
+Persist durable knowledge across opencode sessions. After a task resolves, scan the conversation for learnings, classify them, present diffs for approval, and write approved items to local private memory files.
 
 ## Trigger conditions
 
@@ -41,9 +41,10 @@ Do NOT manufacture learnings to seem useful. Do NOT downgrade a weak candidate j
 
 ### 1. Load supporting files
 
-Read both:
+Read all that exist:
 
 - `~/.config/opencode/skills/auto-learn/classify.md` -- classification rubric, project map, novelty rules
+- `~/.config/opencode/skills/auto-learn/classify.local.md` -- private project map overrides
 - `~/.config/opencode/skills/auto-learn/reflect.md` -- reflection prompt template
 
 ### 2. Reflect
@@ -58,12 +59,12 @@ For each candidate, apply the rubric in `classify.md`:
 
 | Type | Destination |
 |---|---|
-| Convention | `AGENTS.md` -> `## Project: <name>` -> `### Conventions` |
-| Pattern | `AGENTS.md` -> `## Project: <name>` -> `### Patterns` |
-| Anti-pattern | `AGENTS.md` -> `## Project: <name>` -> `### Anti-patterns` |
-| Gotcha | `AGENTS.md` -> `## Project: <name>` -> `### Gotchas` |
-| Universal rule | `AGENTS.md` -> `## Universal` -> `### <sub>` |
-| Decision | `decisions.md` (append) |
+| Convention | `AGENTS.local.md` -> `## Project: <name>` -> `### Conventions` |
+| Pattern | `AGENTS.local.md` -> `## Project: <name>` -> `### Patterns` |
+| Anti-pattern | `AGENTS.local.md` -> `## Project: <name>` -> `### Anti-patterns` |
+| Gotcha | `AGENTS.local.md` -> `## Project: <name>` -> `### Gotchas` |
+| Universal rule | `AGENTS.local.md` -> `## Universal` -> `### <sub>` |
+| Decision | `decisions.local.md` (append) |
 | New workflow skill | `~/.config/opencode/skills/<name>/SKILL.md` (propose only; do not auto-create) |
 
 ### 4. Detect project
@@ -77,7 +78,7 @@ Create new section "## Project: <name>"? [y/n/rename]
 
 ### 5. Novelty filter
 
-Before presenting any candidate, grep `AGENTS.md` and `decisions.md` for substantively similar content. Skip duplicates silently. Mention skipped count in summary.
+Before presenting any candidate, grep `AGENTS.local.md` and `decisions.local.md` for substantively similar content. Skip duplicates silently. Mention skipped count in summary.
 
 ### 6. Safety filter (hard rule)
 
@@ -108,7 +109,7 @@ Wait for user response before moving to next item.
 
 ### 8. Apply
 
-Write approved diffs. For AGENTS.md additions, append under the correct `###` sub-heading (create the sub-heading only if missing). For `decisions.md`, prepend (newest first) under a new `## <date> -- <project> -- <title>` block.
+Write approved diffs. For AGENTS.local.md additions, append under the correct `###` sub-heading (create the sub-heading only if missing). For `decisions.local.md`, prepend (newest first) under a new `## <date> -- <project> -- <title>` block.
 
 ### 9. Summarize
 
@@ -121,9 +122,10 @@ Effective from next session.
 
 ## File locations (all global)
 
-- `~/.config/opencode/AGENTS.md`
-- `~/.config/opencode/decisions.md`
+- `~/.config/opencode/AGENTS.local.md`
+- `~/.config/opencode/decisions.local.md`
 - `~/.config/opencode/skills/auto-learn/classify.md`
+- `~/.config/opencode/skills/auto-learn/classify.local.md`
 - `~/.config/opencode/skills/auto-learn/reflect.md`
 
 ## Hands-off rule
@@ -135,4 +137,4 @@ This skill MUST NOT touch:
 - Any project-level `AGENTS.md` or `AGENTS.local.md`
 - Any `.env*`, `*.key`, `*.pem`, `credentials*` files
 
-Only writes to the four paths listed above (plus proposing new skills under `~/.config/opencode/skills/<new-name>/`).
+Only writes to the four paths listed above (plus proposing new skills under `~/.config/opencode/skills/<new-name>/`). Do not write durable learnings to tracked public `~/.config/opencode/AGENTS.md` or `~/.config/opencode/decisions.md`.

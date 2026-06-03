@@ -6,6 +6,12 @@
 - Never commit or push without explicit permission
 - Never expose secrets, API keys, env vars, or credentials in output
 
+## Local Memory
+
+Private project memory belongs in `AGENTS.local.md`, which is intentionally
+ignored by git. Keep this tracked file limited to public-safe rules and setup
+guidance.
+
 ## Auto-learning directive
 
 After ANY of these signals, invoke the `auto-learn` skill before ending your turn:
@@ -19,7 +25,7 @@ After ANY of these signals, invoke the `auto-learn` skill before ending your tur
 
 Do NOT invoke for trivial tasks, intermediate steps, or purely informational exchanges. The skill self-exits silently if it finds no candidates.
 
-Memory is keyed by project (matched against `cwd`). See `~/.config/opencode/skills/auto-learn/classify.md` for the project map. Decisions and failed approaches go to `~/.config/opencode/decisions.md`. Conventions/patterns/gotchas go to the appropriate section below.
+Memory is keyed by project (matched against `cwd`). Durable private memory goes to `~/.config/opencode/AGENTS.local.md` and `~/.config/opencode/decisions.local.md`.
 
 ---
 
@@ -27,49 +33,7 @@ Memory is keyed by project (matched against `cwd`). See `~/.config/opencode/skil
 
 ### Conventions
 
-- Keep opencode portable via dotfiles: symlink AGENTS.md, decisions.md, opencode.json, agents/*, and each skills/<name>/ individually from ~/.dotfiles/opencode/ into ~/.config/opencode/. Exclude live git-clone skills (detect via `[ -d <skill>/.git ]`) and gitignore mutable per-skill `data/` directories. Install script auto-detects setup entrypoints (`setup.sh` or `modes/bootstrap.md`) and prints hints rather than auto-running them.
-
-### Patterns
-
-### Anti-patterns
-
-### Gotchas
-
----
-
-## Project: cdot
-
-Path: `/Users/bishwa/workspace/glab/cdot`
-
-### Conventions
-
-### Patterns
-
-### Anti-patterns
-
-### Gotchas
-
----
-
-## Project: gitlab-rails
-
-Path: `/Users/bishwa/workspace/glab/gitlab-development-kit/gitlab`
-
-### Conventions
-
-### Patterns
-
-### Anti-patterns
-
-### Gotchas
-
----
-
-## Project: ai-assist
-
-Path: `/Users/bishwa/workspace/glab/ai-assist`
-
-### Conventions
+- Keep opencode portable via dotfiles: symlink AGENTS.md, AGENTS.local.md when present, decisions.md, decisions.local.md when present, opencode.json, agents/*, and each skills/<name>/ individually from ~/.dotfiles/opencode/ into ~/.config/opencode/. Exclude live git-clone skills (detect via `[ -d <skill>/.git ]`) and gitignore mutable per-skill `data/` directories. Install script auto-detects setup entrypoints (`setup.sh` or `modes/bootstrap.md`) and prints hints rather than auto-running them.
 
 ### Patterns
 

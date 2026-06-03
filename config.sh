@@ -34,7 +34,9 @@ mkdir -p "$HOME/.config/opencode/agents"
 mkdir -p "$HOME/.config/opencode/skills"
 ln -nfs "$HOME/.dotfiles/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
 ln -nfs "$HOME/.dotfiles/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
+[ -f "$HOME/.dotfiles/opencode/AGENTS.local.md" ] && ln -nfs "$HOME/.dotfiles/opencode/AGENTS.local.md" "$HOME/.config/opencode/AGENTS.local.md"
 ln -nfs "$HOME/.dotfiles/opencode/decisions.md" "$HOME/.config/opencode/decisions.md"
+[ -f "$HOME/.dotfiles/opencode/decisions.local.md" ] && ln -nfs "$HOME/.dotfiles/opencode/decisions.local.md" "$HOME/.config/opencode/decisions.local.md"
 ln -nfs "$HOME/.dotfiles/opencode/agents/gitlab-dev.md" "$HOME/.config/opencode/agents/gitlab-dev.md"
 
 # OpenCode skills — symlink every skill directory present in dotfiles
@@ -79,11 +81,10 @@ fi
 # Install tmux plugins listed in .tmux.conf
 if hash tmux > /dev/null; then
   echo "📦 Installing tmux plugins..."
-  "$TPM_PATH/bin/install_plugins"
+  "$HOME/.tmux/plugins/tpm/bin/install_plugins"
 fi
 
 echo "🎨 Tip: Import Solarized iTerm colors manually if needed"
 echo "💡 For italics in terminal, visit: https://weibeld.net/terminals-and-shells/italics.html"
 
 echo "✅ Finished configuring your environment!"
-

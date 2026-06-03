@@ -4,5 +4,14 @@ vim/.netrwhist
 vim/bundle/
 tags
 view/
+opencode/AGENTS.local.md
+opencode/decisions.local.md
+opencode/**/*.local.*
+opencode/skills/auto-learn/classify.local.md
 opencode/skills/gitlab-comment/data/
-
+opencode/skills/*/data/
+claude/**/memory/
+claude/**/projects/
+claude/*.local.json
+.env
+.env.*

@@ -2,15 +2,9 @@
 
 ## Project map
 
-Match `cwd` prefix (longest match wins). Editable by hand.
-
-| Prefix | Project name |
-|---|---|
-| `/Users/bishwa/workspace/glab/cdot` | cdot |
-| `/Users/bishwa/workspace/glab/gitlab-development-kit/gitlab` | gitlab-rails |
-| `/Users/bishwa/workspace/glab/ai-assist` | ai-assist |
-
-If no prefix matches, ask the user before creating a new `## Project: <name>` section.
+Match `cwd` prefix (longest match wins). Keep private project mappings in
+`classify.local.md`, which is intentionally ignored by git. If no prefix
+matches, ask the user before creating a new `## Project: <name>` section.
 
 ## Categories
 
@@ -20,35 +14,35 @@ Examples:
 - "Run `bin/rubocop -A` before staging Ruby changes"
 - "Use `let_it_be` over `let` for unchanging fixtures in RSpec"
 
-Goes to: `AGENTS.md` -> `## Project: X` -> `### Conventions`
+Goes to: `AGENTS.local.md` -> `## Project: X` -> `### Conventions`
 
 ### Pattern
 "Do this" code-shaped guidance with a concrete example.
 Examples:
 - "Wrap external API calls in `ActiveInteraction` with explicit error filters"
 
-Goes to: `AGENTS.md` -> `## Project: X` -> `### Patterns`
+Goes to: `AGENTS.local.md` -> `## Project: X` -> `### Patterns`
 
 ### Anti-pattern
 "Don't do this" with reason.
 Examples:
 - "Don't call `.save!` inside a `find_or_create_by` block -- race condition under load"
 
-Goes to: `AGENTS.md` -> `## Project: X` -> `### Anti-patterns`
+Goes to: `AGENTS.local.md` -> `## Project: X` -> `### Anti-patterns`
 
 ### Gotcha
 Non-obvious behavior or trap that bit us.
 Examples:
 - "Zuora sandbox rate-limits at 60 req/min; VCR cassettes recorded against prod silently 429 in CI"
 
-Goes to: `AGENTS.md` -> `## Project: X` -> `### Gotchas`
+Goes to: `AGENTS.local.md` -> `## Project: X` -> `### Gotchas`
 
 ### Universal rule
 Applies across all projects, not just this codebase.
 Examples:
 - "Always run lint + typecheck before declaring a task done"
 
-Goes to: `AGENTS.md` -> `## Universal` -> `### <Conventions|Patterns|Anti-patterns|Gotchas>`
+Goes to: `AGENTS.local.md` -> `## Universal` -> `### <Conventions|Patterns|Anti-patterns|Gotchas>`
 
 ### Decision
 A choice made in a specific context, including what was tried and rejected.
@@ -56,7 +50,7 @@ Format: lightweight bullets.
 Examples:
 - "Tried exponential backoff for Zuora 429s, still hit per-account ceiling, chose queue-level concurrency limit of 4"
 
-Goes to: `decisions.md` (prepend, newest first).
+Goes to: `decisions.local.md` (prepend, newest first).
 
 ### New workflow skill
 A multi-step process likely to recur.
@@ -90,7 +84,7 @@ Do not display rejected candidates. Log count only.
 Skip a candidate if any of these are true:
 
 - It's a single-use fact (not reusable)
-- It's already documented in the codebase README or AGENTS.md
+- It's already documented in the codebase README or AGENTS.local.md
 - It's trivial restatement of common knowledge ("use git to version control")
 - It lacks a concrete actionable rule or example
 - It's a transient state (will be false in a week)

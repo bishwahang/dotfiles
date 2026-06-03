@@ -3,10 +3,20 @@
   "small_model": "gitlab/duo-chat-haiku-4-5",
   "share": "disabled",
   "autoupdate": false,
+  "instructions": [
+    "AGENTS.md",
+    "AGENTS.local.md"
+  ],
   "permission": {
     "*": "ask",
     "external_directory": {
-      "~/.dotfiles/**/*": "allow"
+      "~/.dotfiles/**": "allow",
+      "~/workspace/**": "allow",
+      "~/.config/opencode/**": "allow",
+      "/tmp/**": "allow",
+      "/private/tmp/**": "allow",
+      "/var/folders/*/*/T/opencode/**": "allow",
+      "/private/var/folders/*/*/T/opencode/**": "allow"
     },
     "bash": {
       "*": "ask",
@@ -24,7 +34,9 @@
       "wc *": "allow",
       "which *": "allow",
       "bundle exec rspec *": "allow",
-      "bin/rubocop*": "allow"
+      "bin/rubocop*": "allow",
+      "git add *": "allow",
+      "git commit *": "allow"
     },
     "read": "allow",
     "edit": "allow",
@@ -32,6 +44,7 @@
     "grep": "allow",
     "task": "allow",
     "todowrite": "allow",
-    "webfetch": "allow"
+    "webfetch": "allow",
+    "skill": "allow"
   }
 }
