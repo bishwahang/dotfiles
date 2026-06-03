@@ -32,11 +32,17 @@ ln -nfs "$HOME/.dotfiles/claude/settings.json" "$HOME/.claude/settings.json"
 echo "🔗 Linking OpenCode config"
 mkdir -p "$HOME/.config/opencode/agents"
 mkdir -p "$HOME/.config/opencode/skills"
+if [ ! -f "$HOME/.dotfiles/opencode/AGENTS.local.md" ]; then
+  printf '# Local opencode memory\n\nPrivate project memory for this machine. This file is ignored by git.\n' > "$HOME/.dotfiles/opencode/AGENTS.local.md"
+fi
+if [ ! -f "$HOME/.dotfiles/opencode/decisions.local.md" ]; then
+  printf '# Local decisions log\n\nPrivate decisions for this machine. This file is ignored by git.\n' > "$HOME/.dotfiles/opencode/decisions.local.md"
+fi
 ln -nfs "$HOME/.dotfiles/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
 ln -nfs "$HOME/.dotfiles/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
-[ -f "$HOME/.dotfiles/opencode/AGENTS.local.md" ] && ln -nfs "$HOME/.dotfiles/opencode/AGENTS.local.md" "$HOME/.config/opencode/AGENTS.local.md"
+ln -nfs "$HOME/.dotfiles/opencode/AGENTS.local.md" "$HOME/.config/opencode/AGENTS.local.md"
 ln -nfs "$HOME/.dotfiles/opencode/decisions.md" "$HOME/.config/opencode/decisions.md"
-[ -f "$HOME/.dotfiles/opencode/decisions.local.md" ] && ln -nfs "$HOME/.dotfiles/opencode/decisions.local.md" "$HOME/.config/opencode/decisions.local.md"
+ln -nfs "$HOME/.dotfiles/opencode/decisions.local.md" "$HOME/.config/opencode/decisions.local.md"
 ln -nfs "$HOME/.dotfiles/opencode/agents/gitlab-dev.md" "$HOME/.config/opencode/agents/gitlab-dev.md"
 
 # OpenCode skills — symlink every skill directory present in dotfiles
