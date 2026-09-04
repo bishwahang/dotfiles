@@ -7,44 +7,64 @@
     "AGENTS.md",
     "~/.config/opencode/AGENTS.local.md"
   ],
+  "plugin": [
+    "@gitlab/opencode-gitlab-plugin"
+  ],
+  "mcp": {
+    "glean": {
+      "type": "remote",
+      "url": "https://gitlab-be.glean.com/mcp/default",
+      "enabled": true
+    }
+  },
   "permission": {
-    "*": "ask",
+    "*": "allow",
     "external_directory": {
-      "~/.dotfiles/**": "allow",
-      "~/workspace/**": "allow",
-      "~/.config/opencode/**": "allow",
-      "/tmp/**": "allow",
-      "/private/tmp/**": "allow",
-      "/var/folders/*/*/T/opencode/**": "allow",
-      "/private/var/folders/*/*/T/opencode/**": "allow"
+      "*": "allow",
+      "~/.ssh/**": "ask",
+      "~/.aws/**": "ask",
+      "~/.gnupg/**": "ask"
     },
     "bash": {
-      "*": "ask",
-      "git status*": "allow",
-      "git log*": "allow",
-      "git diff*": "allow",
-      "git branch*": "allow",
-      "git show*": "allow",
-      "git blame*": "allow",
-      "git fetch*": "allow",
-      "ls*": "allow",
-      "rg *": "allow",
-      "head *": "allow",
-      "tail *": "allow",
-      "wc *": "allow",
-      "which *": "allow",
-      "bundle exec rspec *": "allow",
-      "bin/rubocop*": "allow",
-      "git add *": "allow",
-      "git commit *": "allow"
+      "*": "allow",
+      "rm -rf *": "ask",
+      "rm -fr *": "ask",
+      "sudo *": "ask",
+      "git push*": "ask",
+      "git reset --hard*": "ask",
+      "git clean *": "ask",
+      "git checkout -- *": "ask",
+      "git rebase*": "ask",
+      "git filter-branch*": "ask",
+      "*curl*|*sh*": "ask",
+      "*wget*|*sh*": "ask",
+      "chmod -R *": "ask",
+      "chown -R *": "ask",
+      "dd *": "ask",
+      "mkfs*": "deny",
+      "shutdown*": "deny",
+      "reboot*": "deny",
+      "brew uninstall *": "ask",
+      "npm publish*": "ask",
+      "gem push*": "ask",
+      "docker system prune*": "ask",
+      "kubectl delete *": "ask",
+      "terraform apply*": "ask",
+      "terraform destroy*": "ask",
+      "psql *DROP*": "ask",
+      "*history -c*": "ask"
     },
     "read": "allow",
     "edit": "allow",
     "glob": "allow",
     "grep": "allow",
+    "list": "allow",
     "task": "allow",
     "todowrite": "allow",
+    "question": "allow",
     "webfetch": "allow",
+    "websearch": "allow",
+    "lsp": "allow",
     "skill": "allow"
   }
 }
