@@ -5,3 +5,5 @@ Thumbs.db
 tags
 .bin
 .byebug_history
+
+**/.claude/settings.local.json
