@@ -17,6 +17,20 @@
       "enabled": true
     }
   },
+  "agent": {
+    "plan": {
+      "model": "gitlab/duo-chat-opus-5"
+    },
+    "build": {
+      "model": "gitlab/duo-chat-gpt-5-6-sol"
+    },
+    "explore": {
+      "model": "gitlab/duo-chat-sonnet-5"
+    },
+    "general": {
+      "model": "gitlab/duo-chat-sonnet-5"
+    }
+  },
   "permission": {
     "*": "allow",
     "external_directory": {
