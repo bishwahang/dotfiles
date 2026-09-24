@@ -39,6 +39,6 @@ alias bumi='bundle install && bundle exec rails db:migrate'
 alias gurr='gdk update && gdk reconfigure && gdk restart'
 alias grr='gdk reconfigure && gdk restart'
 
-alias pg_cdot="pg_ctl -D '/Users/bishwa/workspace/glab/databases/cdot/data'"
+alias pg_cdot="pg_ctl -D '/Users/bishwa/workspace/glab/databases/cdot/data' -l '/Users/bishwa/workspace/glab/databases/cdot/postgresql.log'"
 
 alias gap='git add -A && git commit --amend --no-edit && git push --force-with-lease'

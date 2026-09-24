@@ -1,5 +1,6 @@
 [user]
-  name = Bishwa Hang Rai
+	name = Bishwa Hang Rai
+	email = bhrai@gitlab.com
 [color]
   ui = auto
   diff = auto

@@ -40,3 +40,15 @@ Memory is keyed by project (matched against `cwd`). Durable private memory goes 
 ### Anti-patterns
 
 ### Gotchas
+
+<!-- orbit:setup:begin -->
+## Orbit
+
+Prefer Orbit for code search and callers/callees. Grep means `glab orbit grep`.
+
+- Unknown code? `glab orbit grep 'words'`. FTS, not regex. Terms AND; `a|b` OR.
+- grep shows IDs and file:lines. Source? `glab orbit context path:120-180`. Callers/callees? `glab orbit context Definition:123`.
+- Do not reread unchanged files. Reuse shown source.
+- Need file map? `glab orbit context path`. Directory? `glab orbit context dir`.
+- Too broad? Add `--path`/`--kind`.
+<!-- orbit:setup:end -->

@@ -8,16 +8,10 @@
       "Read",
       "Edit(~/workspace/**)",
       "Edit(~/.dotfiles/**)",
-      "Write(~/workspace/**)",
-      "Write(~/.dotfiles/**)",
       "Edit(~/.claude/memory/**)",
-      "Write(~/.claude/memory/**)",
       "Edit(~/.claude/projects/**/memory/**)",
-      "Write(~/.claude/projects/**/memory/**)",
       "Edit(/tmp/**)",
-      "Write(/tmp/**)",
       "Edit(/private/tmp/**)",
-      "Write(/private/tmp/**)",
       "Glob",
       "Grep",
       "Bash(git status*)",
@@ -54,10 +48,31 @@
           }
         ]
       }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Grep|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "glab orbit hook-guard search"
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "glab orbit hook-guard read"
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
     "ruby-lsp@claude-plugins-official": true
   },
+  "theme": "dark",
   "skipAutoPermissionPrompt": true
 }
