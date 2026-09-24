@@ -1,23 +1,20 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "small_model": "gitlab/duo-chat-haiku-4-5",
   "share": "disabled",
-  "autoupdate": false,
-  "instructions": [
-    "AGENTS.md",
-    "~/.config/opencode/AGENTS.local.md"
-  ],
-  "plugin": [
-    "@gitlab/opencode-gitlab-plugin"
+  "update": "disable",
+  "plugins": [
+    "opencode-gitlab-plugin"
   ],
   "mcp": {
-    "glean": {
-      "type": "remote",
-      "url": "https://gitlab-be.glean.com/mcp/default",
-      "enabled": true
+    "servers": {
+      "glean": {
+        "type": "remote",
+        "url": "https://gitlab-be.glean.com/mcp/default",
+        "disabled": false
+      }
     }
   },
-  "agent": {
+  "agents": {
     "plan": {
       "model": "gitlab/duo-chat-opus-5"
     },
@@ -29,56 +26,43 @@
     },
     "general": {
       "model": "gitlab/duo-chat-sonnet-5"
+    },
+    "title": {
+      "model": "gitlab/duo-chat-haiku-4-5"
     }
   },
-  "permission": {
-    "*": "allow",
-    "external_directory": {
-      "*": "allow",
-      "~/.ssh/**": "ask",
-      "~/.aws/**": "ask",
-      "~/.gnupg/**": "ask"
-    },
-    "bash": {
-      "*": "allow",
-      "rm -rf *": "ask",
-      "rm -fr *": "ask",
-      "sudo *": "ask",
-      "git push*": "ask",
-      "git reset --hard*": "ask",
-      "git clean *": "ask",
-      "git checkout -- *": "ask",
-      "git rebase*": "ask",
-      "git filter-branch*": "ask",
-      "*curl*|*sh*": "ask",
-      "*wget*|*sh*": "ask",
-      "chmod -R *": "ask",
-      "chown -R *": "ask",
-      "dd *": "ask",
-      "mkfs*": "deny",
-      "shutdown*": "deny",
-      "reboot*": "deny",
-      "brew uninstall *": "ask",
-      "npm publish*": "ask",
-      "gem push*": "ask",
-      "docker system prune*": "ask",
-      "kubectl delete *": "ask",
-      "terraform apply*": "ask",
-      "terraform destroy*": "ask",
-      "psql *DROP*": "ask",
-      "*history -c*": "ask"
-    },
-    "read": "allow",
-    "edit": "allow",
-    "glob": "allow",
-    "grep": "allow",
-    "list": "allow",
-    "task": "allow",
-    "todowrite": "allow",
-    "question": "allow",
-    "webfetch": "allow",
-    "websearch": "allow",
-    "lsp": "allow",
-    "skill": "allow"
-  }
+  "permissions": [
+    { "action": "*", "resource": "*", "effect": "allow" },
+    { "action": "external_directory", "resource": "*", "effect": "allow" },
+    { "action": "external_directory", "resource": "~/.ssh/**", "effect": "ask" },
+    { "action": "external_directory", "resource": "~/.aws/**", "effect": "ask" },
+    { "action": "external_directory", "resource": "~/.gnupg/**", "effect": "ask" },
+    { "action": "shell", "resource": "*", "effect": "allow" },
+    { "action": "shell", "resource": "rm -rf *", "effect": "ask" },
+    { "action": "shell", "resource": "rm -fr *", "effect": "ask" },
+    { "action": "shell", "resource": "sudo *", "effect": "ask" },
+    { "action": "shell", "resource": "git push*", "effect": "ask" },
+    { "action": "shell", "resource": "git reset --hard*", "effect": "ask" },
+    { "action": "shell", "resource": "git clean *", "effect": "ask" },
+    { "action": "shell", "resource": "git checkout -- *", "effect": "ask" },
+    { "action": "shell", "resource": "git rebase*", "effect": "ask" },
+    { "action": "shell", "resource": "git filter-branch*", "effect": "ask" },
+    { "action": "shell", "resource": "*curl*|*sh*", "effect": "ask" },
+    { "action": "shell", "resource": "*wget*|*sh*", "effect": "ask" },
+    { "action": "shell", "resource": "chmod -R *", "effect": "ask" },
+    { "action": "shell", "resource": "chown -R *", "effect": "ask" },
+    { "action": "shell", "resource": "dd *", "effect": "ask" },
+    { "action": "shell", "resource": "mkfs*", "effect": "deny" },
+    { "action": "shell", "resource": "shutdown*", "effect": "deny" },
+    { "action": "shell", "resource": "reboot*", "effect": "deny" },
+    { "action": "shell", "resource": "brew uninstall *", "effect": "ask" },
+    { "action": "shell", "resource": "npm publish*", "effect": "ask" },
+    { "action": "shell", "resource": "gem push*", "effect": "ask" },
+    { "action": "shell", "resource": "docker system prune*", "effect": "ask" },
+    { "action": "shell", "resource": "kubectl delete *", "effect": "ask" },
+    { "action": "shell", "resource": "terraform apply*", "effect": "ask" },
+    { "action": "shell", "resource": "terraform destroy*", "effect": "ask" },
+    { "action": "shell", "resource": "psql *DROP*", "effect": "ask" },
+    { "action": "shell", "resource": "*history -c*", "effect": "ask" }
+  ]
 }
