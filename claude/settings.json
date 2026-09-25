@@ -34,7 +34,8 @@
       "Bash(glab repo view*)",
       "Bash(glab release list*)",
       "Bash(glab label list*)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "hooks": {
     "Stop": [
