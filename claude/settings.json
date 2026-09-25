@@ -54,7 +54,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "glab orbit hook-guard search"
+            "command": "command -v glab >/dev/null 2>&1 || exit 0; glab orbit hook-guard search; rc=$?; [ $rc -eq 2 ] && exit 2; exit 0"
           }
         ]
       },
@@ -63,7 +63,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "glab orbit hook-guard read"
+            "command": "command -v glab >/dev/null 2>&1 || exit 0; glab orbit hook-guard read; rc=$?; [ $rc -eq 2 ] && exit 2; exit 0"
           }
         ]
       }
