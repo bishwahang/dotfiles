@@ -27,6 +27,7 @@ fi
 echo "🔗 Linking Claude Code config"
 mkdir -p "$HOME/.claude"
 ln -nfs "$HOME/.dotfiles/claude/settings.json" "$HOME/.claude/settings.json"
+ln -nfs "$HOME/.dotfiles/claude/hooks" "$HOME/.claude/hooks"
 
 # OpenCode config symlink
 echo "🔗 Linking OpenCode config"
