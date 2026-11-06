@@ -30,8 +30,16 @@ fi
 # Claude Code config symlink
 echo "🔗 Linking Claude Code config"
 mkdir -p "$HOME/.claude"
-ln -nfs "$HOME/.dotfiles/claude/settings.json" "$HOME/.claude/settings.json"
+claude_settings="$HOME/.dotfiles/claude/settings.json"
+if [ -f "$HOME/.dotfiles/claude/settings.local.json" ]; then
+  claude_settings="$HOME/.dotfiles/claude/settings.local.json"
+fi
+ln -nfs "$claude_settings" "$HOME/.claude/settings.json"
 ln -nfs "$HOME/.dotfiles/claude/hooks" "$HOME/.claude/hooks"
+ln -nfs "$HOME/.dotfiles/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+if [ ! -f "$HOME/.dotfiles/claude/CLAUDE.local.md" ]; then
+  printf '# Local Claude Code memory\n\nPrivate notes for this machine. This file is ignored by git.\n' > "$HOME/.dotfiles/claude/CLAUDE.local.md"
+fi
 
 # OpenCode config symlink
 echo "🔗 Linking OpenCode config"

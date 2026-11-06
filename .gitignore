@@ -12,6 +12,7 @@ opencode/skills/*/data/
 opencode/local/
 claude/**/memory/
 claude/**/projects/
-claude/*.local.json
+claude/**/*.local.*
+claude/local/
 .env
 .env.*
