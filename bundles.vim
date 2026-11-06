@@ -28,19 +28,6 @@ else
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
   Plug 'junegunn/fzf.vim'
 endif
-let g:make = 'gmake'
-if exists('make')
-        let g:make = 'make'
-endif
-Plug 'Shougo/vimproc.vim', {'do': g:make}
-
-"" Vim-Session
-Plug 'xolox/vim-misc'
-Plug 'xolox/vim-session'
-
-if v:version >= 703
-  Plug 'Shougo/vimshell.vim'
-endif
 
 if v:version >= 704
   "" Snippets

@@ -5,7 +5,8 @@
 
 set nocompatible
 
-let g:polyglot_disabled = []
+" Polyglot is disabled in bundles.vim. Keep Python highlighting and VimTeX if re-enabled.
+let g:polyglot_disabled = ['python', 'latex']
 
 source ~/.dotfiles/bundles.vim
 
@@ -23,10 +24,13 @@ let mapleader=','
 "" Encoding
 set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=utf-8
-" Keep the existing binary-mode and BOM settings unchanged.
-set bomb
-set binary
+" Detect existing BOMs; new UTF-8 files do not need one.
+set fileencodings=ucs-bom,utf-8
+set nobinary
+set nobomb
+set nomodeline
+" Preserve files that intentionally have no final newline.
+set nofixendofline
 set ttyfast
 
 set fileformats=unix,dos,mac
@@ -222,17 +226,17 @@ let Grep_Skip_Dirs = '.git node_modules'
 
 " RgSearch - Improved ripgrep integration
 if executable('rg')
-    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
+    let &grepprg = 'rg --vimgrep --smart-case --hidden --glob=!.git --ignore-file=' . shellescape(expand('~/.rgignore'))
     set grepformat=%f:%l:%c:%m
 
     " Using with fzf - enable ripgrep for FZF by default
-    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob=!.git --ignore-file=' . shellescape(expand('~/.rgignore'))
     let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
 
     " RgSearch command: Enhanced ripgrep search with flexible arguments
-    command! -nargs=+ -complete=dir RgSearch call s:RgSearch(<f-args>)
+    command! -bang -nargs=+ -complete=dir RgSearch call s:RgSearch(<bang>0, <f-args>)
 
-    function! s:RgSearch(...)
+    function! s:RgSearch(bang, ...)
         if a:0 < 1
             echo "Usage: RgSearch [flags] pattern [path]"
             return
@@ -335,58 +339,77 @@ if executable('rg')
             endif
         endif
 
-        " Join flags
-        let l:flag_str = join(l:flags, ' ')
+        call s:RunRgSearch(l:pattern, l:flags, l:path, a:bang)
+    endfunction
+
+    function! s:RunRgSearch(pattern, flags, path, bang)
+        " Keep flags, patterns, and paths as separate shell arguments.
+        let l:flag_str = join(map(copy(a:flags), 'shellescape(v:val)'), ' ')
 
         " Build command with correct handling of -e flag
-        let l:cmd = 'rg --column --line-number --no-heading --color=always --smart-case '
+        let l:cmd = 'rg --column --line-number --no-heading --color=always --smart-case --glob=!.git --ignore-file=' . shellescape(expand('~/.rgignore')) . ' '
 
         " Check if -e flag is present and handle pattern appropriately
-        if l:flag_str =~# '-e\>'
+        if index(a:flags, '-e') >= 0 || index(a:flags, '--regexp') >= 0
             " If -e flag is present, don't use -- separator
-            let l:cmd .= l:flag_str . ' ' . shellescape(l:pattern)
+            let l:cmd .= l:flag_str . ' ' . shellescape(a:pattern)
         else
             " Otherwise, use -- separator
-            let l:cmd .= l:flag_str . ' -- ' . shellescape(l:pattern)
+            let l:cmd .= l:flag_str . ' -- ' . shellescape(a:pattern)
         endif
 
         " Add path if provided
-        if l:path != ''
-            let l:cmd .= ' ' . shellescape(l:path)
+        if a:path != ''
+            let l:cmd .= ' ' . shellescape(a:path)
         endif
 
         " Debug line - uncomment if needed
         " echom "Running command: " . l:cmd
 
-        call fzf#vim#grep(l:cmd, 1, fzf#vim#with_preview())
+        call fzf#vim#grep(l:cmd, 1, fzf#vim#with_preview(), a:bang)
     endfunction
 
     " RgIn: Search in specified directory
     function! s:RgIn(bang, ...)
-        if !isdirectory(a:1)
-            throw 'not a valid directory: ' .. a:1
+        let l:path = expand(a:1)
+        if !isdirectory(l:path)
+            echoerr 'Not a valid directory: ' . a:1
+            return
         endif
 
         " If only directory provided, prompt for search
         if a:0 == 1
-            call RgSearch('', a:1)
-            return
+            let l:pattern = input('Search pattern: ')
+            if empty(l:pattern)
+                return
+            endif
+        else
+            let l:pattern = join(a:000[1:], ' ')
+            if l:pattern =~# '^".*"$' || l:pattern =~# "^'.*'$"
+                let l:pattern = l:pattern[1:-2]
+            endif
         endif
 
-        " Otherwise, search in specified directory
-        call RgSearch(join(a:000[1:], ' '), a:1)
+        " Search only the requested directory; ! opens fzf fullscreen.
+        call s:RunRgSearch(l:pattern, [], l:path, a:bang)
     endfunction
 
     command! -bang -nargs=+ -complete=dir RgIn call s:RgIn(<bang>0, <f-args>)
+    command! -bang -nargs=* Rg call s:RunRgSearch(<q-args>, [], '', <bang>0)
+    " fzf also defines :Ag; remove that unused Silver Searcher entry point.
+    silent! delcommand Ag
+    augroup vimrc-search-commands
+        autocmd!
+        autocmd VimEnter * silent! delcommand Ag
+    augroup END
 endif
 " Define a function to search with word boundaries
 
 function! RgSearchWordBoundary()
     " Explicitly capture the word under cursor
     let l:word = expand('<cword>')
-    " Construct the command with proper escaping
-    let l:cmd = 'RgSearch -e "\\b' . l:word . '\\b"'
-    execute l:cmd
+    " Pass word boundaries directly, without command-line escaping.
+    call s:RunRgSearch('\b' . l:word . '\b', [], '', 0)
 endfunction
 
 " Map the function to your keybinding
@@ -395,7 +418,7 @@ endfunction
 " Basic search
 nnoremap \ :RgSearch<Space>
 " Search for word under cursor (default search)
-nnoremap <silent> <Leader>rg :RgSearch <C-R><C-W><CR>
+nnoremap <silent> <Leader>rg :call <SID>RunRgSearch(expand('<cword>'), ['-F'], '', 0)<CR>
 " Search for word under cursor with word boundaries (whole word only)
 nnoremap <silent> <Leader>rw :call RgSearchWordBoundary()<CR>
 
@@ -608,11 +631,7 @@ endfunction
 " Shell
 command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
 
-" vimshell.vim
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-let g:vimshell_prompt =  '$ '
-
-nnoremap <silent> <leader>sh :VimShellCreate<CR>
+" Use Vim's :terminal for an interactive shell; :Shell above shows command output.
 
 
 "=============================================================================
@@ -654,8 +673,8 @@ augroup END
 
 
 "=============================================================================
-" 9. Git, tags, sessions, and plugin tools
-" Keep Fugitive, Tagbar, saved sessions, lint-on-save, alignment, tests, and netrw.
+" 9. Git, tags, and plugin tools
+" Keep Fugitive, Tagbar, lint-on-save, alignment, tests, and netrw.
 "=============================================================================
 
 "" fugitive
@@ -686,17 +705,7 @@ set tags=./tags,tags
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
-" session management
-let g:session_directory = "~/.vim/session"
-let g:session_autoload = "no"
-let g:session_autosave = "no"
-let g:session_command_aliases = 1
-
-" session management
-nnoremap <leader>so :OpenSession<Space>
-nnoremap <leader>ss :SaveSession<Space>
-nnoremap <leader>sd :DeleteSession<CR>
-nnoremap <leader>sc :CloseSession<CR>
+" Save a session with :mksession {file}; restore it with :source {file}.
 
 " ale
 " show Vim windows for the loclist or quickfix items when a file contains warnings or errors
@@ -853,12 +862,7 @@ augroup END
 
 " Syntax highlight
 " Default highlight is better than polyglot
-let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
-
-" using vim-tex
-let g:polyglot_disabled = ['latex']
-
 
 
 " ruby

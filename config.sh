@@ -6,11 +6,15 @@ hash git > /dev/null || {
 }
 
 echo "🔗 Linking dotfiles..."
-configs=(bashrc bash_profile bash_aliases vimrc gvimrc vim gitconfig gitignore tmux.conf agignore functions.sh key_bindings.sh)
+configs=(bashrc bash_profile bash_aliases vimrc gvimrc vim gitconfig gitignore tmux.conf rgignore functions.sh key_bindings.sh)
 for config in "${configs[@]}"; do
   echo "linking $config"
   ln -nfs "$HOME/.dotfiles/$config" "$HOME/.$config"
 done
+
+if [ -L "$HOME/.agignore" ] && [ "$(readlink "$HOME/.agignore")" = "$HOME/.dotfiles/agignore" ]; then
+  unlink "$HOME/.agignore"
+fi
 
 echo "📁 Creating directories..."
 mkdir -p "$HOME/.tmp"
