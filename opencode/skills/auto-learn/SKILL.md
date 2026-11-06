@@ -103,7 +103,7 @@ REJECT any candidate that contains, references, or implies:
 - API keys, tokens, passwords, secrets
 - Contents of `.env`, `.env.*`, `*.key`, `*.pem`, `credentials.yml.enc`
 - Database connection strings with credentials
-- Personal identifying information beyond the user's own GitLab username
+- Personal identifying information
 
 If a candidate is rejected for safety, do not show it. Log only `[1 candidate filtered for safety]` in summary.
 
@@ -149,8 +149,7 @@ Effective from next session.
 
 This skill MUST NOT touch:
 
-- `gitlab-comment` skill files (has own learning loop)
-- `gitlab-review` skill files (has own learning loop)
+- Other skills with their own learning loops
 - Any project-level `AGENTS.md` or `AGENTS.local.md`
 - Any `.env*`, `*.key`, `*.pem`, `credentials*` files
 

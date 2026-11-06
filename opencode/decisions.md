@@ -18,10 +18,21 @@ personal workflow, or uncertain decisions belong in ignored
 
 ---
 
+## 2026-11-06 -- meta -- Generic public setup with private local extensions
+- Context: public dotfiles must not publish organization settings or personal context
+- Chose: keep reusable configuration and skills public; keep private extensions in ignored `opencode/local/`
+- Chose: select ignored `opencode.local.json` when present; otherwise use public `opencode.json`
+- Why: local customization stays available without becoming part of the public setup
+
+## 2026-11-06 -- meta -- Explicit private instruction loading
+- Context: private memory must stay outside tracked instruction files
+- Chose: load `AGENTS.local.md` and `decisions.local.md` through the V2 `instructions` array
+- Why: symlinks alone do not declare additional instruction files
+
 ## 2026-05-20 -- meta -- Portable opencode setup via dotfiles
 - Context: ensure opencode skills/agents/config survive a new machine
 - Tried: symlinking the whole `skills/` directory as one unit
-- Rejected: force-syncs live git clones (e.g. gitlab-review) and one-off copies you don't own
+- Rejected: force-syncs live git clones and one-off copies you don't own
 - Chose: per-skill symlinks in a loop; gitignore mutable `data/`; print setup hints instead of auto-running bootstrap
 - Why: one `config.sh` run restores everything on a new machine; new skills added to dotfiles auto-install on next run; no interactive auth blocks the install
 
@@ -29,5 +40,5 @@ personal workflow, or uncertain decisions belong in ignored
 - Context: opencode loses knowledge between sessions; want iterative improvement
 - Tried: folding decisions into AGENTS.md under per-project sub-sections
 - Rejected: would bloat AGENTS.md, which loads into every session's context
-- Chose: separate `decisions.md` (read on demand by auto-learn) + AGENTS.md (loaded every session) with `## Project: <name>` sub-sections
+- Chose: public setup decisions in `decisions.md`; private rules in `AGENTS.local.md`; private decisions in `decisions.local.md`
 - Why: keeps per-session token cost low; decisions only matter when relevant work resurfaces

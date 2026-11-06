@@ -1,36 +1,11 @@
 {
+  "instructions": [
+    "~/.config/opencode/AGENTS.local.md",
+    "~/.config/opencode/decisions.local.md"
+  ],
   "$schema": "https://opencode.ai/config.json",
   "share": "disabled",
   "update": "disable",
-  "plugins": [
-    "opencode-gitlab-plugin"
-  ],
-  "mcp": {
-    "servers": {
-      "glean": {
-        "type": "remote",
-        "url": "https://gitlab-be.glean.com/mcp/default",
-        "disabled": false
-      }
-    }
-  },
-  "agents": {
-    "plan": {
-      "model": "gitlab/duo-chat-opus-5"
-    },
-    "build": {
-      "model": "gitlab/duo-chat-gpt-5-6-sol"
-    },
-    "explore": {
-      "model": "gitlab/duo-chat-sonnet-5"
-    },
-    "general": {
-      "model": "gitlab/duo-chat-sonnet-5"
-    },
-    "title": {
-      "model": "gitlab/duo-chat-haiku-4-5"
-    }
-  },
   "permissions": [
     { "action": "*", "resource": "*", "effect": "allow" },
     { "action": "external_directory", "resource": "*", "effect": "allow" },

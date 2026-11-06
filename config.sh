@@ -44,13 +44,21 @@ fi
 if [ ! -f "$HOME/.dotfiles/opencode/decisions.local.md" ]; then
   printf '# Local decisions log\n\nPrivate decisions for this machine. This file is ignored by git.\n' > "$HOME/.dotfiles/opencode/decisions.local.md"
 fi
-ln -nfs "$HOME/.dotfiles/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
+opencode_config="$HOME/.dotfiles/opencode/opencode.json"
+if [ -f "$HOME/.dotfiles/opencode/opencode.local.json" ]; then
+  opencode_config="$HOME/.dotfiles/opencode/opencode.local.json"
+fi
+ln -nfs "$opencode_config" "$HOME/.config/opencode/opencode.json"
 ln -nfs "$HOME/.dotfiles/opencode/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
 ln -nfs "$HOME/.dotfiles/opencode/AGENTS.local.md" "$HOME/.config/opencode/AGENTS.local.md"
 ln -nfs "$HOME/.dotfiles/opencode/decisions.md" "$HOME/.config/opencode/decisions.md"
 ln -nfs "$HOME/.dotfiles/opencode/decisions.local.md" "$HOME/.config/opencode/decisions.local.md"
-ln -nfs "$HOME/.dotfiles/opencode/agents/gitlab-dev.md" "$HOME/.config/opencode/agents/gitlab-dev.md"
-for plugin_file in "$HOME/.dotfiles/opencode/plugins"/*; do
+for agent_file in "$HOME/.dotfiles/opencode/agents"/* "$HOME/.dotfiles/opencode/local/agents"/*; do
+  [ -f "$agent_file" ] || continue
+  agent_name=$(basename "$agent_file")
+  ln -nfs "$agent_file" "$HOME/.config/opencode/agents/$agent_name"
+done
+for plugin_file in "$HOME/.dotfiles/opencode/plugins"/* "$HOME/.dotfiles/opencode/local/plugins"/*; do
   [ -f "$plugin_file" ] || continue
   plugin_name=$(basename "$plugin_file")
   ln -nfs "$plugin_file" "$HOME/.config/opencode/plugins/$plugin_name"
@@ -58,7 +66,7 @@ done
 
 # OpenCode skills — symlink every skill directory present in dotfiles
 opencode_skill_setup_hints=()
-for skill_dir in "$HOME/.dotfiles/opencode/skills"/*/; do
+for skill_dir in "$HOME/.dotfiles/opencode/skills"/*/ "$HOME/.dotfiles/opencode/local/skills"/*/; do
   [ -d "$skill_dir" ] || continue
   [ ! -d "${skill_dir}.git" ] || continue
   skill_name=$(basename "$skill_dir")

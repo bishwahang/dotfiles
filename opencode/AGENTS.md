@@ -33,22 +33,12 @@ Memory is keyed by project (matched against `cwd`). Durable private memory goes 
 
 ### Conventions
 
-- Keep opencode portable via dotfiles: symlink AGENTS.md, AGENTS.local.md when present, decisions.md, decisions.local.md when present, opencode.json, agents/*, and each skills/<name>/ individually from ~/.dotfiles/opencode/ into ~/.config/opencode/. Exclude live git-clone skills (detect via `[ -d <skill>/.git ]`) and gitignore mutable per-skill `data/` directories. Install script auto-detects setup entrypoints (`setup.sh` or `modes/bootstrap.md`) and prints hints rather than auto-running them.
+- Keep the public setup generic. Store organization settings, personal preferences, and project context in ignored local files.
+- Link agents, plugins, and skills individually from the public and ignored local directories. Exclude live git-clone skills and ignore mutable skill data.
+- Print setup hints instead of automatically running interactive bootstrap steps.
 
 ### Patterns
 
 ### Anti-patterns
 
 ### Gotchas
-
-<!-- orbit:setup:begin -->
-## Orbit
-
-Prefer Orbit for code search and callers/callees. Grep means `glab orbit grep`.
-
-- Unknown code? `glab orbit grep 'words'`. FTS, not regex. Terms AND; `a|b` OR.
-- grep shows IDs and file:lines. Source? `glab orbit context path:120-180`. Callers/callees? `glab orbit context Definition:123`.
-- Do not reread unchanged files. Reuse shown source.
-- Need file map? `glab orbit context path`. Directory? `glab orbit context dir`.
-- Too broad? Add `--path`/`--kind`.
-<!-- orbit:setup:end -->

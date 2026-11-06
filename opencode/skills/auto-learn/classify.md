@@ -33,7 +33,7 @@ Goes to: `AGENTS.local.md` -> `## Project: X` -> `### Anti-patterns`
 ### Gotcha
 Non-obvious behavior or trap that bit us.
 Examples:
-- "Zuora sandbox rate-limits at 60 req/min; VCR cassettes recorded against prod silently 429 in CI"
+- "The test API allows 60 requests per minute; fixtures must not make live requests in CI"
 
 Goes to: `AGENTS.local.md` -> `## Project: X` -> `### Gotchas`
 
@@ -48,7 +48,7 @@ Goes to: `AGENTS.local.md` -> `## Universal` -> `### <Conventions|Patterns|Anti-
 A choice made in a specific context, including what was tried and rejected.
 Format: lightweight bullets.
 Examples:
-- "Tried exponential backoff for Zuora 429s, still hit per-account ceiling, chose queue-level concurrency limit of 4"
+- "Tried exponential backoff for API rate limits, chose queue-level concurrency limit of 4"
 
 Goes to: `decisions.local.md` by default. Goes to public `decisions.md` only if it passes every item in the public-decision gate:
 
@@ -82,7 +82,7 @@ Reject if candidate contains any of:
 - `password`, `secret`, `api_key`, `token` followed by `=` or `:`
 - References to `.env`, `.env.*`, `*.key`, `*.pem`, `credentials.yml.enc`
 - DB URLs with `://user:pass@` patterns
-- Email addresses other than `@gitlab.com` work addresses already in user's public profile
+- Email addresses
 
 Do not display rejected candidates. Log count only.
 
