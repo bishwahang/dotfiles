@@ -53,6 +53,10 @@ set expandtab
 let mapleader=','
 let g:browser = 'open '
 
+if has('macunix')
+    command! -nargs=1 Browse call system('open ' . shellescape(<q-args>))
+endif
+
 "" Enable hidden buffers
 set hidden
 
