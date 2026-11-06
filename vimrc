@@ -92,7 +92,6 @@ syntax on
 set ruler
 set number
 
-" let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
     colorscheme solarized
 endif
@@ -146,8 +145,6 @@ set scrolloff=3
 set title
 set titleold="Terminal"
 set titlestring=%F
-
-" set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
 
 " Nice statusbar
 set laststatus=2
@@ -212,17 +209,6 @@ nnoremap <silent> <leader>f :Rgrep<CR>
 let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules'
-
-"" fzf.vim
-" See `man fzf-tmux` for available options
-" TODO: research more about this
-" if exists('$TMUX')
-"   let g:fzf_layout = { 'tmux': '-p90%,60%' }
-" else
-"   let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-" endif
-
-" let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
 
 " RgSearch - Improved ripgrep integration
 if executable('rg')
@@ -362,9 +348,6 @@ if executable('rg')
         if a:path != ''
             let l:cmd .= ' ' . shellescape(a:path)
         endif
-
-        " Debug line - uncomment if needed
-        " echom "Running command: " . l:cmd
 
         call fzf#vim#grep(l:cmd, 1, fzf#vim#with_preview(), a:bang)
     endfunction
@@ -708,8 +691,6 @@ let g:tagbar_autofocus = 1
 " Save a session with :mksession {file}; restore it with :source {file}.
 
 " ale
-" show Vim windows for the loclist or quickfix items when a file contains warnings or errors
-" let g:ale_open_list = 1
 " disable lint while typing
 let g:ale_lint_on_text_changed = 'never'
 " if you don't want linters to run on opening a file
@@ -736,7 +717,6 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 
 let test#strategy = 'dispatch'
-" let test#ruby#rspec#executable = 'bundle exec rspec'
 
 " netrw styling
 let g:netrw_banner    = 0
@@ -883,16 +863,6 @@ augroup vimrc-ruby
     autocmd FileType ruby nnoremap <silent> <Leader>ahr  :Tabularize  /^[^=]*\zs=><CR>
     autocmd FileType ruby vnoremap <silent> <Leader>ahr  :Tabularize  /^[^=]*\zs=><CR>
 
-    " " Ruby refactory (not used frequently)
-    " autocmd FileType ruby nnoremap <leader>rap  :RAddParameter<cr>
-    " autocmd FileType ruby nnoremap <leader>rcpc :RConvertPostConditional<cr>
-    " autocmd FileType ruby nnoremap <leader>rel  :RExtractLet<cr>
-    " autocmd FileType ruby vnoremap <leader>rec  :RExtractConstant<cr>
-    " autocmd FileType ruby vnoremap <leader>relv :RExtractLocalVariable<cr>
-    " autocmd FileType ruby nnoremap <leader>rit  :RInlineTemp<cr>
-    " autocmd FileType ruby vnoremap <leader>rlv  :RRenameLocalVariable<cr>
-    " autocmd FileType ruby vnoremap <leader>riv  :RRenameInstanceVariable<cr>
-    " autocmd FileType ruby vnoremap <leader>rem  :RExtractMethod<cr>
 augroup END
 
 let g:tagbar_type_ruby = {
@@ -911,69 +881,7 @@ let g:vimtex_latexmk_build_dir="build"
 
 
 "=============================================================================
-" 11. Saved experiments and optional settings
-" Inactive examples are kept for reference; none of these settings run.
-"=============================================================================
-
-"" NERDTree configuration
-" let g:NERDTreeChDirMode=2
-" let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-" let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-" let g:NERDTreeShowBookmarks=1
-" let g:nerdtree_tabs_focus_on_files=1
-" let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-" let g:NERDTreeWinSize = 50
-" Ignore a lot of stuff.
-" nnoremap <silent> <F2> :NERDTreeFind<CR>
-" noremap <F3> :NERDTreeToggle<CR>
-
-"" The PC is fast enough, do syntax highlight syncing from start unless 200 lines
-" augroup vimrc-sync-fromstart
-"   autocmd!
-"   autocmd BufEnter * :syntax sync maxlines=200
-" augroup END
-
-"" circular navigation
-" nnoremap <tab>   <c-w>w
-" nnoremap <S-tab> <c-w>W
-
-" tabs
-" nnoremap <leader>te :tabedit
-
-" syntastic
-" let g:syntastic_always_populate_loc_list=1
-" let g:syntastic_auto_loc_list=1
-" let g:syntastic_aggregate_errors = 1
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 0
-" let syntastic_mode_map = { 'passive_filetypes': ['yaml'] }
-
-" let g:syntastic_python_checkers=['python', 'flake8']
-
-" let g:syntastic_go_checkers = ['golint', 'govet']
-" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
-" let g:syntastic_error_symbol='✗'
-" let g:syntastic_warning_symbol='⚠'
-" let g:syntastic_style_error_symbol = '✗'
-" let g:syntastic_style_warning_symbol = '⚠'
-
-" FSharp Testing
-" let g:fsharpbinding_debug = 1
-" let g:fsharp_interactive_bin = '/Library/Frameworks/Mono.framework/Versions/Current/Commands/fsharpi'
-" let g:fsharp_xbuild_path = "/Library/Frameworks/Mono.framework/Versions/Current/Commands/msbuild"
-"
-" save folds
-" augroup remember_folds
-"   autocmd!
-"   autocmd BufWinLeave * mkview
-"   autocmd BufWinEnter * silent! loadview
-" augroup END
-" set viewoptions-=curdir
-
-
-"=============================================================================
-" 12. Local configuration and final overrides
+" 11. Local configuration and final overrides
 " Keep the existing override order: local config first, then these final preferences.
 "=============================================================================
 
