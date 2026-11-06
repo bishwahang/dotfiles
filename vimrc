@@ -1,3 +1,5 @@
+set nocompatible
+
 let g:polyglot_disabled = []
 
 source ~/.dotfiles/bundles.vim
@@ -5,7 +7,6 @@ source ~/.dotfiles/bundles.vim
 "*****************************************************************************
 "" Basic Setup
 "*****************************************************************************"
-set nocompatible
 filetype plugin indent on
 
 "" Encoding
@@ -326,6 +327,12 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.tex setlocal spell
 autocmd BufRead,BufNewFile *.markdown setlocal spell
 set complete+=kspell
+
+if exists('+autocomplete')
+    set autocomplete
+    set autocompletedelay=100
+    set completeopt=menuone,noselect,popup
+endif
 
 set autoread
 
@@ -802,6 +809,13 @@ let g:jedi#rename_command = "<leader>r"
 let g:jedi#show_call_signatures = "0"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#smart_auto_mappings = 0
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+
+augroup vimrc-python-completion
+    autocmd!
+    autocmd FileType python setlocal omnifunc=jedi#completions
+augroup END
 
 " Syntax highlight
 " Default highlight is better than polyglot
@@ -874,40 +888,6 @@ let test#strategy = 'dispatch'
 
 " vimtex output
 let g:vimtex_latexmk_build_dir="build"
-
-let g:deoplete#enable_at_startup = 1
-
-" neo complete
-" Disable AutoComplPop.
-" let g:acp_enableAtStartup = 0
-" " Use neocomplete.
-" let g:neocomplete#enable_at_startup = 1
-" " Use smartcase.
-" let g:neocomplete#enable_smart_case = 1
-" " Set minimum syntax keyword length.
-" let g:ueocomplete#sources#syntax#min_keyword_length = 3
-" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-" " Enable snipMate compatibility feature.
-" let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-" let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/UltiSnips'
-
-" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><C-y>  neocomplete#close_popup()
-" inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-" Turn on language specific omnifuncs
-" python
-autocmd FileType python set omnifunc=jedi#completions
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-" if !exists('g:neocomplete#force_omni_input_patterns')
-"         let g:neocomplete#force_omni_input_patterns = {}
-" endif
-" let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-""" end neo complete
 
 "*****************************************************************************
 "*****************************************************************************

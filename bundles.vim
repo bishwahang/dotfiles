@@ -18,9 +18,6 @@ Plug 'majutsushi/tagbar'
 Plug 'Yggdroot/indentLine'
 Plug 'avelino/vim-bootstrap-updater'
 " Plug 'sheerun/vim-polyglot'
-" Plug 'Shougo/neocomplete.vim'
-" Plug 'Shougo/neosnippet'
-" Plug 'Shougo/neosnippet-snippets'
 Plug 'mbbill/undotree'
 " Plug 'ludovicchabant/vim-gutentags'
 " Plug 'justinmk/vim-sneak'
@@ -50,13 +47,7 @@ if v:version >= 704
   Plug 'SirVer/ultisnips'
 endif
 
-" Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
-
-" autocomplete
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
 
 "" Color
 Plug 'tomasr/molokai'
@@ -83,7 +74,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
-Plug 'mattn/emmet-vim'
 
 
 " javascript
