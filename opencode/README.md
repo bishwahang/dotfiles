@@ -37,9 +37,8 @@ Without a configured worker model, subagents inherit the parent session's model;
 delegation alone does not make them cheaper. Configure available lighter models
 privately if desired. No model or permission changes are made by these rules.
 
-Until these tracked edits are committed and transferred, they exist only in the
-local checkout. Private files below are not included in a clone; transfer any
-needed private context separately through a trusted private channel.
+Private files below are not included in a clone; transfer any needed private
+context separately through a trusted private channel.
 
 ## Private files
 

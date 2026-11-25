@@ -54,8 +54,10 @@ Before each consequential action and final response:
   Do not publish, send, create, or edit shared issues, merge/pull requests,
   documents, or messages, or approve or merge changes, until the user explicitly
   authorizes that specific output or action. Draft revisions are not approval.
-- Do not add restrictive permission gates or change models, tools, or permissions
-  merely to implement this workflow. These instructions are not a technical lock.
+- These instructions are not a technical lock. Do not add global permission
+  gates or change the main session's model, tools, or permissions to implement
+  them. Configured research and review agents may set their own model and a
+  read-only guard.
 
 ### Batched research
 
@@ -70,7 +72,8 @@ Before each consequential action and final response:
   decisions and blockers, and explicit uncertainties. Parallelize independent
   batches; avoid overlapping assignments and needless duplicate reads.
 - Keep single small reads and listings direct when delegation costs more than
-  it saves. Use existing configured models; do not assume workers are cheaper.
+  it saves. Do not assume workers are cheaper unless their configuration sets a
+  lighter model.
 - The coordinating agent retains synthesis, judgment, and responsibility for
   checking decision-critical evidence. A research worker is not an independent
   reviewer of its own findings.
