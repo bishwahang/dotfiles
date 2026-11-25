@@ -40,6 +40,12 @@ ln -nfs "$HOME/.dotfiles/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 if [ ! -f "$HOME/.dotfiles/claude/CLAUDE.local.md" ]; then
   printf '# Local Claude Code memory\n\nPrivate notes for this machine. This file is ignored by git.\n' > "$HOME/.dotfiles/claude/CLAUDE.local.md"
 fi
+mkdir -p "$HOME/.claude/agents"
+for agent_file in "$HOME/.dotfiles/claude/agents"/* "$HOME/.dotfiles/claude/local/agents"/*; do
+  [ -f "$agent_file" ] || continue
+  agent_name=$(basename "$agent_file")
+  ln -nfs "$agent_file" "$HOME/.claude/agents/$agent_name"
+done
 
 # OpenCode config symlink
 echo "🔗 Linking OpenCode config"

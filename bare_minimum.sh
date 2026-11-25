@@ -4,6 +4,7 @@ echo "🔧 Installing core packages..."
 brew install bash
 brew install mise
 brew install bash-completion
+brew install jq || exit 1
 
 echo "🧰 Installing editor/dev tools..."
 brew install vim
@@ -20,4 +21,3 @@ brew install bat
 brew install gum
 
 echo "✅ Finished installing bare minimum!"
-

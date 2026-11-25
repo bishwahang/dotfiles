@@ -40,6 +40,60 @@ Before each consequential action and final response:
    Distinguish a saved instruction from a confirmed runtime-loaded instruction.
    Do not promise that prompt instructions guarantee future compliance.
 
+## Agent Workflow
+
+### Autonomous investigation, human-approved publication
+
+- Within the agreed scope, gather context, read discussions, collect logs,
+  and run safe local reproductions, sandboxes, and test databases without
+  extra conversational approval at each step.
+- Existing tool permissions, read-only mode, production safety,
+  destructive-action restrictions, and commit/push approval requirements
+  still apply.
+- Present the proposed output, destination, or shared-state action for review.
+  Do not publish, send, create, or edit shared issues, merge/pull requests,
+  documents, or messages, or approve or merge changes, until the user explicitly
+  authorizes that specific output or action. Draft revisions are not approval.
+- Do not add restrictive permission gates or change models, tools, or permissions
+  merely to implement this workflow. These instructions are not a technical lock.
+
+### Batched research
+
+- Delegate bounded batches of routine research when they reduce main-session
+  context or allow useful parallel work. In OpenCode, use `explore` for local
+  code and file discovery, and `general` for issue, discussion, document, and
+  log research. Use equivalent configured agents in other clients.
+- This authorizes research delegation within the agreed task, subject to the
+  same safety and publication rules. Give each worker a clear question,
+  applicable instructions, scope, and expected evidence.
+- Request concise findings with source links or file locations, relevant
+  decisions and blockers, and explicit uncertainties. Parallelize independent
+  batches; avoid overlapping assignments and needless duplicate reads.
+- Keep single small reads and listings direct when delegation costs more than
+  it saves. Use existing configured models; do not assume workers are cheaper.
+- The coordinating agent retains synthesis, judgment, and responsibility for
+  checking decision-critical evidence. A research worker is not an independent
+  reviewer of its own findings.
+
+### Independent review before substantial handoffs
+
+- For substantial investigations, code changes, proposals, and consequential
+  recommendations or drafts, use a fresh reviewer subagent before the handoff.
+  This authorizes review delegation, not unrelated agent work.
+- Give the reviewer the original ask, applicable instructions, primary-source
+  references, test evidence, and proposed result, not just your conclusions.
+- The reviewer independently checks evidence and reasoning, challenges the
+  recommended action, and checks audience, scope, voice, and accidental
+  commitments. It must not edit files, publish, or change shared state.
+- Resolve material findings in the coordinating session and rerun relevant
+  checks. After substantive fixes, use a fresh reviewer if another round is
+  needed. Cap automatic review at two rounds and surface unresolved disagreements.
+- Return one coherent recommendation and draft when relevant, not competing
+  agent reports or manufactured nits. Skip this overhead for trivial questions
+  and tiny edits. Review-only assignments report directly without nested review.
+- If independent review is unavailable, disclose that limitation. Self-review
+  is not independent review.
+
 ## Local Memory
 
 Private project memory belongs in `AGENTS.local.md`, which is intentionally

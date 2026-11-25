@@ -9,8 +9,31 @@ The script also performs the repository's other setup steps.
 ## Public files
 
 - `CLAUDE.md`: imports shared generic rules from `opencode/AGENTS.md`.
-- `settings.json`: schema-only configuration; Claude Code uses its defaults.
-- `hooks/`: optional reusable hook scripts. Public settings do not enable them.
+- `settings.json`: Claude Code defaults plus the `memory-review.sh` Stop hook.
+- `hooks/`: reusable hook scripts (they need `jq`).
+  - `memory-review.sh`: asks for a memory review every few prompts.
+  - `no-post-guard.sh`: best-effort blocking of selected `git push`, `glab`,
+    and GitLab/Slack MCP publishing commands. Used only by research and review
+    agents, not enabled globally.
+- `agents/`: user-level subagents, linked one file at a time into
+  `~/.claude/agents/`. They are instructed to read only and disable the file-edit
+  tools. Each also wires `no-post-guard.sh` in its frontmatter.
+
+## Guard limits and verification
+
+The guard is not a sandbox or a complete write barrier. Raw HTTP clients,
+scripts, path-qualified commands such as `/usr/bin/git push`, unlisted MCP tools,
+and tools outside its matcher are not covered.
+The read-only instructions still apply to those routes. Do not bypass a denial.
+The main session must still get explicit approval before publishing.
+
+`bare_minimum.sh` installs `jq` as a core dependency and stops if its installation
+fails. If you skip that script, install it with `brew install jq` before using
+the hooks. The guard exits with blocking status 2
+when `jq` is missing or hook input cannot be parsed. Its agent registrations
+use `onFailure: block` for hook startup errors and timeouts, which requires
+Claude Code 2.1.295 or later. This does not expand publishing-route coverage.
+No global permission settings or model choices are changed.
 
 ## Private files
 

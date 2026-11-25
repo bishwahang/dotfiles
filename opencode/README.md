@@ -9,12 +9,37 @@ The script also performs the repository's other setup steps.
 ## Public files
 
 - `opencode.json`: provider-neutral settings and tool permissions.
-- `AGENTS.md`: generic agent rules.
+- `AGENTS.md`: generic agent rules and the research, review, and publication workflow.
 - `decisions.md`: reusable setup decisions.
 - `agents/`, `plugins/`, and `skills/`: optional reusable extensions.
 
 The default permissions allow most actions. Selected destructive commands
 require confirmation. Review the permissions before installing this setup.
+
+## Portable workflow
+
+The tracked `AGENTS.md` contains the workflow defaults:
+
+1. Investigate and test independently within the agreed scope and safety rules.
+2. Delegate bounded research batches; keep small individual reads direct.
+3. Use a fresh independent reviewer before substantial handoffs.
+4. Present one consolidated result. Wait for explicit approval before publishing
+   or changing shared work.
+
+On a new machine, clone the dotfiles and run `config.sh` when ready for its
+setup steps. The installer links this file to `~/.config/opencode/AGENTS.md`,
+which OpenCode loads globally. No private memory file is needed for these rules.
+These are agent instructions, not an enforced publication gate.
+
+The workflow uses the built-in `explore` and `general` agents. Provider access,
+model choices, MCP connections, and authentication remain machine-specific.
+Without a configured worker model, subagents inherit the parent session's model;
+delegation alone does not make them cheaper. Configure available lighter models
+privately if desired. No model or permission changes are made by these rules.
+
+Until these tracked edits are committed and transferred, they exist only in the
+local checkout. Private files below are not included in a clone; transfer any
+needed private context separately through a trusted private channel.
 
 ## Private files
 
